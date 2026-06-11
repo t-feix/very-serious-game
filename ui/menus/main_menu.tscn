@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://diax7i1pink5u"]
+
+[ext_resource type="Script" uid="uid://duj64kca47o86" path="res://ui/menus/main_menu.gd" id="1_5oih7"]
+
+[node name="MainMenu" type="Control" unique_id=1050146617]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5oih7")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1112295504]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1962374945]
+custom_minimum_size = Vector2(427, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="StartNewGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1068285194]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "START NEW GAME"
+
+[node name="LoadSavedGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=433304811]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "LOAD SAVED GAME"
+
+[node name="OptionsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=872634701]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "OPTIONS"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=357004371]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "QUIT GAME"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/StartNewGameButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
