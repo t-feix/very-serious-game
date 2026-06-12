@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://01x1j10bf084"]
+
+[ext_resource type="Texture2D" uid="uid://cthqrarmo003u" path="res://shared_assets/Button Test/NSL_test02.png" id="1_q6iep"]
+
+[node name="ButtonTest" type="Node2D" unique_id=92784328]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=57331796]
+offset_right = 292.0
+offset_bottom = 211.0
+texture = ExtResource("1_q6iep")
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
