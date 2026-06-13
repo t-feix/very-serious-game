@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dhj5kl683ab7h"]
+
+[ext_resource type="Script" uid="uid://c5jbd7jedljrl" path="res://dialogue_demo/characters/non_playable_character.gd" id="1_mqis3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_stp7t"]
+radius = 43.0
+
+[node name="NonPlayableCharacter" type="Area2D" unique_id=1291840750 groups=["npc"]]
+script = ExtResource("1_mqis3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=562384062]
+shape = SubResource("CircleShape2D_stp7t")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=296822807]
+color = Color(0.11372549, 1, 0.81960785, 1)
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
