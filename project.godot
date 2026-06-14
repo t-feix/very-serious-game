@@ -16,7 +16,8 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 
 [autoload]
 
-DialogueManager="*uid://c460y6ui63m1b"
+DialogueRunner="*uid://b54y2tn0byi45"
+Flags="*uid://btv8g5ehiirmo"
 
 [display]
 

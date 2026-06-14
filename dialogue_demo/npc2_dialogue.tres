@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="DialogueGraph" format=3 uid="uid://clnr5uyt7pcqu"]
+
+[ext_resource type="Script" uid="uid://6rcrgxi2bmul" path="res://systems/dialogue/dialogue_graph.gd" id="1_fu5dx"]
+[ext_resource type="Script" uid="uid://k6dhyg11268d" path="res://systems/dialogue/nodes/response_node.gd" id="2_bcsah"]
+[ext_resource type="Script" uid="uid://c0kd7joicwbet" path="res://systems/dialogue/nodes/end_node.gd" id="3_qg001"]
+[ext_resource type="Script" uid="uid://cdec8o3felvpd" path="res://systems/dialogue/nodes/line_node.gd" id="4_5cw77"]
+[ext_resource type="Script" uid="uid://y2lrn7beew5o" path="res://systems/dialogue/nodes/choice_node.gd" id="5_yidjr"]
+
+[sub_resource type="Resource" id="Resource_rrdlc"]
+script = ExtResource("3_qg001")
+metadata/_custom_type_script = "uid://c0kd7joicwbet"
+
+[sub_resource type="Resource" id="Resource_obdxq"]
+script = ExtResource("4_5cw77")
+text = "It's basketball."
+next = SubResource("Resource_rrdlc")
+metadata/_custom_type_script = "uid://cdec8o3felvpd"
+
+[sub_resource type="Resource" id="Resource_kkpjg"]
+script = ExtResource("2_bcsah")
+text = "What's your favorite hobby?"
+next = SubResource("Resource_obdxq")
+metadata/_custom_type_script = "uid://k6dhyg11268d"
+
+[sub_resource type="Resource" id="Resource_1e1wp"]
+script = ExtResource("3_qg001")
+set_flags = Array[String](["met_npc2"])
+metadata/_custom_type_script = "uid://c0kd7joicwbet"
+
+[sub_resource type="Resource" id="Resource_lof3w"]
+script = ExtResource("4_5cw77")
+text = "Now that you've talked to me, they will tell you."
+next = SubResource("Resource_1e1wp")
+metadata/_custom_type_script = "uid://cdec8o3felvpd"
+
+[sub_resource type="Resource" id="Resource_p3ifl"]
+script = ExtResource("2_bcsah")
+text = "NPC1 knows a secret but he won't tell me."
+next = SubResource("Resource_lof3w")
+metadata/_custom_type_script = "uid://k6dhyg11268d"
+
+[sub_resource type="Resource" id="Resource_udoey"]
+script = ExtResource("5_yidjr")
+responses = Array[ExtResource("2_bcsah")]([SubResource("Resource_kkpjg"), SubResource("Resource_p3ifl")])
+metadata/_custom_type_script = "uid://y2lrn7beew5o"
+
+[sub_resource type="Resource" id="Resource_x2ire"]
+script = ExtResource("4_5cw77")
+text = "Wazzup!"
+next = SubResource("Resource_udoey")
+metadata/_custom_type_script = "uid://cdec8o3felvpd"
+
+[resource]
+script = ExtResource("1_fu5dx")
+start = SubResource("Resource_x2ire")
+metadata/_custom_type_script = "uid://6rcrgxi2bmul"
