@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://1d7jcj8nr15p"]
+
+[ext_resource type="Script" uid="uid://jtyb681eua8m" path="res://Scripts/enemy.gd" id="1_m1htj"]
+[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://Scenes/Bullet.tscn" id="2_wovta"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wovta"]
+radius = 15.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xeo28"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kpr8r"]
+radius = 200.0
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1728479623]
+script = ExtResource("1_m1htj")
+bullet_scene = ExtResource("2_wovta")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=307916872]
+shape = SubResource("CapsuleShape2D_wovta")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1579852005]
+modulate = Color(0.70207834, 0.108827345, 3.85046e-07, 1)
+position = Vector2(0.5, 1.0000013)
+scale = Vector2(29, 28.000002)
+texture = SubResource("PlaceholderTexture2D_xeo28")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1840368337]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=684915464]
+shape = SubResource("CircleShape2D_kpr8r")

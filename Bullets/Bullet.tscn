@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b3827mu10ef3r"]
+
+[ext_resource type="Script" uid="uid://dl4vhd651e22t" path="res://Scripts/Bullet.gd" id="1_vlxeq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_14k46"]
+radius = 5.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qvus8"]
+
+[node name="Bullet" type="Area2D" unique_id=105673603]
+collision_layer = 2
+script = ExtResource("1_vlxeq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1796795603]
+shape = SubResource("CircleShape2D_14k46")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=126551045]
+modulate = Color(0.6297358, 0.7952215, 0, 1)
+position = Vector2(2.3841858e-07, 0.50000006)
+scale = Vector2(8.000001, 7)
+texture = SubResource("PlaceholderTexture2D_qvus8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=196233522]
