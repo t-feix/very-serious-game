@@ -66,7 +66,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_hg6s5")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"Player walk",
 "speed": 5.0
 }]
 
@@ -117,7 +117,7 @@ shape = SubResource("CircleShape2D_rkbax")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=479282641]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_8t03j")
-animation = &"walk"
+animation = &"Player walk"
 frame = 1
 speed_scale = 2.0
 
