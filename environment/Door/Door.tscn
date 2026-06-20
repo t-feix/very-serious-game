@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://be6klfrshxe1t"]
+
+[ext_resource type="Texture2D" uid="uid://diny1jpfths22" path="res://environment/Door/door.png" id="1_1yc7h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_devri"]
+size = Vector2(24, 4)
+
+[node name="Door" type="Node2D" unique_id=371851669]
+
+[node name="Door_Rigid Body" type="RigidBody2D" parent="." unique_id=2016659511]
+gravity_scale = 0.0
+
+[node name="Door Sprite" type="Sprite2D" parent="Door_Rigid Body" unique_id=1447344548]
+texture_filter = 1
+texture = ExtResource("1_1yc7h")
+
+[node name="Door Colission Shape" type="CollisionShape2D" parent="Door_Rigid Body" unique_id=1470077219]
+shape = SubResource("RectangleShape2D_devri")
+
+[node name="Door_Joint" type="PinJoint2D" parent="." unique_id=1059799518]
+position = Vector2(12, 0)
+node_a = NodePath("../Anker")
+node_b = NodePath("../Door_Rigid Body")
+disable_collision = false
+
+[node name="Anker" type="StaticBody2D" parent="." unique_id=1764698430]
+position = Vector2(12, 0)
