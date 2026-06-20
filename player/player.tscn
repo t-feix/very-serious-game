@@ -118,9 +118,10 @@ shape = SubResource("CircleShape2D_rkbax")
 sprite_frames = SubResource("SpriteFrames_8t03j")
 animation = &"walk"
 frame = 1
-speed_scale = 3.0
+speed_scale = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1919794983]
 libraries/ = SubResource("AnimationLibrary_qjkh3")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=718057998]
+zoom = Vector2(2, 2)
