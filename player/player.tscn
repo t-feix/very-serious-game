@@ -115,6 +115,7 @@ script = ExtResource("1_rkbax")
 shape = SubResource("CircleShape2D_rkbax")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=479282641]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_8t03j")
 animation = &"walk"
 frame = 1
