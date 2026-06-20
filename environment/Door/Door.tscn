@@ -1,14 +1,23 @@
 [gd_scene format=3 uid="uid://be6klfrshxe1t"]
 
-[ext_resource type="Texture2D" uid="uid://diny1jpfths22" path="res://environment/Door/door.png" id="1_1yc7h"]
+[ext_resource type="Texture2D" uid="uid://diny1jpfths22" path="res://environment/door/door.png" id="1_1yc7h"]
+[ext_resource type="Script" uid="uid://xv3tqrbvjf6v" path="res://environment/door/door.gd" id="1_py504"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_devri"]
 size = Vector2(24, 4)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_nyt34"]
+radius = 0.0
+
 [node name="Door" type="Node2D" unique_id=371851669]
 
 [node name="Door_Rigid Body" type="RigidBody2D" parent="." unique_id=2016659511]
+collision_mask = 2
+mass = 0.6
 gravity_scale = 0.0
+linear_damp = 1.0
+angular_damp = 3.0
+script = ExtResource("1_py504")
 
 [node name="Door Sprite" type="Sprite2D" parent="Door_Rigid Body" unique_id=1447344548]
 texture_filter = 1
@@ -22,6 +31,12 @@ position = Vector2(12, 0)
 node_a = NodePath("../Anker")
 node_b = NodePath("../Door_Rigid Body")
 disable_collision = false
+angular_limit_enabled = true
+angular_limit_lower = -1.4974926
+angular_limit_upper = 1.5149457
 
 [node name="Anker" type="StaticBody2D" parent="." unique_id=1764698430]
 position = Vector2(12, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anker" unique_id=148428483]
+shape = SubResource("CircleShape2D_nyt34")

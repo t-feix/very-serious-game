@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://1d7jcj8nr15p"]
 
-[ext_resource type="Script" uid="uid://jtyb681eua8m" path="res://Scripts/enemy.gd" id="1_m1htj"]
-[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://Scenes/Bullet.tscn" id="2_wovta"]
+[ext_resource type="Script" uid="uid://jtyb681eua8m" path="res://enemy/enemy.gd" id="1_m1htj"]
+[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://bullets/Bullet.tscn" id="2_wovta"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wovta"]
 radius = 15.0

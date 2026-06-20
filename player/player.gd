@@ -1,10 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
-# --- STATS ---
 @export var speed: float = 220.0
+@export var push_strength: float = 5000.0
 
-# --- NODES ---
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(_delta: float) -> void:
@@ -14,11 +13,9 @@ func _physics_process(_delta: float) -> void:
 	handle_movement()
 
 func handle_movement():
-	# Get input direction using Input Map
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * speed
 	
-	# Handle animation and rotation
 	if input_dir != Vector2.ZERO:
 		rotation = input_dir.angle() + PI/2
 		if not sprite.is_playing():
@@ -27,5 +24,11 @@ func handle_movement():
 		sprite.stop()
 		sprite.frame = 0
 	
-	# Apply movement
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var collider := collision.get_collider()
+		if collider is RigidBody2D:
+			var contact_local: Vector2 = collision.get_position() - collider.global_position
+			collider.apply_force(-collision.get_normal() * push_strength, contact_local)
