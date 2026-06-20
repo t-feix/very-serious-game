@@ -1,24 +1,18 @@
 class_name Player
 extends CharacterBody2D
 
-# --- STATS ---
 @export var speed: float = 220.0
-
-# --- NODES ---
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(_delta: float) -> void:
 	#if RewindBuffer.is_rewinding():
 		#return
 	
-	handle_movement()
-
-func handle_movement():
-	# Get input direction using Input Map
+	# for later I guess
+	
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * speed
 	
-	# Handle animation and rotation
 	if input_dir != Vector2.ZERO:
 		rotation = input_dir.angle() + PI/2
 		if not sprite.is_playing():
@@ -27,5 +21,4 @@ func handle_movement():
 		sprite.stop()
 		sprite.frame = 0
 	
-	# Apply movement
 	move_and_slide()
