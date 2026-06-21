@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://diax7i1pink5u"]
 
 [ext_resource type="Script" uid="uid://duj64kca47o86" path="res://ui/menus/main_menu.gd" id="1_5oih7"]
+[ext_resource type="AudioStream" uid="uid://ctaixmjscbaob" path="res://ui/sfx/UIConfirm.wav" id="2_1njj5"]
+[ext_resource type="AudioStream" uid="uid://dkkd0ps7w36gp" path="res://ui/sfx/UIHover.wav" id="3_h223f"]
+[ext_resource type="AudioStream" uid="uid://dtcn6xq0gmlrx" path="res://ui/sfx/UIBack.wav" id="4_l3r6a"]
 
 [node name="MainMenu" type="Control" unique_id=1050146617]
 layout_mode = 3
@@ -44,5 +47,23 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "QUIT GAME"
 
+[node name="UIConfirm" type="AudioStreamPlayer" parent="." unique_id=912703356]
+stream = ExtResource("2_1njj5")
+bus = &"SFX"
+
+[node name="UIHover" type="AudioStreamPlayer" parent="." unique_id=1080147007]
+stream = ExtResource("3_h223f")
+bus = &"SFX"
+
+[node name="UIBack" type="AudioStreamPlayer" parent="." unique_id=2128961461]
+stream = ExtResource("4_l3r6a")
+bus = &"SFX"
+
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/StartNewGameButton" to="." method="_on_start_new_game_button_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartNewGameButton" to="." method="_on_start_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/LoadSavedGameButton" to="." method="_on_load_saved_game_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/LoadSavedGameButton" to="." method="_on_load_saved_game_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
