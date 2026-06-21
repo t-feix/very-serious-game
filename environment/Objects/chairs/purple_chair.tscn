@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cbgeeq4xxsai3"]
+
+[ext_resource type="Texture2D" uid="uid://10lst12emici" path="res://environment/objects/chairs/purple_chair.tres" id="1_krhxm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_afrl2"]
+radius = 9.0
+height = 24.0
+
+[node name="PurpleChair" type="StaticBody2D" unique_id=143999062]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1193372935]
+shape = SubResource("CapsuleShape2D_afrl2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1262534679]
+texture = ExtResource("1_krhxm")

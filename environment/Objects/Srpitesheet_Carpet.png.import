@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxs2p45q8bt0j"
-path="res://.godot/imported/Srpitesheet_Carpet.png-7d9a800b7d3fd259c477c0c0ec79e846.ctex"
+uid="uid://lmnxmnef6si7"
+path="res://.godot/imported/Srpitesheet_Carpet.png-e89f0eb7627bcf4ca73e018af5745daf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment/Objects/Srpitesheet_Carpet.png"
-dest_files=["res://.godot/imported/Srpitesheet_Carpet.png-7d9a800b7d3fd259c477c0c0ec79e846.ctex"]
+source_file="res://environment/objects/Srpitesheet_Carpet.png"
+dest_files=["res://.godot/imported/Srpitesheet_Carpet.png-e89f0eb7627bcf4ca73e018af5745daf.ctex"]
 
 [params]
 

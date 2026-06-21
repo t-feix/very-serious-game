@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cyrmhbnbijbuu"]
+
+[ext_resource type="Texture2D" uid="uid://cimayrt7esv8e" path="res://environment/objects/bins/bin_paper.tres" id="1_l1lo7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pmtor"]
+
+[node name="BinPaper" type="StaticBody2D" unique_id=1242605353]
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=463686648]
+texture = ExtResource("1_l1lo7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=879047333]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_pmtor")
