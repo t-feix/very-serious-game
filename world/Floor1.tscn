@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bd42beihk1c6a" path="res://player/player.tscn" id="2_qcnog"]
 [ext_resource type="TileSet" uid="uid://do5defqbo3d5a" path="res://environment/walls/wall_tileset.tres" id="3_j75s2"]
 [ext_resource type="PackedScene" uid="uid://1d7jcj8nr15p" path="res://enemy/Enemy.tscn" id="4_q202a"]
-[ext_resource type="PackedScene" uid="uid://ri05nf8dfdla" path="res://environment/door/door.tscn" id="5_w1jr1"]
+[ext_resource type="PackedScene" path="res://environment/door/door.tscn" id="5_w1jr1"]
 [ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="6_qcnog"]
 
 [node name="World" type="Node2D" unique_id=1484466954]
@@ -58,6 +58,5 @@ rotation = -1.5707964
 
 [node name="LevelExit" parent="." unique_id=562984780 instance=ExtResource("6_qcnog")]
 position = Vector2(1777, 1115)
-collision_mask = 2
 send_as = "from_higher"
 next_scene = "uid://ypncdfw7enfd"

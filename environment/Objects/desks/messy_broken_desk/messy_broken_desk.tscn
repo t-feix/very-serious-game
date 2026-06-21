@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ce2twn3sysg2u"]
+
+[ext_resource type="Texture2D" uid="uid://hro7msyr86ob" path="res://environment/objects/desks/messy_broken_desk/messy_broken_desk.tres" id="1_kyodc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcplq"]
+size = Vector2(60, 28)
+
+[node name="MessyBrokenDesk" type="StaticBody2D" unique_id=78318666]
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=141177599]
+texture = ExtResource("1_kyodc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1161337672]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_tcplq")

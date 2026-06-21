@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cuedcj6wvkm6l" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://b4fj1i6fui173" path="res://player/Sprite_Player.png" id="2_rkbax"]
+[ext_resource type="Script" path="res://player/rewind_buffer.gd" id="3_g1dw6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 radius = 6.0
@@ -421,6 +422,7 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_rkbax")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=479282641]
+unique_name_in_owner = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_8t03j")
 animation = &"Player dead"
@@ -431,3 +433,7 @@ libraries/ = SubResource("AnimationLibrary_qjkh3")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=718057998]
 zoom = Vector2(2.5, 2.5)
+
+[node name="RewindBuffer" type="Node2D" parent="." unique_id=1608139270]
+unique_name_in_owner = true
+script = ExtResource("3_g1dw6")

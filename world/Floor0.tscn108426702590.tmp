@@ -37,13 +37,14 @@ position = Vector2(1376, 498)
 position = Vector2(1015, 141)
 
 [node name="Player" parent="." unique_id=638306865 instance=ExtResource("2_1hshi")]
-position = Vector2(1776, 1074)
+position = Vector2(265, 234)
 
 [node name="Enemy3" parent="." unique_id=418387870 instance=ExtResource("4_se10e")]
 position = Vector2(461, 642)
 
 [node name="LevelExit" parent="." unique_id=562984780 instance=ExtResource("8_se10e")]
 position = Vector2(80, -26)
+collision_mask = 3
 next_scene = "uid://bjjjquptyi1yk"
 
 [node name="Doors" type="Node2D" parent="." unique_id=524982029]

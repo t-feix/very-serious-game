@@ -11,14 +11,9 @@ func _physics_process(_delta: float) -> void:
 	if RewindBuffer.is_rewinding():
 		return
 	
-<<<<<<< Updated upstream
 	handle_movement()
 
 func handle_movement():
-=======
-	# for later I guess, -- yep, for later
-	
->>>>>>> Stashed changes
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_dir * speed
 	
