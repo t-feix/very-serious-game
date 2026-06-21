@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://cuedcj6wvkm6l" path="res://player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://2k12aot6xolk" path="res://player/Topdown test1-Sheet.png" id="2_rkbax"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
-radius = 11.045361
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
+radius = 6.0
+height = 24.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkbax"]
 atlas = ExtResource("2_rkbax")
@@ -109,10 +110,12 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=638306865]
+collision_layer = 2
 script = ExtResource("1_rkbax")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2109002290]
-shape = SubResource("CircleShape2D_rkbax")
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_rkbax")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=479282641]
 texture_filter = 1
@@ -125,4 +128,4 @@ speed_scale = 2.0
 libraries/ = SubResource("AnimationLibrary_qjkh3")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=718057998]
-zoom = Vector2(2, 2)
+zoom = Vector2(2.5, 2.5)
