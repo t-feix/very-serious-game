@@ -112,3 +112,4 @@ position = Vector2(1684, 1001)
 
 [node name="MessyBrokenDesk" parent="." unique_id=78318666 instance=ExtResource("12_v5wn5")]
 position = Vector2(1490, 795)
+drag_weight = 2.5

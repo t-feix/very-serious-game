@@ -1,12 +1,26 @@
 [gd_scene format=3 uid="uid://ce2twn3sysg2u"]
 
+[ext_resource type="Script" uid="uid://bctis1n0tqtwd" path="res://draggable/draggable.gd" id="1_avrb5"]
 [ext_resource type="Texture2D" uid="uid://hro7msyr86ob" path="res://environment/objects/desks/messy_broken_desk/messy_broken_desk.tres" id="1_kyodc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcplq"]
 size = Vector2(60, 28)
 
-[node name="MessyBrokenDesk" type="StaticBody2D" unique_id=78318666]
-collision_mask = 0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avrb5"]
+size = Vector2(55, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oe52u"]
+size = Vector2(12, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ccxe"]
+size = Vector2(12, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1rkgh"]
+size = Vector2(55, 12)
+
+[node name="MessyBrokenDesk" type="AnimatableBody2D" unique_id=1281880372]
+sync_to_physics = false
+script = ExtResource("1_avrb5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=141177599]
 texture = ExtResource("1_kyodc")
@@ -14,3 +28,22 @@ texture = ExtResource("1_kyodc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1161337672]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_tcplq")
+
+[node name="GrabArea" type="Area2D" parent="." unique_id=1716325996]
+collision_layer = 0
+
+[node name="ArmNorth" type="CollisionShape2D" parent="GrabArea" unique_id=613012808]
+position = Vector2(0, -21)
+shape = SubResource("RectangleShape2D_avrb5")
+
+[node name="ArmSouth" type="CollisionShape2D" parent="GrabArea" unique_id=1555143968]
+position = Vector2(-36, 0)
+shape = SubResource("RectangleShape2D_oe52u")
+
+[node name="ArmWest" type="CollisionShape2D" parent="GrabArea" unique_id=2128612731]
+position = Vector2(36, 0)
+shape = SubResource("RectangleShape2D_3ccxe")
+
+[node name="ArmEast" type="CollisionShape2D" parent="GrabArea" unique_id=1372401816]
+position = Vector2(0, 19)
+shape = SubResource("RectangleShape2D_1rkgh")
