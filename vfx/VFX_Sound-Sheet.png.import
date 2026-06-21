@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bipvj3fd3lne"
-path="res://.godot/imported/SFX_attention.png-bbab710ef8ea5bb53f5c2ef19bb0b2cd.ctex"
+uid="uid://chuji7oexjuvi"
+path="res://.godot/imported/VFX_Sound-Sheet.png-7da2990ab666a6eb1f1de56e4e10eaf1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sfx/SFX_attention.png"
-dest_files=["res://.godot/imported/SFX_attention.png-bbab710ef8ea5bb53f5c2ef19bb0b2cd.ctex"]
+source_file="res://vfx/VFX_Sound-Sheet.png"
+dest_files=["res://.godot/imported/VFX_Sound-Sheet.png-7da2990ab666a6eb1f1de56e4e10eaf1.ctex"]
 
 [params]
 
