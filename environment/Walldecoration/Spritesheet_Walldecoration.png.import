@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chuji7oexjuvi"
-path="res://.godot/imported/SFX_Sound-Sheet.png-de551e93dd70b3c7c3c602309f123d8e.ctex"
+uid="uid://5h142sh6qroo"
+path="res://.godot/imported/Spritesheet_Walldecoration.png-373130359d912d5d5f8ce0953576855a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sfx/SFX_Sound-Sheet.png"
-dest_files=["res://.godot/imported/SFX_Sound-Sheet.png-de551e93dd70b3c7c3c602309f123d8e.ctex"]
+source_file="res://environment/Walldecoration/Spritesheet_Walldecoration.png"
+dest_files=["res://.godot/imported/Spritesheet_Walldecoration.png-373130359d912d5d5f8ce0953576855a.ctex"]
 
 [params]
 
