@@ -56,10 +56,14 @@ var state_names = {
 @onready var patrol_timer = $PatrolTimer
 
 func _ready():
-	print("!!! SCRIPT FROM: %s" % get_script().resource_path)
-	print("!!! MY CHILDREN:")
+	print("==============================================")
+	print("!!! NEW SCRIPT LOADED !!!")
+	print("!!! SCRIPT PATH: %s" % get_script().resource_path)
+	print("!!! NODE NAME: %s" % name)
+	print("!!! CHILDREN:")
 	for child in get_children():
-		print("  -> %s | Type: %s" % [child.name, child.get_class()])
+		print("  -> %s | %s" % [child.name, child.get_class()])
+	print("==============================================")
 	
 	# Save anchor position
 	anchor = global_position
@@ -72,9 +76,11 @@ func _ready():
 	build_vision_debug()
 	
 	# Connect signals
+	print("[%s] Connecting signals..." % name)
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
 	patrol_timer.timeout.connect(_on_patrol_timeout)
+	print("[%s] Signals connected!" % name)
 	
 	# Start patrol or idle
 	if is_patrolling:
@@ -83,45 +89,43 @@ func _ready():
 	else:
 		current_state = State.IDLE
 	
-	dprint("READY | Anchor: %s | Patrolling: %s" % [anchor, is_patrolling])
-	dprint("Patrol A: %s | B: %s" % [point_a, point_b])
-	dprint("DetectionArea monitoring: %s" % detection_area.monitoring)
-	dprint("DetectionArea collision_mask: %s" % detection_area.collision_mask)
+	print("[%s] READY | Anchor: %s | Patrolling: %s" % [name, anchor, is_patrolling])
+	print("[%s] Patrol A: %s | B: %s" % [name, point_a, point_b])
+	print("[%s] DetectionArea monitoring: %s" % [name, detection_area.monitoring])
+	print("[%s] DetectionArea mask: %s" % [name, detection_area.collision_mask])
 	
-	# Wait 2 frames then check for player
+	# Wait then check for player
 	await get_tree().process_frame
 	await get_tree().process_frame
 	
-	# Find player any way possible
-	var found = false
+	var found_player = false
 	for node in get_tree().root.get_children():
 		for child in node.get_children():
-			if child is Player:
-				dprint("FOUND Player! Name: %s | Layer: %s" % [child.name, child.collision_layer])
-				found = true
-			elif child.name == "Player":
-				dprint("FOUND node named Player! Class: %s | Layer: %s" % [child.get_class(), child.collision_layer])
-				found = true
+			if child is Player or child.name == "Player":
+				print("[%s] FOUND PLAYER: %s | Layer: %s" % [name, child.name, child.collision_layer])
+				found_player = true
 	
-	if not found:
-		dprint("!!! WARNING: No Player found anywhere !!!")
+	if not found_player:
+		print("[%s] !!! WARNING: NO PLAYER FOUND !!!" % name)
 	
-	var group_count = get_tree().get_nodes_in_group("player").size()
-	dprint("Players in 'player' group: %s" % group_count)
+	print("[%s] Players in group 'player': %s" % [name, get_tree().get_nodes_in_group("player").size()])
 
 func _physics_process(delta):
-	# Log state changes
 	if current_state != previous_state:
-		dprint("STATE: %s -> %s" % [
-			state_names.get(previous_state, "NONE"),
-			state_names[current_state]
-		])
+		print("[%s] STATE: %s -> %s" % [name, state_names.get(previous_state, "NONE"), state_names[current_state]])
 		previous_state = current_state
 	
-	# Update vision debug color
 	update_debug_color()
 	
-	# Run current state
+	# CONTINUOUS VISION CHECK
+	# If player is in detection area but we're still patrolling/idle
+	# keep checking if they enter the vision cone
+	if player != null and (current_state == State.IDLE or current_state == State.PATROL or current_state == State.PATROL_WAIT):
+		if is_player_in_vision_cone(player):
+			print("[%s] Player entered vision cone -> ALERT" % name)
+			current_state = State.ALERT
+			alert_nearby_enemies()
+	
 	match current_state:
 		State.IDLE:
 			do_idle()
@@ -138,9 +142,6 @@ func _physics_process(delta):
 		State.RETURN:
 			do_return()
 
-# ========================
-# VISION CONE (VISUAL ONLY)
-# ========================
 func build_vision_debug():
 	var points = PackedVector2Array()
 	points.append(Vector2.ZERO)
@@ -161,26 +162,20 @@ func build_vision_debug():
 func is_player_in_vision_cone(target: Node2D) -> bool:
 	var to_player = target.global_position - global_position
 	
-	# Distance check
 	if to_player.length() > vision_range:
 		return false
 	
-	# Angle check
 	var forward = Vector2.RIGHT.rotated(rotation)
 	var ang = abs(forward.angle_to(to_player))
 	if ang > deg_to_rad(vision_angle_deg):
 		return false
 	
-	# Raycast wall check
 	var space = get_world_2d().direct_space_state
 	if space == null:
 		return true
 	
-	var query = PhysicsRayQueryParameters2D.create(
-		global_position,
-		target.global_position
-	)
-	query.collision_mask = (1 << 0) | (1 << 2)  # Layer 1 (player) + Layer 3 (walls)
+	var query = PhysicsRayQueryParameters2D.create(global_position, target.global_position)
+	query.collision_mask = (1 << 0) | (1 << 2)
 	query.exclude = [self]
 	
 	var result = space.intersect_ray(query)
@@ -188,65 +183,48 @@ func is_player_in_vision_cone(target: Node2D) -> bool:
 		return true
 	
 	if result.collider == target:
-		dprint("Vision: clear line of sight!")
 		return true
 	else:
-		dprint("Vision: blocked by %s" % result.collider.name)
+		print("[%s] Vision blocked by: %s" % [name, result.collider.name])
 		return false
-
-# ========================
-# DEBUG
-# ========================
-func dprint(msg: String):
-	if debug_enabled:
-		print("[%s] %s" % [name, msg])
 
 func update_debug_color():
 	match current_state:
 		State.IDLE, State.PATROL, State.PATROL_WAIT:
-			vision_debug.color = Color(1, 1, 0, 0.2)    # Yellow
+			vision_debug.color = Color(1, 1, 0, 0.2)
 		State.ALERT:
-			vision_debug.color = Color(1, 0.5, 0, 0.3)  # Orange
+			vision_debug.color = Color(1, 0.5, 0, 0.3)
 		State.CHASE:
-			vision_debug.color = Color(1, 0, 0, 0.3)    # Red
+			vision_debug.color = Color(1, 0, 0, 0.3)
 		State.SHOOT:
-			vision_debug.color = Color(1, 0, 0, 0.5)    # Bright Red
+			vision_debug.color = Color(1, 0, 0, 0.5)
 		State.RETURN:
-			vision_debug.color = Color(0, 0, 1, 0.2)    # Blue
+			vision_debug.color = Color(0, 0, 1, 0.2)
 
-# ========================
-# STATE: IDLE
-# ========================
 func do_idle():
 	velocity = Vector2.ZERO
 	move_and_slide()
 
-# ========================
-# STATE: PATROL
-# ========================
 func do_patrol():
 	var dir = (patrol_target - global_position).normalized()
 	velocity = dir * speed
 	
-	# Face movement direction
 	if dir.length() > 0.1:
 		rotation = dir.angle()
 	
 	move_and_slide()
 	
-	# Reached target?
 	if global_position.distance_to(patrol_target) < 10.0:
 		velocity = Vector2.ZERO
 		current_state = State.PATROL_WAIT
 		patrol_timer.wait_time = patrol_delay
 		patrol_timer.start()
-		dprint("Reached patrol point, waiting %.1fs" % patrol_delay)
+		print("[%s] Reached patrol point, waiting %.1fs" % [name, patrol_delay])
 		return
 	
-	# Hit wall? Turn around
 	if is_on_wall():
 		flip_patrol_target()
-		dprint("Hit wall -> turning around")
+		print("[%s] Hit wall -> turning around" % name)
 
 func do_patrol_wait():
 	velocity = Vector2.ZERO
@@ -258,9 +236,6 @@ func flip_patrol_target():
 	else:
 		patrol_target = point_a
 
-# ========================
-# STATE: ALERT
-# ========================
 func do_alert(delta):
 	velocity = Vector2.ZERO
 	move_and_slide()
@@ -272,74 +247,61 @@ func do_alert(delta):
 	if alert_timer >= alert_duration:
 		alert_timer = 0.0
 		current_state = State.CHASE
-		dprint("Alert done -> CHASE")
+		print("[%s] Alert done -> CHASE" % name)
 
-# ========================
-# STATE: CHASE
-# ========================
 func do_chase():
 	if player == null:
-		dprint("Lost player -> RETURN")
+		print("[%s] Lost player -> RETURN" % name)
 		go_return()
 		return
 	
-	# Too far from home?
 	if global_position.distance_to(anchor) > max_pursuit_distance:
-		dprint("Too far from anchor -> RETURN")
+		print("[%s] Too far from anchor -> RETURN" % name)
 		player = null
 		go_return()
 		return
 	
-	# Can still see player?
 	if not is_player_in_vision_cone(player):
-		dprint("Lost sight -> RETURN")
+		print("[%s] Lost sight -> RETURN" % name)
 		player = null
 		go_return()
 		return
 	
 	var dist = global_position.distance_to(player.global_position)
 	
-	# Close enough to shoot?
 	if dist <= shoot_range:
 		current_state = State.SHOOT
-		dprint("In range -> SHOOT")
+		print("[%s] In range -> SHOOT" % name)
 		return
 	
-	# Move toward player
 	var dir = (player.global_position - global_position).normalized()
 	velocity = dir * speed
 	move_and_slide()
 	look_at(player.global_position)
 
-# ========================
-# STATE: SHOOT
-# ========================
 func do_shoot():
 	if player == null:
-		dprint("Lost player -> RETURN")
+		print("[%s] Lost player -> RETURN" % name)
 		go_return()
 		return
 	
-	# Too far from home?
 	if global_position.distance_to(anchor) > max_pursuit_distance:
-		dprint("Too far from anchor -> RETURN")
+		print("[%s] Too far from anchor -> RETURN" % name)
 		player = null
 		go_return()
 		return
 	
-	# Can still see?
 	if not is_player_in_vision_cone(player):
-		dprint("Lost sight -> RETURN")
+		print("[%s] Lost sight -> RETURN" % name)
 		player = null
 		go_return()
 		return
 	
 	var dist = global_position.distance_to(player.global_position)
 	
-	# Too far to shoot?
 	if dist > shoot_range:
 		current_state = State.CHASE
-		dprint("Out of range -> CHASE")
+		print("[%s] Out of range -> CHASE" % name)
 		return
 	
 	look_at(player.global_position)
@@ -347,9 +309,6 @@ func do_shoot():
 	if can_shoot:
 		shoot()
 
-# ========================
-# STATE: RETURN
-# ========================
 func do_return():
 	var dist = global_position.distance_to(anchor)
 	
@@ -360,10 +319,10 @@ func do_return():
 		if is_patrolling:
 			patrol_target = point_a
 			current_state = State.PATROL
-			dprint("Back home -> PATROL")
+			print("[%s] Back home -> PATROL" % name)
 		else:
 			current_state = State.IDLE
-			dprint("Back home -> IDLE")
+			print("[%s] Back home -> IDLE" % name)
 		return
 	
 	var dir = (anchor - global_position).normalized()
@@ -374,11 +333,8 @@ func do_return():
 func go_return():
 	current_state = State.RETURN
 
-# ========================
-# ALERT NEARBY ENEMIES
-# ========================
 func alert_nearby_enemies():
-	dprint("ALERTING nearby enemies!")
+	print("[%s] ALERTING nearby enemies!" % name)
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for e in enemies:
 		if e != self:
@@ -387,18 +343,15 @@ func alert_nearby_enemies():
 				if e.current_state == State.IDLE or e.current_state == State.PATROL or e.current_state == State.PATROL_WAIT:
 					e.player = player
 					e.current_state = State.ALERT
-					dprint("Alerted %s" % e.name)
+					print("[%s] Alerted %s" % [name, e.name])
 
-# ========================
-# SHOOT
-# ========================
 func shoot():
 	if bullet_scene == null:
-		dprint("ERROR: No bullet scene!")
+		print("[%s] ERROR: No bullet scene!" % name)
 		return
 	
 	can_shoot = false
-	dprint("SHOOTING!")
+	print("[%s] SHOOTING!" % name)
 	
 	var bullet = bullet_scene.instantiate()
 	get_tree().root.add_child(bullet)
@@ -410,30 +363,29 @@ func shoot():
 	await get_tree().create_timer(fire_rate).timeout
 	can_shoot = true
 
-# ========================
-# DETECTION SIGNALS (simple circle)
-# ========================
 func _on_body_entered(body):
+	print("[%s] !!! BODY ENTERED: %s | Is Player: %s" % [name, body.name, body is Player])
+	
 	if body is Player:
-		dprint(">>> Player DETECTED <<<")
+		print("[%s] >>> PLAYER DETECTED <<<" % name)
 		player = body
 		
-		# Check if can see (in vision cone)
 		if is_player_in_vision_cone(body):
-			dprint("Player in vision cone -> ALERT")
+			print("[%s] Player in vision cone -> ALERT" % name)
 			current_state = State.ALERT
 			alert_nearby_enemies()
 		else:
-			dprint("Player nearby but NOT in vision cone")
+			print("[%s] Player nearby but NOT in vision cone" % name)
 
 func _on_body_exited(body):
+	print("[%s] !!! BODY EXITED: %s" % [name, body.name])
+	
 	if body is Player:
-		dprint(">>> Player LEFT detection area <<<")
-		# Only go idle if not already chasing
+		print("[%s] >>> PLAYER LEFT <<<" % name)
 		if current_state == State.IDLE or current_state == State.PATROL or current_state == State.PATROL_WAIT:
 			player = null
 
 func _on_patrol_timeout():
 	flip_patrol_target()
 	current_state = State.PATROL
-	dprint("Patrol timer done -> moving to %s" % patrol_target)
+	print("[%s] Patrol timer done -> moving to %s" % [name, patrol_target])

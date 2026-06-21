@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ri05nf8dfdla"]
 
-[ext_resource type="Script" uid="uid://xv3tqrbvjf6v" path="res://environment/door/door.gd" id="1_py504"]
-[ext_resource type="Texture2D" uid="uid://bkesma3yjuprl" path="res://environment/door/Sprite_door.png" id="2_devri"]
+[ext_resource type="Script" uid="uid://xv3tqrbvjf6v" path="res://environment/Door/door.gd" id="1_py504"]
+[ext_resource type="Texture2D" uid="uid://bkesma3yjuprl" path="res://environment/Door/Sprite_door.png" id="2_devri"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_devri"]
 size = Vector2(32, 4)

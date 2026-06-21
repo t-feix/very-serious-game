@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://1d7jcj8nr15p"]
 
-[ext_resource type="Script" uid="uid://jtyb681eua8m" path="res://enemy/enemy.gd" id="1_m1htj"]
-[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://bullets/Bullet.tscn" id="2_wovta"]
+[ext_resource type="Script" uid="uid://q61v3wgja7x5" path="res://enemy/enemy_new.gd" id="1_7lgfl"]
+[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://Bullets/Bullet.tscn" id="2_5p6bu"]
 [ext_resource type="Texture2D" uid="uid://dnxt6xhrogx6k" path="res://enemy/Sprite_Enemy_Default_Dummy.png" id="3_5p6bu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wovta"]
@@ -45,12 +45,14 @@ _data = {
 &"RESET": SubResource("Animation_55d7h")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kpr8r"]
-radius = 200.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_7lgfl"]
+radius = 300.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1728479623]
-script = ExtResource("1_m1htj")
-bullet_scene = ExtResource("2_wovta")
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_7lgfl")
+bullet_scene = ExtResource("2_5p6bu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=307916872]
 shape = SubResource("CapsuleShape2D_wovta")
@@ -65,8 +67,13 @@ hframes = 8
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=195472788]
 libraries/ = SubResource("AnimationLibrary_xgln8")
 
-[node name="DetectionArea" type="Area2D" parent="." unique_id=1840368337]
-collision_mask = 3
+[node name="VisionConeDebug" type="Polygon2D" parent="." unique_id=730719019]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=684915464]
-shape = SubResource("CircleShape2D_kpr8r")
+[node name="PatrolTimer" type="Timer" parent="." unique_id=391297171]
+one_shot = true
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=297840267]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=2102130559]
+shape = SubResource("CircleShape2D_7lgfl")
