@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ce2twn3sysg2u"]
 
-[ext_resource type="Script" uid="uid://bctis1n0tqtwd" path="res://draggable/draggable.gd" id="1_avrb5"]
-[ext_resource type="Texture2D" uid="uid://hro7msyr86ob" path="res://environment/objects/desks/messy_broken_desk/messy_broken_desk.tres" id="1_kyodc"]
+[ext_resource type="Script" uid="uid://bctis1n0tqtwd" path="res://draggable/draggable.gd" id="1_gjxna"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcplq"]
 size = Vector2(60, 28)
@@ -18,12 +17,11 @@ size = Vector2(12, 23)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1rkgh"]
 size = Vector2(55, 12)
 
-[node name="MessyBrokenDesk" type="AnimatableBody2D" unique_id=1281880372]
+[node name="Desk" type="AnimatableBody2D" unique_id=1281880372]
 sync_to_physics = false
-script = ExtResource("1_avrb5")
+script = ExtResource("1_gjxna")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=141177599]
-texture = ExtResource("1_kyodc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1161337672]
 position = Vector2(0, -1)

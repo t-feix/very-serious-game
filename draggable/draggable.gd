@@ -7,6 +7,10 @@ enum ShapeType { RECTANGLE, CIRCLE }
 @export var grab_distance_horizontal: float = 43.0
 @export var drag_weight: float = 1.0
 
+@export var sprite_texture: Texture2D
+@onready var sprite: Sprite2D = $Sprite2D
+
+
 var _held_by: Node2D = null
 var _grab_offset: Vector2 = Vector2.ZERO
 
@@ -14,6 +18,9 @@ func _ready() -> void:
 	var grab_area := $GrabArea as Area2D
 	grab_area.body_entered.connect(_on_body_entered)
 	grab_area.body_exited.connect(_on_body_exited)
+	
+	if sprite_texture:
+		sprite.texture = sprite_texture
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):

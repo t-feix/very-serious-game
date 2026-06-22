@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://1d7jcj8nr15p"]
 
-[ext_resource type="Script" uid="uid://q61v3wgja7x5" path="res://enemy/enemy_new.gd" id="1_7lgfl"]
-[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://Bullets/Bullet.tscn" id="2_5p6bu"]
+[ext_resource type="Script" path="res://enemy/enemy_new.gd" id="1_7lgfl"]
+[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://bullets/Bullet.tscn" id="2_5p6bu"]
 [ext_resource type="Texture2D" uid="uid://cna27higwefid" path="res://enemy/Sprite_Enemy.png" id="3_5p6bu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wovta"]
@@ -272,7 +272,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_7lgfl"]
 radius = 300.0
 
-[node name="Enemy" type="CharacterBody2D" unique_id=1728479623 groups=["enemies"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=1728479623]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_7lgfl")
@@ -285,7 +285,8 @@ shape = SubResource("CapsuleShape2D_wovta")
 unique_name_in_owner = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_l7ide")
-animation = &"Enemy walk"
+animation = &"Enemy aim_start"
+frame_progress = 0.6570523
 speed_scale = 2.0
 
 [node name="VisionConeDebug" type="Polygon2D" parent="." unique_id=730719019]

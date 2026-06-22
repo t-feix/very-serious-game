@@ -15,9 +15,17 @@ func _physics_process(_delta: float) -> void:
 	
 	handle_movement()
 
-# draggable section
+# interact section
 var _nearby_draggables: Array[Draggable] = []
 var _held: Draggable = null
+
+var _nearby_buttons: Array[WallButton] = []
+func _on_button_area_entered(button: WallButton) -> void:
+	if not _nearby_buttons.has(button):
+		_nearby_buttons.append(button)
+
+func _on_button_area_exited(button: WallButton) -> void:
+	_nearby_buttons.erase(button)
 
 var _grab_forward: Vector2 = Vector2.ZERO 
 
@@ -28,9 +36,28 @@ func _on_grab_area_entered(draggable: Draggable) -> void:
 func _on_grab_area_exited(draggable: Draggable) -> void:
 	_nearby_draggables.erase(draggable)
 
+func _closest_button() -> WallButton:
+	var best: WallButton = null
+	var best_dist: float = INF
+	for b in _nearby_buttons:
+		var dist := global_position.distance_squared_to(b.global_position)
+		if dist < best_dist:
+			best_dist = dist
+			best = b
+	return best
+
+func _try_press_or_grab() -> void:
+	if not _nearby_draggables.is_empty():
+		_try_grab()
+		return
+	
+	var closest_button := _closest_button()
+	if closest_button:
+		closest_button.press()
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("grab"):
-		_try_grab()
+		_try_press_or_grab()
 	elif event.is_action_released("grab"):
 		_release()
 
@@ -58,7 +85,7 @@ func _closest_draggable() -> Draggable:
 			best = d
 	return best
 
-# end draggable section
+# end interact section
 
 func handle_movement():
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -81,7 +108,7 @@ func handle_movement():
 	for i in get_slide_collision_count():
 		var collision := get_slide_collision(i)
 		var collider := collision.get_collider()
-		if collider is RigidBody2D:
+		if collider is RigidBody2D and not collider.freeze:
 			var contact_local: Vector2 = collision.get_position() - collider.global_position
 			collider.apply_force(-collision.get_normal() * push_strength, contact_local)
 

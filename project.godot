@@ -14,11 +14,16 @@ config/name="Very Serious Game"
 run/main_scene="uid://be3xcby8l7uc"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout="uid://dneeypqv2mhfe"
+
 [autoload]
 
 DialogueRunner="*uid://b54y2tn0byi45"
 Flags="*uid://btv8g5ehiirmo"
 GameState="*uid://4e3bjqgww6ch"
+EventBus="*uid://cyhd10sev2ua4"
 
 [display]
 

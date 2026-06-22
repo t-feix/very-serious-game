@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cu34k3qe3qfuq"]
+
+[ext_resource type="Script" uid="uid://btvlifrq67lgt" path="res://environment/Interactables/wall_buttons/wall_button.gd" id="1_tpgrb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5oky0"]
+
+[node name="WallButton" type="Area2D" unique_id=110869629]
+script = ExtResource("1_tpgrb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1533602665]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1781137357]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_5oky0")

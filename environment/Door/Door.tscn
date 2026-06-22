@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://cwvdqtn06cwgq"]
+[gd_scene format=3 uid="uid://wx7vhi7acx4"]
 
-[ext_resource type="Script" uid="uid://xv3tqrbvjf6v" path="res://environment/Door/door.gd" id="1_py504"]
-[ext_resource type="Texture2D" uid="uid://bkesma3yjuprl" path="res://environment/Door/Sprite_door.png" id="2_devri"]
+[ext_resource type="Script" uid="uid://xv3tqrbvjf6v" path="res://environment/door/door.gd" id="1_py504"]
+[ext_resource type="Texture2D" uid="uid://bkesma3yjuprl" path="res://environment/door/Sprite_door.png" id="2_devri"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_devri"]
 size = Vector2(32, 4)
@@ -10,6 +10,7 @@ size = Vector2(32, 4)
 radius = 0.0
 
 [node name="Door" type="Node2D" unique_id=371851669 groups=["doors"]]
+script = ExtResource("1_py504")
 
 [node name="Door_Rigid Body" type="RigidBody2D" parent="." unique_id=2016659511]
 collision_mask = 2
@@ -17,7 +18,6 @@ mass = 0.3
 gravity_scale = 0.0
 linear_damp = 1.0
 angular_damp = 4.0
-script = ExtResource("1_py504")
 
 [node name="Door Sprite" type="Sprite2D" parent="Door_Rigid Body" unique_id=1447344548]
 texture_filter = 1
