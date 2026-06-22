@@ -48,9 +48,20 @@ func rewind_step() -> void:
 	if size == 0:
 		stop_rewind()
 
+func clear() -> void:
+	if rewinding:
+		stop_rewind()
+	buffer.clear()
+	buffer.resize(MAX_STATES)
+	write_index = 0
+	read_index = 0
+	size = 0
 
 func stop_rewind() -> void:
+	if not rewinding:
+		return
 	rewinding = false
+	write_index = (read_index + 1) % MAX_STATES
 	emit_signal("rewind_ended")
 	sprite.play()
 
@@ -78,6 +89,8 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		start_rewind()
+	elif event.is_action_released("ui_accept"):
+		stop_rewind()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

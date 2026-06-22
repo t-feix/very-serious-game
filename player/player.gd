@@ -9,6 +9,9 @@ const ANIMATIONS_NEEDING_FLIP_V := ["player_push", "player_pull", "player_push_p
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var RewindBuffer = %RewindBuffer
 
+func _ready() -> void:
+	RewindBuffer.clear()
+
 func _physics_process(_delta: float) -> void:
 	if RewindBuffer.is_rewinding():
 		return
