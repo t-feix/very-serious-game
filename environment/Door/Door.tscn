@@ -9,7 +9,7 @@ size = Vector2(32, 4)
 [sub_resource type="CircleShape2D" id="CircleShape2D_nyt34"]
 radius = 0.0
 
-[node name="Door" type="Node2D" unique_id=371851669]
+[node name="Door" type="Node2D" unique_id=371851669 groups=["doors"]]
 
 [node name="Door_Rigid Body" type="RigidBody2D" parent="." unique_id=2016659511]
 collision_mask = 2

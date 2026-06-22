@@ -272,7 +272,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_7lgfl"]
 radius = 300.0
 
-[node name="Enemy" type="CharacterBody2D" unique_id=1728479623]
+[node name="Enemy" type="CharacterBody2D" unique_id=1728479623 groups=["enemies"]]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_7lgfl")
@@ -285,8 +285,7 @@ shape = SubResource("CapsuleShape2D_wovta")
 unique_name_in_owner = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_l7ide")
-animation = &"Enemy aim_finish"
-frame_progress = 0.26188734
+animation = &"Enemy walk"
 speed_scale = 2.0
 
 [node name="VisionConeDebug" type="Polygon2D" parent="." unique_id=730719019]

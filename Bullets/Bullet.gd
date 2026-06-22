@@ -1,14 +1,15 @@
 extends Area2D
 
-#  STATS 
+# --- STATS ---
 @export var speed: float = 400.0
-@export var damage: float = 10.0
+@export var damage: float = 1.0
 @export var lifetime: float = 3.0
 
-#  INTERNAL 
+# --- INTERNAL ---
 var direction = Vector2.ZERO
+var shooter = null  # Who shot this bullet
 
-#  NODES 
+# --- NODES ---
 @onready var visible_notifier = $VisibleOnScreenNotifier2D
 
 func _ready():
@@ -18,25 +19,45 @@ func _ready():
 	
 	# Auto delete after lifetime
 	await get_tree().create_timer(lifetime).timeout
-	queue_free()
+	if is_inside_tree():
+		queue_free()
 
 func _physics_process(delta):
-	# Move bullet forward
 	global_position += direction * speed * delta
 
-#  SET DIRECTION 
-func setup(shoot_direction: Vector2):
+func setup(shoot_direction: Vector2, who_shot = null):
 	direction = shoot_direction.normalized()
-	# Rotate bullet to face direction
 	rotation = direction.angle()
+	shooter = who_shot
 
-#  SIGNALS 
 func _on_screen_exited():
-	# Delete when off screen
 	queue_free()
 
 func _on_body_entered(body):
-	if body.name == "Player":
-		# Hit player
+	# Don't hit the one who shot us
+	if body == shooter:
+		return
+	
+	# Hit player
+	if body is Player:
 		print("Player Hit!")
 		queue_free()
+		return
+	
+	# Hit enemy
+	if body.is_in_group("enemies"):
+		print("Enemy %s hit by bullet!" % body.name)
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+		queue_free()
+		return
+	
+	# Hit door - just destroy bullet
+	if body.is_in_group("doors"):
+		print("Bullet hit door!")
+		queue_free()
+		return
+	
+	# Hit wall or anything else
+	print("Bullet hit: %s" % body.name)
+	queue_free()

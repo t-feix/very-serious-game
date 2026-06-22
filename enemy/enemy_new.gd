@@ -9,6 +9,7 @@ var previous_state = -1
 @export var speed: float = 100.0
 @export var shoot_range: float = 200.0
 @export var fire_rate: float = 1.5
+@export var health: float = 1.0  # Dies in 1 hit
 
 # --- PATROL ---
 @export var is_patrolling: bool = true
@@ -50,7 +51,7 @@ var state_names = {
 }
 
 # --- NODES ---
-@onready var sprite = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detection_area = $DetectionArea
 @onready var vision_debug = $VisionConeDebug
 @onready var patrol_timer = $PatrolTimer
@@ -94,6 +95,16 @@ func _ready():
 	print("[%s] DetectionArea monitoring: %s" % [name, detection_area.monitoring])
 	print("[%s] DetectionArea mask: %s" % [name, detection_area.collision_mask])
 	
+		# DEBUG: Check animations
+	print("[%s] === ANIMATION CHECK ===" % name)
+	if sprite.sprite_frames == null:
+		print("[%s] !!! NO SPRITE FRAMES !!!" % name)
+	else:
+		var anims = sprite.sprite_frames.get_animation_names()
+		print("[%s] Available animations: %s" % [name, anims])
+		for a in anims:
+			var count = sprite.sprite_frames.get_frame_count(a)
+			print("[%s]   -> '%s' has %s frames" % [name, a, count])
 	# Wait then check for player
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -141,6 +152,19 @@ func _physics_process(delta):
 			do_shoot()
 		State.RETURN:
 			do_return()
+
+# ========================
+# COLLISION DETECTION (for doors etc)
+# ========================
+func _physics_process_collisions():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		if collider != null and collider.is_in_group("doors"):
+			print("[%s] HIT BY DOOR: %s" % [name, collider.name])
+			die()
+			return
 
 func build_vision_debug():
 	var points = PackedVector2Array()
@@ -201,9 +225,25 @@ func update_debug_color():
 		State.RETURN:
 			vision_debug.color = Color(0, 0, 1, 0.2)
 
+# ========================
+# ANIMATION
+# ========================
+func play_anim(anim_name: String):
+	if sprite.sprite_frames == null:
+		return
+	if not sprite.sprite_frames.has_animation(anim_name):
+		# Fallback to default if animation doesn't exist
+		if sprite.sprite_frames.has_animation("default"):
+			anim_name = "default"
+		else:
+			return
+	if sprite.animation != anim_name:
+		sprite.play(anim_name)
+		
 func do_idle():
 	velocity = Vector2.ZERO
 	move_and_slide()
+	play_anim("Enemy aim_hold")
 
 func do_patrol():
 	var dir = (patrol_target - global_position).normalized()
@@ -213,6 +253,7 @@ func do_patrol():
 		rotation = dir.angle()
 	
 	move_and_slide()
+	play_anim("Enemy walk")
 	
 	if global_position.distance_to(patrol_target) < 10.0:
 		velocity = Vector2.ZERO
@@ -229,16 +270,17 @@ func do_patrol():
 func do_patrol_wait():
 	velocity = Vector2.ZERO
 	move_and_slide()
-
+	play_anim("Enemy aim_hold")
+	
 func flip_patrol_target():
 	if patrol_target == point_a:
 		patrol_target = point_b
 	else:
 		patrol_target = point_a
-
 func do_alert(delta):
 	velocity = Vector2.ZERO
 	move_and_slide()
+	play_anim("Enemy aim_start")
 	
 	if player != null:
 		look_at(player.global_position)
@@ -250,6 +292,9 @@ func do_alert(delta):
 		print("[%s] Alert done -> CHASE" % name)
 
 func do_chase():
+	# Play aim finish if coming from shoot state
+	if previous_state == State.SHOOT:
+		play_anim("Enemy aim_finish")
 	if player == null:
 		print("[%s] Lost player -> RETURN" % name)
 		go_return()
@@ -278,6 +323,7 @@ func do_chase():
 	velocity = dir * speed
 	move_and_slide()
 	look_at(player.global_position)
+	play_anim("Enemy walk")
 
 func do_shoot():
 	if player == null:
@@ -305,6 +351,7 @@ func do_shoot():
 		return
 	
 	look_at(player.global_position)
+	play_anim("Enemy aim_hold")
 	
 	if can_shoot:
 		shoot()
@@ -329,6 +376,7 @@ func do_return():
 	velocity = dir * speed
 	move_and_slide()
 	rotation = dir.angle()
+	play_anim("Enemy walk")
 
 func go_return():
 	current_state = State.RETURN
@@ -353,15 +401,26 @@ func shoot():
 	can_shoot = false
 	print("[%s] SHOOTING!" % name)
 	
+	# Play aim_shoot then shot_front
+	play_anim("Enemy aim_shoot")
+	await get_tree().create_timer(0.2).timeout
+	
+	if not is_inside_tree() or player == null:
+		can_shoot = true
+		return
+	
+	play_anim("Enemy shot_front")
+	
 	var bullet = bullet_scene.instantiate()
 	get_tree().root.add_child(bullet)
 	bullet.global_position = global_position
 	
 	var dir = (player.global_position - global_position).normalized()
-	bullet.setup(dir)
+	bullet.setup(dir, self)
 	
 	await get_tree().create_timer(fire_rate).timeout
-	can_shoot = true
+	if is_inside_tree():
+		can_shoot = true
 
 func _on_body_entered(body):
 	print("[%s] !!! BODY ENTERED: %s | Is Player: %s" % [name, body.name, body is Player])
@@ -389,3 +448,27 @@ func _on_patrol_timeout():
 	flip_patrol_target()
 	current_state = State.PATROL
 	print("[%s] Patrol timer done -> moving to %s" % [name, patrol_target])
+
+# ========================
+# DAMAGE & DEATH
+# ========================
+func take_damage(amount: float):
+	health -= amount
+	print("[%s] TOOK DAMAGE! Health: %s" % [name, health])
+	
+	if health <= 0:
+		die()
+
+func die():
+	print("[%s] DESTROYED!" % name)
+	
+	set_physics_process(false)
+	velocity = Vector2.ZERO
+	
+	play_anim("Enemy Dead")
+	
+	if sprite.sprite_frames and sprite.sprite_frames.has_animation("Enemy Dead"):
+		await sprite.animation_finished
+		await get_tree().create_timer(0.3).timeout
+	
+	queue_free()
