@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://wx7vhi7acx4" path="res://environment/door/Door.tscn" id="5_t3mat"]
 [ext_resource type="TileSet" uid="uid://cudltw1ri8087" path="res://environment/carpets/carpet_tileset.tres" id="6_1hshi"]
 [ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="8_se10e"]
+[ext_resource type="PackedScene" uid="uid://3s1ccw7gk5wm" path="res://environment/Interactables/throwable_objects/throwable_object.tscn" id="9_0eof2"]
 [ext_resource type="PackedScene" uid="uid://ce2twn3sysg2u" path="res://environment/objects/desks/desk.tscn" id="9_gpmgi"]
 [ext_resource type="Texture2D" uid="uid://cfy4h3b4kuvf6" path="res://environment/objects/desks/macbook_desk.tres" id="10_gpmgi"]
 [ext_resource type="PackedScene" uid="uid://bff1u1286k6xa" path="res://environment/objects/chairs/chair.tscn" id="11_ubnnw"]
@@ -66,6 +67,9 @@ is_locked = true
 position = Vector2(1424, 770)
 door_id = 3
 is_locked = true
+
+[node name="ThrowableObject" parent="Doors" unique_id=1349184744 instance=ExtResource("9_0eof2")]
+position = Vector2(1384, 1049)
 
 [node name="Desk" parent="." unique_id=1281880372 instance=ExtResource("9_gpmgi")]
 position = Vector2(1561, 850)

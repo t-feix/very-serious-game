@@ -20,6 +20,27 @@ var _nearby_draggables: Array[Draggable] = []
 var _held: Draggable = null
 
 var _nearby_buttons: Array[WallButton] = []
+
+var _nearby_throwables: Array[Throwable] = []
+var _carried: Throwable = null
+
+func _on_throwable_area_entered(t: Throwable) -> void:
+	if not _nearby_throwables.has(t):
+		_nearby_throwables.append(t)
+
+func _on_throwable_area_exited(t: Throwable) -> void:
+	_nearby_throwables.erase(t)
+	
+func _closest_throwable() -> Throwable:
+	var best: Throwable = null
+	var best_dist: float = INF
+	for t in _nearby_throwables:
+		var dist := global_position.distance_squared_to(t.global_position)
+		if dist < best_dist:
+			best_dist = dist
+			best = t
+	return best
+
 func _on_button_area_entered(button: WallButton) -> void:
 	if not _nearby_buttons.has(button):
 		_nearby_buttons.append(button)
@@ -46,20 +67,51 @@ func _closest_button() -> WallButton:
 			best = b
 	return best
 
-func _try_press_or_grab() -> void:
+func _try_interact() -> void:
 	if not _nearby_draggables.is_empty():
 		_try_grab()
+		return
+	
+	if _try_pickup():
 		return
 	
 	var closest_button := _closest_button()
 	if closest_button:
 		closest_button.press()
 
+func _try_pickup() -> bool:
+	var closest := _closest_throwable()
+	if closest and closest.try_pickup(self):
+		_carried = closest
+		return true
+	return false
+
+func _drop_carried() -> void:
+	if _carried:
+		_carried.drop_at(global_position + Vector2(
+			sin(global_rotation), -cos(global_rotation) 
+		) * 15)
+		_carried = null
+
+func _throw_to(target: Vector2) -> void:
+	if _carried:
+		_carried.throw_from_to(global_position, target)
+		_carried = null
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("grab"):
-		_try_press_or_grab()
+		if _carried:
+			return
+		_try_interact()
 	elif event.is_action_released("grab"):
-		_release()
+		if _carried:
+			_drop_carried()
+		elif _held:
+			_release()
+	
+	elif event.is_action_pressed("throw"):
+		if _carried:
+			_throw_to(get_global_mouse_position())
 
 func _try_grab() -> void:
 	if _held != null:
