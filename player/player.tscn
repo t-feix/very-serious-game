@@ -606,7 +606,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jfgyi")
 }],
-"loop": true,
+"loop": false,
 "name": &"Player aim_finish",
 "speed": 5.0
 }, {
@@ -691,7 +691,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jd2rm")
 }],
-"loop": true,
+"loop": false,
 "name": &"Player shot_front",
 "speed": 5.0
 }, {
@@ -930,7 +930,7 @@ shape = SubResource("CapsuleShape2D_rkbax")
 unique_name_in_owner = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_8t03j")
-animation = &"Player throw_throw"
+animation = &"Player shot_front"
 frame = 1
 speed_scale = 2.0
 
