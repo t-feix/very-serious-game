@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b4fj1i6fui173" path="res://player/Sprite_Player.png" id="2_rkbax"]
 [ext_resource type="Script" uid="uid://bq1ouprwbakmk" path="res://player/rewind_buffer.gd" id="3_g1dw6"]
 [ext_resource type="Script" uid="uid://bkyp7r16k5jvj" path="res://player/color_rect.gd" id="4_yw30f"]
+[ext_resource type="PackedScene" uid="uid://b2ch8soyivcsl" path="res://Watch/watch.tscn" id="5_qjkh3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 radius = 6.0
@@ -859,3 +860,5 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 0.1764706, 0.21176471, 0.29411766)
+
+[node name="WatchHUD" parent="." unique_id=1440977198 instance=ExtResource("5_qjkh3")]

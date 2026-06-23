@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bff1u1286k6xa"]
+[gd_scene format=3 uid="uid://d2bn7juyr68by"]
 
 [ext_resource type="Texture2D" uid="uid://bmwfqxycwtbpl" path="res://environment/objects/chairs/beige_chair.tres" id="1_vaxps"]
 [ext_resource type="Script" uid="uid://bctis1n0tqtwd" path="res://draggable/draggable.gd" id="2_s6d8s"]
