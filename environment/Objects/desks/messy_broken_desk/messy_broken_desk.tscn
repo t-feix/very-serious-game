@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ce2twn3sysg2u"]
+[gd_scene format=3 uid="uid://boubnxfcguiv0"]
 
 [ext_resource type="Script" uid="uid://bctis1n0tqtwd" path="res://draggable/draggable.gd" id="1_avrb5"]
 [ext_resource type="Texture2D" uid="uid://hro7msyr86ob" path="res://environment/objects/desks/messy_broken_desk/messy_broken_desk.tres" id="1_kyodc"]
