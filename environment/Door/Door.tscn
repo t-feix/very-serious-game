@@ -1,7 +1,58 @@
-[gd_scene format=3 uid="uid://wx7vhi7acx4"]
+[gd_scene format=3 uid="uid://cwvdqtn06cwgq"]
 
-[ext_resource type="Script" uid="uid://xv3tqrbvjf6v" path="res://environment/door/door.gd" id="1_py504"]
-[ext_resource type="Texture2D" uid="uid://bkesma3yjuprl" path="res://environment/door/Sprite_door.png" id="2_devri"]
+[ext_resource type="Script" uid="uid://xv3tqrbvjf6v" path="res://environment/Door/door.gd" id="1_py504"]
+[ext_resource type="Texture2D" uid="uid://bkesma3yjuprl" path="res://environment/Door/Sprite_door.png" id="2_devri"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_devri"]
+atlas = ExtResource("2_devri")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fp0r3"]
+atlas = ExtResource("2_devri")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aoay8"]
+atlas = ExtResource("2_devri")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bianc"]
+atlas = ExtResource("2_devri")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ywuf5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_devri")
+}],
+"loop": true,
+"name": &"Door_gray",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fp0r3")
+}],
+"loop": true,
+"name": &"Door_light",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aoay8")
+}],
+"loop": true,
+"name": &"Door_locked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bianc")
+}],
+"loop": true,
+"name": &"Door_open",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_devri"]
 size = Vector2(32, 4)
@@ -19,9 +70,12 @@ gravity_scale = 0.0
 linear_damp = 1.0
 angular_damp = 4.0
 
-[node name="Door Sprite" type="Sprite2D" parent="Door_Rigid Body" unique_id=1447344548]
+[node name="Door Sprite" type="AnimatedSprite2D" parent="Door_Rigid Body" unique_id=723183945]
+unique_name_in_owner = true
 texture_filter = 1
-texture = ExtResource("2_devri")
+sprite_frames = SubResource("SpriteFrames_ywuf5")
+animation = &"Door_light"
+speed_scale = 2.0
 
 [node name="Door Colission Shape" type="CollisionShape2D" parent="Door_Rigid Body" unique_id=1470077219]
 shape = SubResource("RectangleShape2D_devri")
