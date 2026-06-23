@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d2bn7juyr68by"]
+
+[ext_resource type="Texture2D" uid="uid://bmwfqxycwtbpl" path="res://environment/objects/chairs/beige_chair.tres" id="1_vaxps"]
+[ext_resource type="Script" uid="uid://bctis1n0tqtwd" path="res://draggable/draggable.gd" id="2_s6d8s"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s6d8s"]
+radius = 9.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vaxps"]
+radius = 19.0
+
+[node name="BeigeChair" type="AnimatableBody2D" unique_id=1473381379]
+sync_to_physics = false
+script = ExtResource("2_s6d8s")
+shape_type = 1
+drag_weight = 0.1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1142993744]
+texture = ExtResource("1_vaxps")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1189767651]
+shape = SubResource("CapsuleShape2D_s6d8s")
+
+[node name="GrabArea" type="Area2D" parent="." unique_id=806359338]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea" unique_id=1613248754]
+shape = SubResource("CircleShape2D_vaxps")

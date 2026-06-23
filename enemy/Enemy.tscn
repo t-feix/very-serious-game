@@ -300,3 +300,10 @@ collision_layer = 0
 shape = SubResource("CircleShape2D_7lgfl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1183069850]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=873484328]
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 20.0
+avoidance_layers = 0
+avoidance_mask = 0

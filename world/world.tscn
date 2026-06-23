@@ -3,9 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://bd42beihk1c6a" path="res://player/player.tscn" id="1_6xmxd"]
 [ext_resource type="TileSet" uid="uid://do5defqbo3d5a" path="res://environment/walls/wall_tileset.tres" id="2_tcf2h"]
 [ext_resource type="PackedScene" uid="uid://1d7jcj8nr15p" path="res://enemy/Enemy.tscn" id="3_4717r"]
-[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://Bullets/Bullet.tscn" id="4_h5o24"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4717r"]
+vertices = PackedVector2Array(1912.8906, 15.9296875, 1902.1016, 1069, 11.0390625, 1069, 14.9609375, 4.0625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(5, -6, 1923, 6, 1912, 1079, 1, 1079)])
 
 [node name="World" type="Node2D" unique_id=1484466954]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=580495208]
+navigation_polygon = SubResource("NavigationPolygon_4717r")
 
 [node name="Player" parent="." unique_id=638306865 instance=ExtResource("1_6xmxd")]
 position = Vector2(960, 540)
@@ -17,18 +24,14 @@ tile_set = ExtResource("2_tcf2h")
 [node name="Enemy" parent="." unique_id=1728479623 instance=ExtResource("3_4717r")]
 position = Vector2(1376, 498)
 is_patrolling = false
-bullet_scene = ExtResource("4_h5o24")
 
 [node name="Enemy2" parent="." unique_id=389609383 instance=ExtResource("3_4717r")]
 position = Vector2(1130, 115)
 patrol_offset_a = Vector2(-150, 0)
 patrol_offset_b = Vector2(150, 0)
-bullet_scene = ExtResource("4_h5o24")
 
 [node name="Enemy3" parent="." unique_id=856229952 instance=ExtResource("3_4717r")]
 position = Vector2(100, -200)
-bullet_scene = ExtResource("4_h5o24")
 
 [node name="Enemy4" parent="." unique_id=788300192 instance=ExtResource("3_4717r")]
 position = Vector2(178, -69)
-bullet_scene = ExtResource("4_h5o24")
