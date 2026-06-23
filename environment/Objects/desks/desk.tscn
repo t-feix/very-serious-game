@@ -17,6 +17,9 @@ size = Vector2(12, 23)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1rkgh"]
 size = Vector2(55, 12)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1toyk"]
+polygon = PackedVector2Array(-18, -16, -15, -16, -15, -15, -4, -15, -4, -16, -3, -16, -3, -15, 30, -15, 30, 15, 28, 15, 28, 13, -28, 13, -28, 15, -30, 15, -30, -15, -18, -15)
+
 [node name="Desk" type="AnimatableBody2D" unique_id=1281880372]
 sync_to_physics = false
 script = ExtResource("1_gjxna")
@@ -45,3 +48,6 @@ shape = SubResource("RectangleShape2D_3ccxe")
 [node name="ArmEast" type="CollisionShape2D" parent="GrabArea" unique_id=1372401816]
 position = Vector2(0, 19)
 shape = SubResource("RectangleShape2D_1rkgh")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=949713726]
+occluder = SubResource("OccluderPolygon2D_1toyk")
