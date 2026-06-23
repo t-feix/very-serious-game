@@ -17,9 +17,6 @@ var read_index := 0
 var size := 0
 var rewinding := false
 
-
-
-#data model
 func record_state():
 	var state := {
 		"position": player.global_position,
@@ -35,7 +32,6 @@ func record_state():
 	size = min(size + 1, MAX_STATES)
 
 
-#API
 func is_rewinding() -> bool:
 	return rewinding
 
@@ -63,6 +59,8 @@ func stop_rewind() -> void:
 	rewinding = false
 	write_index = (read_index + 1) % MAX_STATES
 	emit_signal("rewind_ended")
+	EventBus.rewind_ended.emit()
+	EventBus.is_rewinding = false
 	sprite.play()
 
 
@@ -75,6 +73,8 @@ func start_rewind() -> void:
 	rewinding = true
 	read_index = (write_index - 1 + MAX_STATES) % MAX_STATES
 	emit_signal("rewind_started")
+	EventBus.rewind_started.emit()
+	EventBus.is_rewinding = true
 	sprite.pause()
 
 

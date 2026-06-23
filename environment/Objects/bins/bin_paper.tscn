@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyrmhbnbijbuu"]
 
-[ext_resource type="Texture2D" uid="uid://cimayrt7esv8e" path="res://environment/Objects/bins/bin_paper.tres" id="1_l1lo7"]
+[ext_resource type="Texture2D" uid="uid://cimayrt7esv8e" path="res://environment/objects/bins/bin_paper.tres" id="1_l1lo7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmtor"]
 

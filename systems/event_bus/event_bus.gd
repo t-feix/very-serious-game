@@ -3,6 +3,7 @@ extends Node
 
 signal rewind_started
 signal rewind_ended
+var is_rewinding: bool = false
 
 signal door_lock_changed(door_id: int, is_locked: bool)
 
