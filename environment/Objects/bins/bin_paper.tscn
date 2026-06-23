@@ -5,7 +5,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmtor"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vj32o"]
-polygon = PackedVector2Array(10, -2, 10, 1, 10, 3, 9, 3, 9, 6, 8, 6, 8, 8, 7, 8, 7, 9, 5, 9, 5, 10, 2, 10, 2, 11, -2, 11, -2, 10, -5, 10, -5, 9, -7, 9, -7, 8, -8, 8, -8, 6, -9, 6, -9, 3, -10, 3, -10, -2, -9, -2, -9, -5, -8, -5, -8, -7, -7, -7, -7, -8, -5, -8, -5, -9, -2, -9, -2, -10, 2, -10, 2, -9, 5, -9, 5, -8, 7, -8, 7, -7, 8, -7, 8, -5, 9, -5, 9, -2)
+polygon = PackedVector2Array(10, -1, 10, 1, 10, 3, 9, 3, 9, 6, 8, 6, 8, 8, 7, 8, 7, 9, 5, 9, 5, 10, 2, 10, 2, 11, -2, 11, -2, 10, -5, 10, -5, 9, -7, 9, -7, 8, -8, 8, -8, 6, -9, 6, -9, 3, -10, 3, -10, -1, -9, -1, -9, -4, -8, -4, -8, -6, -7, -6, -7, -7, -5, -7, -5, -8, -2, -8, -2, -9, 2, -9, 2, -8, 5, -8, 5, -7, 7, -7, 7, -6, 8, -6, 8, -4, 9, -4, 9, -1)
 
 [node name="BinPaper" type="StaticBody2D" unique_id=1242605353]
 collision_mask = 0
@@ -18,4 +18,5 @@ position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_pmtor")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=2005925091]
+position = Vector2(0, -1)
 occluder = SubResource("OccluderPolygon2D_vj32o")
