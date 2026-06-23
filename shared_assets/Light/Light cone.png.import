@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnxt6xhrogx6k"
-path="res://.godot/imported/Sprite_Enemy_Default_Dummy.png-6ad1a08240f043020d813120aeefa01e.ctex"
+uid="uid://xpj5vlujsvwq"
+path="res://.godot/imported/Light cone.png-a42788bef333a761afa612e1f354fa36.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemy/Sprite_Enemy_Default_Dummy.png"
-dest_files=["res://.godot/imported/Sprite_Enemy_Default_Dummy.png-6ad1a08240f043020d813120aeefa01e.ctex"]
+source_file="res://shared_assets/Light/Light cone.png"
+dest_files=["res://.godot/imported/Light cone.png-a42788bef333a761afa612e1f354fa36.ctex"]
 
 [params]
 

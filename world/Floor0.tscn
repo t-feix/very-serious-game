@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bd42beihk1c6a" path="res://player/player.tscn" id="2_1hshi"]
 [ext_resource type="TileSet" uid="uid://do5defqbo3d5a" path="res://environment/walls/wall_tileset.tres" id="3_uhpy4"]
 [ext_resource type="PackedScene" uid="uid://1d7jcj8nr15p" path="res://enemy/Enemy.tscn" id="4_se10e"]
-[ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/door/Door.tscn" id="5_t3mat"]
+[ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/Door/Door.tscn" id="5_t3mat"]
 [ext_resource type="TileSet" uid="uid://cudltw1ri8087" path="res://environment/carpets/carpet_tileset.tres" id="6_1hshi"]
 [ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="8_se10e"]
 [ext_resource type="PackedScene" uid="uid://3s1ccw7gk5wm" path="res://environment/Interactables/throwable_objects/throwable_object.tscn" id="9_0eof2"]
@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b15mjluex2stv" path="res://environment/Interactables/wall_buttons/green_silver_wall_button.tres" id="14_0eof2"]
 [ext_resource type="Texture2D" uid="uid://cfatiwiahf1os" path="res://environment/Interactables/wall_buttons/green_silver_wall_button_pressed.tres" id="15_c5tt6"]
 [ext_resource type="PackedScene" uid="uid://dm4x3amcvxgos" path="res://environment/Objects/desks/green_mousepad_desk/green_mousepad_desk.tscn" id="19_a3lqn"]
-[ext_resource type="Texture2D" uid="uid://pwfudx14e7im" path="res://Watch/Sprite_Pocketwatch_watch.png" id="20_4yp3c"]
+[ext_resource type="Texture2D" uid="uid://cf0gnn24y5dub" path="res://shared_assets/Light/Light circle.png" id="20_a3lqn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_54lpg"]
 vertices = PackedVector2Array(1616, 875.90625, 1616, 875.96094, 1601.9688, 875.9297, 1601.9219, 848, 1899.9063, 789.0703, 1899.9609, 816, 1899.9063, 816, 1872, 788.89844, 1424, 788.09375, 1456, 788.03125, 1456, 788.09375, 1433, 859, 1488, 788.03125, 1488, 788.09375, 1520, 788.03125, 1520, 859, 1556.8984, 816, 1584, 788.09375, 1616, 788.03125, 1616, 788.09375, 1566.1094, 848, 1648, 788.03125, 1648, 788.09375, 1680, 788.03125, 1680, 788.09375, 1648, 875.90625, 1712, 788.03125, 1712, 788.09375, 1744, 788.03125, 1744, 788.09375, 1712, 876.0078, 1776, 788.03125, 1776, 788.09375, 1808, 788.03125, 1808, 788.09375, 1840, 788.03125, 1840, 788.09375, 1872, 788.03125, 1264, 820.09375, 1296, 820.03125, 1296, 820.09375, 1328, 820.03125, 1328, 912, 1557.0703, 788.0781, 1584, 788.03125, 1237.0703, 820.0781, 1264, 820.03125, 1236.8984, 848, 1648, 875.96094, 1899.9609, 848, 1899.9063, 848, 1899.9609, 880, 1899.9063, 880, 1899.9609, 912, 1899.9063, 912, 1899.9609, 944, 1899.9063, 944, 1712, 912, 1899.9609, 976, 1899.9063, 976, 1899.9609, 1008, 1899.9063, 1008, 1899.9609, 1040, 1899.1016, 1040, 1840, 1067.9063, 1840, 1067.9609, 1808, 1067.9063, 1808, 1067.9609, 1776, 1067.9063, 1776, 1067.9609, 1744, 1067.9063, 1744, 1067.9609, 1712, 1067.9063, 1712, 1067.9609, 1680, 1067.9063, 1680, 1067.9609, 1648, 1067.9063, 1648, 1067.9609, 1616, 1067.9063, 1616, 1067.9609, 1584, 1067.9063, 1584, 1067.9609, 1552, 1067.9063, 1552, 1067.9609, 1520, 1067.9063, 1520, 1067.9609, 1488, 1067.9063, 1488, 1067.9609, 1456, 1067.9063, 1456, 1067.9609, 1424, 1067.9063, 1424, 1067.9609, 1392, 1067.9063, 1392, 1067.1016, 1364.0938, 1040, 1364.0391, 1008, 1364.0938, 1008, 1328, 944, 1328, 1035.9609, 1296, 1035.9063, 1264, 1035.1016, 1236.0938, 1008, 1236.0938, 976, 1296, 1035.9609, 1264, 1035.9063, 1236.0391, 976, 1236.0391, 944, 1236.0938, 944, 1236.0391, 912, 1236.0938, 912, 1236.0391, 880, 1236.0938, 880, 1363.9922, 944, 1236.0391, 848, 1364.0938, 912, 1364.0391, 880, 1364.0938, 880, 1433, 911, 1364.0391, 848, 1364.0938, 848, 1364.0391, 816, 1364.8984, 816, 1364.0781, 1066.9219, 1364.0391, 1040, 1236.0781, 1034.9219, 1236.0391, 1008, 1556.0391, 848, 1556.0234, 816, 1556.8984, 848, 1520, 911, 1520, 912, 1392, 787.9922, 1392, 784, 1424, 784, 1566.0234, 875.9922, 1557.0703, 875.97656, 1365.0703, 787.9531, 1898.9219, 1068)
@@ -136,7 +136,8 @@ position = Vector2(1519, 916)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1559420036]
 position = Vector2(1496, 1012)
-energy = 0.23
+color = Color(1, 1, 0.7137255, 1)
+energy = 0.3
 shadow_enabled = true
-texture = ExtResource("20_4yp3c")
-texture_scale = 2.4
+texture = ExtResource("20_a3lqn")
+texture_scale = 0.4
