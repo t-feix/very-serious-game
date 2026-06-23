@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d2bn7juyr68by"]
 
-[ext_resource type="Texture2D" uid="uid://bmwfqxycwtbpl" path="res://environment/objects/chairs/beige_chair.tres" id="1_vaxps"]
+[ext_resource type="Texture2D" uid="uid://bmwfqxycwtbpl" path="res://environment/Objects/chairs/beige_chair.tres" id="1_vaxps"]
 [ext_resource type="Script" uid="uid://bctis1n0tqtwd" path="res://draggable/draggable.gd" id="2_s6d8s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s6d8s"]
@@ -9,6 +9,9 @@ height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vaxps"]
 radius = 19.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hjxu1"]
+polygon = PackedVector2Array(-12, -12, -9, -12, -9, -10, -8, -10, -8, -9, -6, -9, -6, -10, -5, -10, -5, -11, -3, -11, -3, -12, 3, -12, 3, -11, 5, -11, 5, -10, 6, -10, 6, -9, 7, -9, 7, -8, 8, -8, 8, -9, 9, -9, 9, -11, 12, -11, 12, -7, 9, -7, 9, -5, 10, -5, 10, 2, 9, 2, 9, 4, 10, 4, 10, 5, 13, 5, 13, 9, 10, 9, 10, 7, 8, 7, 8, 8, 3, 8, 3, 9, 2, 9, 2, 11, 1, 11, 1, 12, 2, 12, 2, 15, -2, 15, -2, 12, -1, 12, -1, 11, -2, 11, -2, 9, -3, 9, -3, 8, -7, 8, -7, 7, -10, 7, -10, 9, -13, 9, -13, 5, -10, 5, -10, 4, -9, 4, -9, 2, -10, 2, -10, -5, -9, -5, -9, -8, -12, -8)
 
 [node name="BeigeChair" type="AnimatableBody2D" unique_id=1473381379]
 sync_to_physics = false
@@ -26,3 +29,6 @@ shape = SubResource("CapsuleShape2D_s6d8s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea" unique_id=1613248754]
 shape = SubResource("CircleShape2D_vaxps")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=917734679]
+occluder = SubResource("OccluderPolygon2D_hjxu1")
