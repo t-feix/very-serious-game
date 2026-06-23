@@ -14,14 +14,17 @@ func _nav_move(target_pos: Vector2, move_speed: float) -> bool:
 	
 	if nav_agent.is_navigation_finished():
 		velocity = Vector2.ZERO
-		move_and_slide()
+		_stable_move()
 		return false
 	
 	var next_pos := nav_agent.get_next_path_position()
+	
+	print("[%s] path_len=%d next=%s" % [name, nav_agent.get_current_navigation_path().size(), next_pos])
+	
 	var dir := (next_pos - global_position).normalized()
 	velocity = dir * move_speed * _current_time_scale()
 	_face_direction(dir)
-	move_and_slide()
+	_stable_move()
 	return true
 
 # --- STATES ---
@@ -112,6 +115,31 @@ func _face_position(target_pos: Vector2) -> void:
 	_face_direction(target_pos - global_position)
 
 
+func _stable_move() -> void:
+	var intended := velocity
+	var pos_before := global_position
+	
+	var was_overlapping := test_move(global_transform, Vector2.ZERO)
+	
+	move_and_slide()
+	
+	if was_overlapping:
+		return
+	
+	var actual := global_position - pos_before
+	
+	if intended.length() < 0.001:
+		global_position = pos_before
+		return
+	
+	var intended_dir := intended.normalized()
+	var along := actual.dot(intended_dir)
+	var max_along := intended.length() * get_physics_process_delta_time() + 1.0
+	along = clamp(along, 0.0, max_along)
+	
+	global_position = pos_before + intended_dir * along
+
+
 func _ready():
 	sprite.rotation = PI
 	dprint("==============================================")
@@ -192,6 +220,8 @@ func _physics_process(delta):
 			current_state = State.ALERT
 			alert_nearby_enemies()
 	
+	var prev_pos := global_position
+	
 	match current_state:
 		State.IDLE:
 			do_idle()
@@ -203,6 +233,9 @@ func _physics_process(delta):
 			do_shoot()
 		State.RETURN:
 			do_return()
+	
+	if current_state == State.IDLE or current_state == State.ALERT or current_state == State.SHOOT:
+		global_position = prev_pos
 	
 	_check_door_collisions()
 
@@ -231,9 +264,10 @@ func _check_door_collisions() -> void:
 		var collider = collision.get_collider()
 		
 		if collider != null and collider.is_in_group("doors"):
-			dprint("[%s] HIT BY DOOR: %s" % [name, collider.name])
-			die()
-			return
+			if collider.has_method("is_swinging") and collider.is_swinging():
+				dprint("[%s] HIT BY SWINGING DOOR: %s" % [name, collider.name])
+				die()
+				return
 
 
 
@@ -320,13 +354,13 @@ func play_anim(anim_name: String, force_restart: bool = false):
 
 func do_idle():
 	velocity = Vector2.ZERO
-	move_and_slide()
+	_stable_move()
 	play_anim("enemy_aim_hold")
 
 
 func do_alert(delta):
 	velocity = Vector2.ZERO
-	move_and_slide()
+	_stable_move()
 	play_anim("enemy_aim_start")
 	
 	if player != null:

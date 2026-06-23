@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://cjqfcibcbkj6n"]
+
+[ext_resource type="Texture2D" uid="uid://bkesma3yjuprl" path="res://environment/door/Sprite_door.png" id="1_6a2tf"]
+
+[resource]
+atlas = ExtResource("1_6a2tf")
+region = Rect2(0, 32, 32, 32)

@@ -70,7 +70,8 @@ func _on_body_entered(body):
 		return
 	
 	if body is Player:
-		print("Player Hit!")
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
 		queue_free()
 		return
 	

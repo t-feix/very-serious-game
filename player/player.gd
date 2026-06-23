@@ -4,6 +4,11 @@ extends CharacterBody2D
 @export var speed: float = 220.0
 @export var push_strength: float = 400.0
 
+@export var invincible: bool = false   # debug
+@export var respawn_delay: float = 1
+
+var _dead: bool = false
+
 const ANIMATIONS_NEEDING_FLIP_V := ["player_push", "player_pull", "player_push_pull_start"]
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -18,6 +23,24 @@ func _physics_process(_delta: float) -> void:
 	
 	handle_movement()
 
+func take_damage(amount: float) -> void:
+	if invincible or _dead:
+		return
+	die()
+
+func die() -> void:
+	_dead = true
+	print("Player died")
+	
+	set_physics_process(false)
+	set_process_input(false)
+	velocity = Vector2.ZERO
+	
+	
+	await get_tree().create_timer(respawn_delay).timeout
+	if is_inside_tree():
+		get_tree().reload_current_scene()
+
 # interact section
 var _nearby_draggables: Array[Draggable] = []
 var _held: Draggable = null
@@ -26,6 +49,17 @@ var _nearby_buttons: Array[WallButton] = []
 
 var _nearby_throwables: Array[Throwable] = []
 var _carried: Throwable = null
+
+var _nearby_doors: Array[Door] = []
+
+
+func register_nearby_door(door: Door) -> void:
+	if not _nearby_doors.has(door):
+		_nearby_doors.append(door)
+
+
+func unregister_nearby_door(door: Door) -> void:
+	_nearby_doors.erase(door)
 
 func _on_throwable_area_entered(t: Throwable) -> void:
 	if not _nearby_throwables.has(t):
@@ -81,6 +115,16 @@ func _try_interact() -> void:
 	var closest_button := _closest_button()
 	if closest_button:
 		closest_button.press()
+		return
+	
+	var opened_any := false
+	for door in _nearby_doors:
+		if door.can_open():
+			door.try_open(global_position)
+			opened_any = true
+
+	if opened_any:
+		return
 
 func _try_pickup() -> bool:
 	var closest := _closest_throwable()
