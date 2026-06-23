@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://1d7jcj8nr15p"]
 
-[ext_resource type="Script" uid="uid://q61v3wgja7x5" path="res://enemy/enemy.gd" id="1_7lgfl"]
-[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://bullets/Bullet.tscn" id="2_5p6bu"]
+[ext_resource type="Script" uid="uid://q61v3wgja7x5" path="res://enemy/enemy_new.gd" id="1_7lgfl"]
+[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://Bullets/Bullet.tscn" id="2_5p6bu"]
 [ext_resource type="Texture2D" uid="uid://cna27higwefid" path="res://enemy/Sprite_Enemy.png" id="3_5p6bu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wovta"]
@@ -300,3 +300,8 @@ collision_layer = 0
 shape = SubResource("CircleShape2D_7lgfl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1183069850]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=873484328]
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 20.0

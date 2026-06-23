@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cot8sq4klui6y"]
+
+[ext_resource type="Texture2D" uid="uid://c6w7joqkl0ein" path="res://environment/objects/desks/standard_dark_desk/standard_dark_desk.tres" id="1_sj1d4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcplq"]
+size = Vector2(60, 28)
+
+[node name="StandardDarkDesk" type="StaticBody2D" unique_id=78318666]
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=141177599]
+texture = ExtResource("1_sj1d4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1161337672]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_tcplq")

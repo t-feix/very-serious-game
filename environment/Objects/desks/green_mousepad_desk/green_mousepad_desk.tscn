@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dm4x3amcvxgos"]
+
+[ext_resource type="Texture2D" uid="uid://b1i2s52gvwsvo" path="res://environment/objects/desks/green_mousepad_desk/green_mousepad_desk.tres" id="1_cq1mc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcplq"]
+size = Vector2(60, 28)
+
+[node name="GreenMousepadDesk" type="StaticBody2D" unique_id=78318666]
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=141177599]
+texture = ExtResource("1_cq1mc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1161337672]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_tcplq")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=606183058]
