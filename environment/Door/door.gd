@@ -68,7 +68,9 @@ func try_open(opener_pos: Vector2) -> bool:
 
 func _on_swing_finished() -> void:
 	remove_from_group("navigation_polygon_source")
-	get_tree().get_first_node_in_group("nav_region").bake_navigation_polygon()
+	var nav_region_node = get_tree().get_first_node_in_group("nav_region")
+	if nav_region_node:
+		nav_region_node.bake_navigation_polygon()
 	state = State.OPEN
 
 
