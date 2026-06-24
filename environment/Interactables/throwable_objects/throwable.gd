@@ -50,7 +50,11 @@ func throw_from_to(start: Vector2, target: Vector2) -> void:
 	sprite.visible = true
 	var tween := create_tween()
 	tween.tween_property(self, "global_position", landing, throw_duration)
+	tween.tween_callback(_on_landed)
 	put_down.emit()
+
+func _on_landed() -> void:
+	EventBus.noise_made.emit(global_position, 200.0)
 
 func is_carried() -> bool:
 	return _carried_by != null

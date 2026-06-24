@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cna27higwefid" path="res://enemy/Sprite_Enemy.png" id="3_5p6bu"]
 [ext_resource type="Texture2D" uid="uid://xpj5vlujsvwq" path="res://shared_assets/Light/Light cone.png" id="4_80fio"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wovta"]
-radius = 15.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_80fio"]
+radius = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_55d7h"]
 atlas = ExtResource("3_5p6bu")
@@ -283,7 +283,8 @@ script = ExtResource("1_7lgfl")
 bullet_scene = ExtResource("2_5p6bu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=307916872]
-shape = SubResource("CapsuleShape2D_wovta")
+position = Vector2(-1, -1)
+shape = SubResource("CircleShape2D_80fio")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1291341332]
 unique_name_in_owner = true
@@ -306,7 +307,7 @@ shape = SubResource("CircleShape2D_7lgfl")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1183069850]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=873484328]
-path_postprocessing = 1
+path_desired_distance = 4.0
 radius = 20.0
 avoidance_layers = 0
 avoidance_mask = 0

@@ -34,6 +34,9 @@ func die() -> void:
 	
 	set_physics_process(false)
 	set_process_input(false)
+	
+	if RewindBuffer.rewinding:
+		RewindBuffer.stop_rewind()
 	velocity = Vector2.ZERO
 	
 	

@@ -28,16 +28,16 @@ func _nav_move(target_pos: Vector2, move_speed: float) -> bool:
 	return true
 
 # --- STATES ---
-enum State {IDLE, ALERT, CHASE, SHOOT, RETURN}
+enum State {IDLE, ALERT, CHASE, SHOOT, RETURN, INVESTIGATE}
 var current_state = State.IDLE
 var previous_state = -1
 
 # --- STATS ---
 @export var speed: float = 100.0
 @export var shoot_range: float = 200.0
-@export var fire_rate: float = 0.25
+@export var fire_rate: float = 1
 @export var health: float = 1.0  # Dies in 1 hit
-@export var turn_speed: float = 4.0
+@export var turn_speed: float = 4
 
 # --- VISION ---
 @export var vision_range: float = 250.0
@@ -62,6 +62,12 @@ var can_shoot: bool = true
 var alert_timer: float = 0.0
 var alert_duration: float = 1.0
 
+# Investigate state internals
+var _investigate_pos: Vector2
+var _investigate_scanning: bool = false
+var _investigate_scan_progress: float = 0.0
+const INVESTIGATE_SCAN_SPEED: float = PI/2
+
 
 var _shoot_cooldown: float = 0.0
 var _is_rewinding: bool = false
@@ -71,7 +77,8 @@ var state_names = {
 	State.ALERT: "ALERT",
 	State.CHASE: "CHASE",
 	State.SHOOT: "SHOOT",
-	State.RETURN: "RETURN"
+	State.RETURN: "RETURN",
+	State.INVESTIGATE: "INVESTIGATE"
 }
 
 # --- NODES ---
@@ -83,7 +90,6 @@ var state_names = {
 func dprint(msg: String) -> void:
 	if debug_enabled:
 		print(msg)
-
 
 
 func _current_time_scale() -> float:
@@ -138,10 +144,12 @@ func _stable_move() -> void:
 	along = clamp(along, 0.0, max_along)
 	
 	global_position = pos_before + intended_dir * along
+	print("[%s] intended=%s actual=%s along=%f kept=%f" % [name, intended, actual, actual.dot(intended_dir), along])
 
 
 func _ready():
 	sprite.rotation = PI
+	EventBus.noise_made.connect(_on_noise_made)
 	dprint("==============================================")
 	dprint("!!! NEW SCRIPT LOADED !!!")
 	dprint("!!! SCRIPT PATH: %s" % get_script().resource_path)
@@ -196,6 +204,18 @@ func _ready():
 			dprint("[%s] Player already in detection area at spawn" % name)
 			break
 
+func _on_noise_made(noise_pos: Vector2, radius: float) -> void:
+	if current_state != State.IDLE:
+		return
+	
+	if global_position.distance_to(noise_pos) > radius:
+		return
+	
+	dprint("[%s] Heard noise at %s -> INVESTIGATE" % [name, noise_pos])
+	_investigate_pos = noise_pos
+	_investigate_scanning = false
+	_investigate_scan_progress = 0.0
+	current_state = State.INVESTIGATE
 
 func _physics_process(delta):
 	if current_state != previous_state:
@@ -214,10 +234,10 @@ func _physics_process(delta):
 	update_debug_color()
 	
 
-	if player != null and current_state == State.IDLE:
+	if player != null and (current_state == State.IDLE or current_state == State.INVESTIGATE):
 		if is_player_in_vision_cone(player):
-			dprint("[%s] Player entered vision cone -> ALERT" % name)
-			current_state = State.ALERT
+			dprint("[%s] Player spotted -> CHASE" % name)
+			current_state = State.CHASE
 			alert_nearby_enemies()
 	
 	var prev_pos := global_position
@@ -233,12 +253,37 @@ func _physics_process(delta):
 			do_shoot()
 		State.RETURN:
 			do_return()
+		State.INVESTIGATE:
+			do_investigate(scaled_delta)
 	
 	if current_state == State.IDLE or current_state == State.ALERT or current_state == State.SHOOT:
 		global_position = prev_pos
 	
 	_check_door_collisions()
 
+
+func do_investigate(delta: float) -> void:
+	if not _investigate_scanning:
+		# Phase 1
+		var still_pathing := _nav_move(_investigate_pos, speed)
+		play_anim("enemy_walk")
+		
+		if not still_pathing:
+			_investigate_scanning = true
+			_investigate_scan_progress = 0.0
+	else:
+		# Phase 2
+		velocity = Vector2.ZERO
+		_stable_move()
+		play_anim("enemy_aim_hold")
+		
+		var step := INVESTIGATE_SCAN_SPEED * delta
+		rotation += step
+		_investigate_scan_progress += step
+		
+		if _investigate_scan_progress >= TAU:
+			dprint("[%s] Done investigating -> RETURN" % name)
+			current_state = State.RETURN
 
 
 func _on_state_enter(new_state, old_state) -> void:
@@ -333,6 +378,8 @@ func update_debug_color():
 			vision_debug.color = Color(1, 0, 0, 0.5)
 		State.RETURN:
 			vision_debug.color = Color(0, 0, 1, 0.2)
+		State.INVESTIGATE:
+			vision_debug.color = Color(0.4, 0.7, 1, 0.25)
 
 
 # ========================
@@ -480,8 +527,8 @@ func _on_body_entered(body):
 		player = body
 		
 		if is_player_in_vision_cone(body):
-			dprint("[%s] Player in vision cone -> ALERT" % name)
-			current_state = State.ALERT
+			dprint("[%s] Player in vision cone -> CHASE" % name)
+			current_state = State.CHASE
 			alert_nearby_enemies()
 		else:
 			dprint("[%s] Player nearby but NOT in vision cone" % name)

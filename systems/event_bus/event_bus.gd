@@ -8,3 +8,5 @@ var is_rewinding: bool = false
 signal door_lock_changed(door_id: int, is_locked: bool)
 
 signal button_pressed(button_id: int)
+
+signal noise_made(position: Vector2, radius: float)
