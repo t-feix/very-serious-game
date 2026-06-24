@@ -236,8 +236,8 @@ func _physics_process(delta):
 
 	if player != null and (current_state == State.IDLE or current_state == State.INVESTIGATE):
 		if is_player_in_vision_cone(player):
-			dprint("[%s] Player spotted -> CHASE" % name)
-			current_state = State.CHASE
+			dprint("[%s] Player spotted -> ALERT" % name)
+			current_state = State.ALERT
 			alert_nearby_enemies()
 	
 	var prev_pos := global_position
@@ -527,8 +527,8 @@ func _on_body_entered(body):
 		player = body
 		
 		if is_player_in_vision_cone(body):
-			dprint("[%s] Player in vision cone -> CHASE" % name)
-			current_state = State.CHASE
+			dprint("[%s] Player in vision cone -> ALERT" % name)
+			current_state = State.ALERT
 			alert_nearby_enemies()
 		else:
 			dprint("[%s] Player nearby but NOT in vision cone" % name)

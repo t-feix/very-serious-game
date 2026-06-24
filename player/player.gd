@@ -26,6 +26,8 @@ func _physics_process(_delta: float) -> void:
 func take_damage(amount: float) -> void:
 	if invincible or _dead:
 		return
+	if EventBus.is_rewinding:
+		return
 	die()
 
 func die() -> void:
