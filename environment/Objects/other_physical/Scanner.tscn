@@ -1,0 +1,23 @@
+[gd_scene format=4 uid="uid://bp8qwi2aq2kx7"]
+
+[ext_resource type="TileSet" uid="uid://ccsi0ka5bmctq" path="res://environment/Objects/furniture_tileset.tres" id="1_602lq"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_602lq"]
+polygon = PackedVector2Array(-18.5, 14.5, 27.5, 14.5, 27.5, 13.5, 28.5, 13.5, 28.5, 12.5, 29.5, 12.5, 29.5, -11.5, 28.5, -11.5, 28.5, -12.5, 27.5, -12.5, 27.5, -13.5, 24.5, -13.5, 24.5, -14.5, -11.5, -14.5, -11.5, -13.5, -18.5, -13.5, -18.5, -12.5, -19.5, -12.5, -19.5, -11.5, -20.5, -11.5, -20.5, -6.5, -21.5, -6.5, -21.5, -7.5, -23.5, -7.5, -23.5, -8.5, -24.5, -8.5, -24.5, -9.5, -26.5, -9.5, -26.5, -10.5, -29.5, -10.5, -29.5, 3.5, -28.5, 3.5, -28.5, 4.5, -26.5, 4.5, -26.5, 5.5, -24.5, 5.5, -24.5, 6.5, -22.5, 6.5, -22.5, 7.5, -20.5, 7.5, -20.5, 12.5, -19.5, 12.5, -19.5, 13.5, -18.5, 13.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4m1e"]
+size = Vector2(59, 29)
+
+[node name="Scanner" type="Node2D" unique_id=660441671]
+
+[node name="TileMapLayer3" type="TileMapLayer" parent="." unique_id=773933865]
+tile_map_data = PackedByteArray("AAD+////AAAOAAAAAAD/////AAAPAAAAAAAAAP//AAAQAAAAAAABAP//AAARAAAAAAABAAAAAAARAAEAAAAAAAAAAAAQAAEAAAD//wAAAAAPAAEAAAD+/wAAAAAOAAEAAAA=")
+tile_set = ExtResource("1_602lq")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=888947108]
+position = Vector2(-0.5, 1.5)
+occluder = SubResource("OccluderPolygon2D_602lq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1341515497]
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectangleShape2D_i4m1e")
