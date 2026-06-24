@@ -14,14 +14,31 @@ const ANIMATIONS_NEEDING_FLIP_V := ["player_push", "player_pull", "player_push_p
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var RewindBuffer = %RewindBuffer
 
+@onready var foootstep_audio: AudioStreamPlayer = %FootstepAudio
+@onready var step_timer: Timer = %StepTimer
+
 func _ready() -> void:
 	RewindBuffer.clear()
+	step_timer.start()
 
 func _physics_process(_delta: float) -> void:
 	if RewindBuffer.is_rewinding():
 		return
 	
 	handle_movement()
+	footstep_audio()
+
+
+
+func footstep_audio():
+	if velocity.length() > 0:
+		print("1. Animation and velocity are correct!")
+		if step_timer.is_stopped():
+			print("2. Timer is stopped! Playing audio now.")
+			foootstep_audio.play()
+			step_timer.start(0.35)
+
+
 
 func take_damage(amount: float) -> void:
 	if invincible or _dead:

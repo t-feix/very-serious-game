@@ -5,6 +5,10 @@
 [ext_resource type="Script" uid="uid://bq1ouprwbakmk" path="res://player/rewind_buffer.gd" id="3_g1dw6"]
 [ext_resource type="Script" uid="uid://bkyp7r16k5jvj" path="res://player/color_rect.gd" id="4_yw30f"]
 [ext_resource type="PackedScene" uid="uid://b2ch8soyivcsl" path="res://Watch/watch.tscn" id="5_qjkh3"]
+[ext_resource type="AudioStream" uid="uid://d4mgd2watlvbu" path="res://player/sfx/footsteps/FootStepConcrete1.wav" id="6_hg6s5"]
+[ext_resource type="AudioStream" uid="uid://c1avfpi66nu1f" path="res://player/sfx/footsteps/FootStepConcrete2.wav" id="7_8t03j"]
+[ext_resource type="AudioStream" uid="uid://dejgjlddbicwd" path="res://player/sfx/footsteps/FootStepConcrete3.wav" id="8_2ieo8"]
+[ext_resource type="AudioStream" uid="uid://dgf47xbbas8tl" path="res://player/sfx/footsteps/FootStepConcrete4.wav" id="9_ebec5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkbax"]
 radius = 6.0
@@ -921,6 +925,14 @@ _data = {
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qjkh3"]
 polygon = PackedVector2Array(-11, -1, -3, -5, 4, -5, 11, -1, 11, 4, 8, 7, 4, 10, -5, 10, -11, 4)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yllr7"]
+random_pitch = 1.0717734
+streams_count = 4
+stream_0/stream = ExtResource("6_hg6s5")
+stream_1/stream = ExtResource("7_8t03j")
+stream_2/stream = ExtResource("8_2ieo8")
+stream_3/stream = ExtResource("9_ebec5")
+
 [node name="Player" type="CharacterBody2D" unique_id=638306865 groups=["player"]]
 collision_mask = 7
 script = ExtResource("1_rkbax")
@@ -933,7 +945,7 @@ shape = SubResource("CapsuleShape2D_rkbax")
 unique_name_in_owner = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_8t03j")
-animation = &"Player shot_front"
+animation = &"Player walk"
 frame = 1
 speed_scale = 2.0
 
@@ -964,3 +976,17 @@ color = Color(1, 0.1764706, 0.21176471, 0.29411766)
 
 [node name="Player_LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1592808509]
 occluder = SubResource("OccluderPolygon2D_qjkh3")
+
+[node name="Audio" type="Node2D" parent="." unique_id=1356062628]
+
+[node name="footsteps" type="Node" parent="Audio" unique_id=1561377846]
+
+[node name="FootstepAudio" type="AudioStreamPlayer" parent="Audio/footsteps" unique_id=2044298790]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_yllr7")
+volume_db = 5.0
+
+[node name="StepTimer" type="Timer" parent="Audio/footsteps" unique_id=79650677]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
