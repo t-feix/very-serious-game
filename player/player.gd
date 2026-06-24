@@ -232,6 +232,7 @@ func _try_grab() -> void:
 		_held = closest
 		_grab_forward = Vector2.from_angle(rotation - PI/2)
 		sprite.play("player_push_pull_start")
+		$DragSound.play()
 
 func _release() -> void:
 	if _held:

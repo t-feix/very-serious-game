@@ -36,7 +36,8 @@ func try_grab(grabber: Node2D) -> bool:
 	_held_by = grabber
 	add_collision_exception_with(grabber)
 	var to_grabber: Vector2 = grabber.global_position - global_position
-	
+
+
 	match shape_type:
 		ShapeType.RECTANGLE:
 			var snapped_dir := _snap_to_cardinal(to_grabber)
@@ -48,6 +49,8 @@ func try_grab(grabber: Node2D) -> bool:
 			grabber.rotation = (-to_grabber.normalized()).angle() + PI/2
 			_grab_offset = to_grabber
 	return true
+
+
 
 func release() -> void:
 	if _held_by:

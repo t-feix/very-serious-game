@@ -29,6 +29,7 @@ func press() -> void:
 	pressed.emit()
 	EventBus.button_pressed.emit(button_id)
 	_flash_pressed_visual()
+	$ButtonSound.play()
 
 func _flash_pressed_visual() -> void:
 	if pressed_texture:
