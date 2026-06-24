@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="7_ki6pe"]
 [ext_resource type="PackedScene" uid="uid://bd42beihk1c6a" path="res://player/player.tscn" id="8_emkwu"]
 [ext_resource type="Texture2D" uid="uid://cf0gnn24y5dub" path="res://shared_assets/Light/Light circle.png" id="9_aaamt"]
-[ext_resource type="TileSet" uid="uid://ccsi0ka5bmctq" path="res://environment/Objects/furniture_tileset.tres" id="11_jyyu0"]
+[ext_resource type="TileSet" uid="uid://dt51i0ui7d58s" path="res://environment/Objects/furniture_tileset.tres" id="11_jyyu0"]
 [ext_resource type="PackedScene" uid="uid://cyrmhbnbijbuu" path="res://environment/Objects/bins/bin_paper.tscn" id="12_ki6pe"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3ywud"]
