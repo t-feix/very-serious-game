@@ -4,14 +4,14 @@
 [ext_resource type="TileSet" uid="uid://do5defqbo3d5a" path="res://environment/walls/wall_tileset.tres" id="2_aaamt"]
 [ext_resource type="TileSet" uid="uid://cudltw1ri8087" path="res://environment/carpets/carpet_tileset.tres" id="3_3ywud"]
 [ext_resource type="TileSet" uid="uid://nqss3wtpuetb" path="res://environment/Walldecoration/new_tile_set.tres" id="4_hqb0o"]
-[ext_resource type="PackedScene" uid="uid://ce2twn3sysg2u" path="res://environment/objects/desks/desk.tscn" id="4_ultxu"]
-[ext_resource type="Texture2D" uid="uid://hro7msyr86ob" path="res://environment/objects/desks/messy_broken_desk.tres" id="5_hqb0o"]
-[ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/door/Door.tscn" id="6_jyyu0"]
+[ext_resource type="PackedScene" uid="uid://ce2twn3sysg2u" path="res://environment/Objects/desks/desk.tscn" id="4_ultxu"]
+[ext_resource type="Texture2D" uid="uid://hro7msyr86ob" path="res://environment/Objects/desks/messy_broken_desk.tres" id="5_hqb0o"]
+[ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/Door/Door.tscn" id="6_jyyu0"]
 [ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="7_ki6pe"]
 [ext_resource type="PackedScene" uid="uid://bd42beihk1c6a" path="res://player/player.tscn" id="8_emkwu"]
 [ext_resource type="Texture2D" uid="uid://cf0gnn24y5dub" path="res://shared_assets/Light/Light circle.png" id="9_aaamt"]
-[ext_resource type="TileSet" uid="uid://ccsi0ka5bmctq" path="res://environment/objects/furniture_tileset.tres" id="11_jyyu0"]
-[ext_resource type="PackedScene" uid="uid://cyrmhbnbijbuu" path="res://environment/objects/bins/bin_paper.tscn" id="12_ki6pe"]
+[ext_resource type="TileSet" uid="uid://ccsi0ka5bmctq" path="res://environment/Objects/furniture_tileset.tres" id="11_jyyu0"]
+[ext_resource type="PackedScene" uid="uid://cyrmhbnbijbuu" path="res://environment/Objects/bins/bin_paper.tscn" id="12_ki6pe"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3ywud"]
 polygon = PackedVector2Array(577, 159, 513, 159, 513, 64, 576, 64, 576, 60, 508, 59, 507, 58, 508, 65, 508, 163, 508, 164, 572, 164, 572, 416, 577, 416, 576, 420, 645, 420, 644, 415, 644, 164, 708, 164, 708, 60, 640, 60, 640, 64, 704, 64, 703, 158, 640, 158, 640, 174, 624, 174, 624, 178, 640, 178, 640, 302, 624, 302, 624, 306, 640, 306, 640, 415, 578, 415, 577, 414, 577, 306, 592, 306, 592, 302, 577, 302, 577, 178, 592, 178, 592, 174, 577, 174)
@@ -27,7 +27,7 @@ tile_map_data = PackedByteArray("AAARAAwAAgAEAAEAAAARAAsAAgAEAAEAAAARAAoAAgAEAAE
 tile_set = ExtResource("2_aaamt")
 
 [node name="Walls" type="TileMapLayer" parent="." unique_id=377097009]
-tile_map_data = PackedByteArray("AAARAAwAAgAEAAEAAAARAAsAAgAEAAEAAAARAAoAAgAEAAEAAAARAAkAAgAEAAEAAAAUAAkAAgAEAAEAABAUAAgAAgAEAAEAABAUAAcAAgAEAAEAABAUAAYAAgAEAAEAABAUAAoAAgAEAAEAABAUAAsAAgAEAAEAABAUAAwAAgAEAAEAABATAAkAAgAGAAEAAFASAAkAAgAGAAEAAGASAAUAAgAGAAEAAEATAAUAAgAGAAEAAFATAA0AAgAEAAEAAGASAA0AAgAEAAEAAGARAAgAAgAEAAEAAAARAAcAAgAEAAEAAAARAAYAAgAEAAEAAAAVAAUAAgAEAAEAAHAWAAQAAgAEAAEAABAWAAMAAgAEAAEAABAWAAIAAgAEAAEAABAVAAEAAgAEAAEAAFAUAAEAAgAEAAEAAFARAAEAAgAEAAEAAFAQAAEAAgAEAAEAAFAPAAIAAgAEAAEAAAAPAAMAAgAEAAEAAAAPAAQAAgAEAAEAAAAQAAUAAgAEAAEAAHARAAUAAgAEAAEAAAAUAAUAAgAEAAEAABA=")
+tile_map_data = PackedByteArray("AAARAAwAAgAEAAEAAAARAAsAAgAEAAEAAAARAAoAAgAEAAEAAAARAAkAAgAEAAEAAAAUAAkAAgAEAAEAABAUAAgAAgAEAAEAABAUAAcAAgAEAAEAABAUAAYAAgAEAAEAABAUAAoAAgAEAAEAABAUAAsAAgAEAAEAABAUAAwAAgAEAAEAABATAAkAAgAGAAEAAFASAAkAAgAGAAEAAGASAAUAAgAGAAEAAEATAAUAAgAGAAEAAFATAA0AAgAEAAEAAGASAA0AAgAEAAEAAGARAAgAAgAEAAEAAAARAAcAAgAEAAEAAAARAAYAAgAEAAEAAAAVAAUAAgAEAAEAAHAWAAQAAgAEAAEAABAWAAMAAgAEAAEAABAWAAIAAgAEAAEAABAVAAEAAgAEAAEAAFAUAAEAAgAEAAEAAFARAAEAAgAEAAEAAFAQAAEAAgAEAAEAAFAPAAIAAgAEAAEAAAAPAAMAAgAEAAEAAAAPAAQAAgAEAAEAAAAQAAUAAgAEAAEAAHARAAUAAgAEAAEAAGAUAAUAAgAEAAEAABA=")
 tile_set = ExtResource("2_aaamt")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=758972226]
@@ -36,6 +36,10 @@ tile_set = ExtResource("3_3ywud")
 [node name="Wall decorations" type="TileMapLayer" parent="." unique_id=1563542534]
 tile_map_data = PackedByteArray("AAApAAQAAAAIAAAAAAAqAAQAAAAJAAAAAAApAAUAAAAIAAEAAAAqAAUAAAAJAAEAAAA=")
 tile_set = ExtResource("4_hqb0o")
+
+[node name="TileMapLayer3" type="TileMapLayer" parent="." unique_id=1989402932]
+tile_map_data = PackedByteArray("AAAgAAQAAAAOAAAAAAAhAAQAAAAPAAAAAAAiAAQAAAAQAAAAAAAjAAQAAAARAAAAAAAjAAUAAAARAAEAAAAiAAUAAAAQAAEAAAAhAAUAAAAPAAEAAAAgAAUAAAAOAAEAAAAhAAYAAAAIAAgAAAAiAAYAAAAJAAgAAAAhAAcAAAAIAAkAAAAiAAcAAAAJAAkAAAA=")
+tile_set = ExtResource("11_jyyu0")
 
 [node name="Desk" parent="." unique_id=1281880372 instance=ExtResource("4_ultxu")]
 position = Vector2(608, 211)
@@ -59,23 +63,21 @@ next_scene = "uid://bjjjquptyi1yk"
 position = Vector2(608, 400)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1725200927]
-position = Vector2(608, 281)
+position = Vector2(608, 369)
 energy = 0.1
 shadow_enabled = true
 texture = ExtResource("9_aaamt")
+height = 100.0
 
 [node name="PointLight2D2" type="PointLight2D" parent="." unique_id=982041768]
 position = Vector2(605, 190)
 energy = 0.1
 shadow_enabled = true
 texture = ExtResource("9_aaamt")
+height = 100.0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=2015903982]
 occluder = SubResource("OccluderPolygon2D_3ywud")
-
-[node name="TileMapLayer3" type="TileMapLayer" parent="." unique_id=1989402932]
-tile_map_data = PackedByteArray("AAAgAAQAAAAOAAAAAAAhAAQAAAAPAAAAAAAiAAQAAAAQAAAAAAAjAAQAAAARAAAAAAAjAAUAAAARAAEAAAAiAAUAAAAQAAEAAAAhAAUAAAAPAAEAAAAgAAUAAAAOAAEAAAAhAAYAAAAIAAgAAAAiAAYAAAAJAAgAAAAhAAcAAAAIAAkAAAAiAAcAAAAJAAkAAAA=")
-tile_set = ExtResource("11_jyyu0")
 
 [node name="BinPaper" parent="." unique_id=1242605353 instance=ExtResource("12_ki6pe")]
 position = Vector2(687, 144)
