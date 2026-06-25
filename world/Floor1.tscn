@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bd42beihk1c6a" path="res://player/player.tscn" id="2_qcnog"]
 [ext_resource type="TileSet" uid="uid://do5defqbo3d5a" path="res://environment/walls/wall_tileset.tres" id="3_j75s2"]
 [ext_resource type="PackedScene" uid="uid://1d7jcj8nr15p" path="res://enemy/Enemy.tscn" id="4_q202a"]
-[ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/door/Door.tscn" id="5_w1jr1"]
+[ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/Door/Door.tscn" id="5_w1jr1"]
 [ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="6_qcnog"]
 
 [node name="World2" type="Node2D" unique_id=1484466954]
@@ -34,26 +34,26 @@ position = Vector2(1015, 141)
 position = Vector2(461, 642)
 
 [node name="Door" parent="." unique_id=371851669 instance=ExtResource("5_w1jr1")]
-position = Vector2(1714, 560)
+position = Vector2(1727, 560)
 
 [node name="Door2" parent="." unique_id=1770351580 instance=ExtResource("5_w1jr1")]
-position = Vector2(1842, 112)
+position = Vector2(1856, 112)
 
 [node name="Door3" parent="." unique_id=1737787546 instance=ExtResource("5_w1jr1")]
-position = Vector2(1298, 112)
+position = Vector2(1311, 112)
 
 [node name="Door4" parent="." unique_id=335854527 instance=ExtResource("5_w1jr1")]
-position = Vector2(1298, 560)
+position = Vector2(1311, 560)
 
 [node name="Door6" parent="." unique_id=1097191678 instance=ExtResource("5_w1jr1")]
-position = Vector2(721, 560)
+position = Vector2(736, 560)
 
 [node name="Door5" parent="." unique_id=37262957 instance=ExtResource("5_w1jr1")]
-position = Vector2(976, 750)
+position = Vector2(976, 736)
 rotation = -1.5707964
 
 [node name="Door7" parent="." unique_id=318327281 instance=ExtResource("5_w1jr1")]
-position = Vector2(496, 271)
+position = Vector2(496, 256)
 rotation = -1.5707964
 
 [node name="LevelExit" parent="." unique_id=562984780 instance=ExtResource("6_qcnog")]
