@@ -28,7 +28,6 @@ source_geometry_mode = 2
 agent_radius = 16.0
 
 [node name="World" type="Node2D" unique_id=1484466954]
-position = Vector2(-1, 0)
 script = ExtResource("1_t3mat")
 spawn_from_lower = Vector2(1776, 1047)
 spawn_from_higher = Vector2(1407, 804)
