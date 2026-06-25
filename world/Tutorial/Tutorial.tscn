@@ -2,50 +2,109 @@
 
 [ext_resource type="TileSet" uid="uid://ba8jj83iskcpo" path="res://environment/floor/floor_tileset.tres" id="1_isepa"]
 [ext_resource type="Script" uid="uid://cu3njwa0ovitk" path="res://world/Tutorial/tutorial.gd" id="1_lxnwq"]
+[ext_resource type="PackedScene" uid="uid://bff1u1286k6xa" path="res://environment/objects/chairs/chair.tscn" id="2_38u0x"]
+[ext_resource type="PackedScene" uid="uid://cu34k3qe3qfuq" path="res://environment/Interactables/wall_buttons/wall_button.tscn" id="2_75hua"]
 [ext_resource type="TileSet" uid="uid://do5defqbo3d5a" path="res://environment/walls/wall_tileset.tres" id="2_lxnwq"]
+[ext_resource type="Texture2D" uid="uid://di1dbqk4mfpw6" path="res://environment/Interactables/wall_buttons/red_silver_wall_button.tres" id="3_7ljjj"]
 [ext_resource type="PackedScene" uid="uid://ce2twn3sysg2u" path="res://environment/objects/desks/desk.tscn" id="3_825jq"]
+[ext_resource type="Texture2D" uid="uid://10lst12emici" path="res://environment/objects/chairs/purple_chair.tres" id="3_lcrcg"]
 [ext_resource type="Texture2D" uid="uid://hro7msyr86ob" path="res://environment/objects/desks/messy_broken_desk.tres" id="4_gal1e"]
+[ext_resource type="Texture2D" uid="uid://dmsfmjrarcovd" path="res://environment/Interactables/wall_buttons/red_silver_wall_button_pressed.tres" id="4_ojp0k"]
 [ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/door/Door.tscn" id="5_75hua"]
 [ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="6_7ljjj"]
+[ext_resource type="Texture2D" uid="uid://beyctengl726a" path="res://environment/objects/desks/standard_desk.tres" id="6_ojp0k"]
+[ext_resource type="Texture2D" uid="uid://b1i2s52gvwsvo" path="res://environment/objects/desks/green_mousepad_desk.tres" id="7_l8kmg"]
 [ext_resource type="PackedScene" uid="uid://bd42beihk1c6a" path="res://player/player.tscn" id="7_ojp0k"]
 [ext_resource type="Texture2D" uid="uid://cf0gnn24y5dub" path="res://shared_assets/Light/Light circle.png" id="8_l8kmg"]
 [ext_resource type="PackedScene" uid="uid://cyrmhbnbijbuu" path="res://environment/objects/bins/bin_paper.tscn" id="9_38u0x"]
+[ext_resource type="Texture2D" uid="uid://bmwfqxycwtbpl" path="res://environment/objects/chairs/beige_chair.tres" id="10_lcrcg"]
+[ext_resource type="PackedScene" uid="uid://1d7jcj8nr15p" path="res://enemy/Enemy.tscn" id="19_uq3ay"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3ywud"]
 polygon = PackedVector2Array(577, 159, 513, 159, 513, 64, 576, 64, 576, 60, 508, 59, 507, 58, 508, 65, 508, 163, 508, 164, 572, 164, 572, 416, 577, 416, 576, 420, 645, 420, 644, 415, 644, 164, 708, 164, 708, 60, 640, 60, 640, 64, 704, 64, 703, 158, 640, 158, 640, 174, 624, 174, 624, 178, 640, 178, 640, 302, 624, 302, 624, 306, 640, 306, 640, 415, 578, 415, 577, 414, 577, 306, 592, 306, 592, 302, 577, 302, 577, 178, 592, 178, 592, 174, 577, 174)
 
 [node name="Tutorial" type="Node2D" unique_id=4249973]
 script = ExtResource("1_lxnwq")
-spawn_from_lower = Vector2(608, 300)
+spawn_from_lower = Vector2(300, 350)
 
 [node name="Floor" type="TileMapLayer" parent="." unique_id=1626935638]
-tile_map_data = PackedByteArray("AAASAAYAAAABAAkAAAATAAYAAAADAAkAAAATAAcAAAABAAkAAAASAAcAAAABAAkAAAASAAgAAAABAAkAAAATAAgAAAABAAkAAAASAAkAAAADAAkAAAATAAkAAAABAAkAAAATAAoAAAABAAkAAAASAAoAAAABAAkAAAASAAsAAAABAAkAAAATAAsAAAABAAkAAAATAAwAAAABAAkAAAASAAwAAAABAAkAAAASAAUAAAABAAkAAAATAAUAAAABAAkAAAAQAAQAAAABAAkAAAARAAQAAAABAAkAAAASAAQAAAABAAkAAAATAAQAAAABAAkAAAAUAAQAAAABAAkAAAAVAAQAAAABAAkAAAAQAAMAAAABAAkAAAARAAMAAAABAAkAAAASAAMAAAABAAkAAAATAAMAAAABAAkAAAAUAAMAAAABAAkAAAAVAAMAAAABAAkAAAAQAAIAAAABAAkAAAARAAIAAAABAAkAAAASAAIAAAABAAkAAAATAAIAAAABAAkAAAAUAAIAAAABAAkAAAAVAAIAAAABAAkAAAA=")
+tile_map_data = PackedByteArray("AAASAAYAAAAJAAkAAFATAAYAAAAJAAkAAFATAAcAAAAJAAkAAFASAAcAAAAJAAkAAFASAAgAAAAJAAkAAFATAAgAAAAJAAkAAFASAAkAAAAJAAkAAFATAAkAAAAJAAkAAFATAAoAAAAJAAkAAFASAAoAAAAJAAkAAFASAAsAAAAJAAkAAFATAAsAAAAJAAkAAFATAAwAAAAJAAkAAFASAAwAAAAJAAkAAFASAAUAAAAJAAkAAFATAAUAAAAJAAkAAFAQAAQAAAAJAAkAAFARAAQAAAAJAAkAAFASAAQAAAAJAAkAAFATAAQAAAAJAAkAAFAUAAQAAAAJAAkAAFAVAAQAAAAJAAkAAFAQAAMAAAAJAAkAAFARAAMAAAAJAAkAAFASAAMAAAAJAAkAAFATAAMAAAAJAAkAAFAUAAMAAAAJAAkAAFAVAAMAAAAJAAkAAFAQAAIAAAAJAAkAAFARAAIAAAAJAAkAAFASAAIAAAAJAAkAAFATAAIAAAAJAAkAAFAUAAIAAAAJAAkAAFAVAAIAAAAJAAkAAFALAAwAAAAGAAkAAFAKAAwAAAAGAAkAAFAJAAwAAAAGAAkAAFAJAAsAAAAGAAkAAFAKAAsAAAAGAAkAAFALAAsAAAAGAAkAAFAMAAsAAAAGAAkAAFAMAAwAAAAGAAkAAFANAAwAAAAGAAkAAFAOAAwAAAAGAAkAAFAPAAwAAAAGAAkAAFAQAAwAAAAGAAkAAFARAAwAAAAGAAkAAFARAAsAAAAGAAkAAFAQAAsAAAAGAAkAAFAPAAsAAAAGAAkAAFAOAAsAAAAGAAkAAFANAAsAAAAGAAkAAFAJAAoAAAAGAAkAAFAKAAoAAAAGAAkAAFALAAoAAAAGAAkAAFAMAAoAAAAGAAkAAFANAAoAAAAGAAkAAFAOAAoAAAAGAAkAAFAPAAoAAAAGAAkAAFAQAAoAAAAGAAkAAFARAAoAAAAGAAkAAFARAAkAAAAGAAkAAFAQAAkAAAAGAAkAAFAPAAkAAAAGAAkAAFAOAAkAAAAGAAkAAFANAAkAAAAGAAkAAFAMAAkAAAAGAAkAAFALAAkAAAAGAAkAAFAKAAkAAAAGAAkAAFAJAAkAAAAGAAkAAFAMAA0AAAABAAkAAAAMAA4AAAABAAkAAAAMAA8AAAABAAkAAAAMABAAAAABAAkAAAAMABEAAAABAAkAAAAMABIAAAABAAkAAAANAA0AAAAGAAkAAFANAA4AAAAGAAkAAFANAA8AAAAGAAkAAFANABAAAAAGAAkAAFANABEAAAAGAAkAAFANABIAAAAGAAkAAFAQAA0AAAABAAkAAAAQAA4AAAABAAkAAAAQAA8AAAABAAkAAAAQABAAAAABAAkAAAAQABEAAAABAAkAAAAQABIAAAABAAkAAAARAA0AAAABAAkAAAARAA4AAAABAAkAAAARAA8AAAABAAkAAAARABAAAAABAAkAAAARABEAAAABAAkAAAARABIAAAABAAkAAAALAA0AAAABAAkAAAALAA4AAAABAAkAAAALAA8AAAABAAkAAAALABAAAAABAAkAAAALABEAAAABAAkAAAALABIAAAABAAkAAAAOAA0AAAAGAAkAAFAOAA4AAAAGAAkAAFAOAA8AAAAGAAkAAFAOABAAAAAGAAkAAFAOABEAAAAGAAkAAFAOABIAAAAGAAkAAFAPAA0AAAAGAAkAAFAPAA4AAAAGAAkAAFAPAA8AAAAGAAkAAFAPABAAAAAGAAkAAFAPABEAAAAGAAkAAFAPABIAAAAGAAkAAFAKAA0AAAAGAAkAAFAKAA4AAAAGAAkAAFAKAA8AAAAGAAkAAFAKABAAAAAGAAkAAFAKABEAAAAGAAkAAFAKABIAAAAGAAkAAFAJAA0AAAAGAAkAAFAJAA4AAAAGAAkAAFAJAA8AAAAGAAkAAFAJABAAAAAGAAkAAFAJABEAAAAGAAkAAFAJABIAAAAGAAkAAFASAA0AAAAGAAkAAFASAA4AAAAGAAkAAFASAA8AAAAGAAkAAFASABAAAAAGAAkAAFASABEAAAAGAAkAAFASABIAAAAGAAkAAFATAA0AAAAGAAkAAFATAA4AAAAGAAkAAFATAA8AAAAGAAkAAFATABAAAAAGAAkAAFATABEAAAAGAAkAAFATABIAAAAGAAkAAFA=")
 tile_set = ExtResource("1_isepa")
 
 [node name="Walls" type="TileMapLayer" parent="." unique_id=377097009]
-tile_map_data = PackedByteArray("AAARAAwAAgAEAAEAAAARAAsAAgAEAAEAAAARAAoAAgAEAAEAAAARAAkAAgAEAAEAAAAUAAkAAgAEAAEAABAUAAgAAgAEAAEAABAUAAcAAgAEAAEAABAUAAYAAgAEAAEAABAUAAoAAgAEAAEAABAUAAsAAgAEAAEAABAUAAwAAgAEAAEAABATAAkAAgAGAAEAAFASAAkAAgAGAAEAAGASAAUAAgAGAAEAAEATAAUAAgAGAAEAAFATAA0AAgAEAAEAAGASAA0AAgAEAAEAAGARAAgAAgAEAAEAAAARAAcAAgAEAAEAAAARAAYAAgAEAAEAAAAVAAUAAgADAAAAAAAWAAQAAgADAAAAAGAWAAMAAgADAAAAAGAWAAIAAgADAAAAAGAVAAEAAgADAAAAADAUAAEAAgADAAAAADARAAEAAgADAAAAADAQAAEAAgADAAAAADAPAAIAAgADAAAAAFAPAAMAAgADAAAAAFAPAAQAAgADAAAAAFAUAAUAAgAEAAAAAEARAAUAAgAEAAAAAFAQAAUAAgADAAAAAAA=")
+tile_map_data = PackedByteArray("AAARAAsAAgAEAAEAAAARAAoAAgAEAAEAAAARAAkAAgAEAAEAAAAUAAkAAgAEAAEAABAUAAgAAgAEAAEAABAUAAcAAgAEAAEAABAUAAYAAgAEAAEAABAUAAoAAgAEAAEAABAUAAsAAgAEAAEAABAUAAwAAgAEAAEAABATAAkAAgAGAAEAAFASAAkAAgAGAAEAAGASAAUAAgAGAAEAAEATAAUAAgAGAAEAAFARAAgAAgAEAAAAADARAAcAAgAEAAEAAAARAAYAAgAEAAEAAAAVAAUAAgADAAAAAAAWAAQAAgADAAAAAGAWAAMAAgADAAAAAGAWAAIAAgADAAAAAGAVAAEAAgADAAAAADAUAAEAAgADAAAAADARAAEAAgADAAAAADAQAAEAAgADAAAAADAPAAIAAgADAAAAAFAPAAMAAgADAAAAAFAPAAQAAgADAAAAAFAUAAUAAgAEAAAAAEARAAUAAgAEAAAAAFAQAAUAAgADAAAAAAAOAA0AAgAEAAEAAGANAA0AAgAEAAEAAGAKAA0AAgAEAAEAAGAJAA0AAgAEAAEAAGARAAwAAgAEAAEAAAAIAAwAAgAEAAEAAAAIAAsAAgAEAAEAAAAIAAoAAgAEAAEAAAAIAAkAAgAEAAEAAAAJAAgAAgAEAAEAAFAKAAgAAgAEAAEAAFALAAgAAgAEAAEAAFAMAAgAAgAEAAEAAFANAAgAAgAEAAEAAFAOAAgAAgAEAAEAAFAPAAgAAgAEAAEAAFAQAAgAAgAEAAEAAFAIAA0AAgAEAAEAAAAIAA4AAgAEAAEAAAAIAA8AAgAEAAEAAAAIABAAAgAEAAEAAAAIABEAAgAEAAEAAAAIABIAAgAEAAEAAAAJABMAAgAEAAEAAGAKABMAAgAEAAEAAGALABMAAgAEAAEAAGAMABMAAgAEAAEAAGANABMAAgAEAAEAAGAOABMAAgAEAAEAAGAPABMAAgAEAAEAAGAQABMAAgAEAAEAAGARABMAAgAEAAEAAGASABMAAgAEAAEAAGATABMAAgAEAAEAAGAUABIAAgAEAAEAADAUABEAAgAEAAEAADAUABAAAgAEAAEAADAUAA8AAgAEAAEAADAUAA4AAgAEAAEAADAUAA0AAgAEAAEAADAPAA0AAgAEAAAAAFAQAA0AAgAEAAEAAGARAA0AAgAEAAEAAGAPAA4AAgAEAAEAAAAPAA8AAgAEAAEAAAAPABIAAgAEAAEAAAASAAEAAgADAAAAACATAAEAAgADAAAAACA=")
 tile_set = ExtResource("2_lxnwq")
 
-[node name="Desk" parent="." unique_id=1281880372 instance=ExtResource("3_825jq")]
+[node name="HallwayBlockingDesk" parent="." unique_id=1281880372 instance=ExtResource("3_825jq")]
 position = Vector2(608, 211)
 sprite_texture = ExtResource("4_gal1e")
 
+[node name="DoorBlockingDesk" parent="." unique_id=1154456887 instance=ExtResource("3_825jq")]
+position = Vector2(493, 544)
+rotation = 1.5707964
+grab_distance_vertical = 43.0
+grab_distance_horizontal = 26.0
+sprite_texture = ExtResource("6_ojp0k")
+
+[node name="DecorativeDesk" parent="." unique_id=1610158914 instance=ExtResource("3_825jq")]
+position = Vector2(493, 460)
+rotation = 1.5707964
+grab_distance_vertical = 43.0
+grab_distance_horizontal = 26.0
+sprite_texture = ExtResource("7_l8kmg")
+
+[node name="DecorativeChair" parent="." unique_id=1473381379 instance=ExtResource("2_38u0x")]
+position = Vector2(440, 460)
+rotation = 1.9355701
+sprite_texture = ExtResource("3_lcrcg")
+
+[node name="BlockingChair" parent="." unique_id=60943822 instance=ExtResource("2_38u0x")]
+position = Vector2(439.99997, 542.99994)
+rotation = 0.7749262
+sprite_texture = ExtResource("10_lcrcg")
+
 [node name="Doors" type="Node2D" parent="." unique_id=498364387]
 
-[node name="LevelExitDoorLeft" parent="Doors" unique_id=779808323 instance=ExtResource("5_75hua")]
-position = Vector2(640, 62)
+[node name="ObjTutRoomDoorLeft" parent="Doors" unique_id=1363762656 instance=ExtResource("5_75hua")]
+position = Vector2(416, 418)
+door_id = 2
+is_locked = true
 
-[node name="LevelExitDoorRight" parent="Doors" unique_id=1383317563 instance=ExtResource("5_75hua")]
-position = Vector2(576, 62)
+[node name="ObjTutRoomDoorRight" parent="Doors" unique_id=165699768 instance=ExtResource("5_75hua")]
+position = Vector2(353, 418)
 rotation = 3.1415927
+door_id = 3
+is_locked = true
+
+[node name="NothingDoorRight" parent="Doors" unique_id=1938195555 instance=ExtResource("5_75hua")]
+position = Vector2(510, 576)
+rotation = 1.5707964
+door_id = 4
+
+[node name="NothingDoorLeft" parent="Doors" unique_id=572903146 instance=ExtResource("5_75hua")]
+position = Vector2(510, 512)
+rotation = -1.5707964
+door_id = 5
+
+[node name="EnemyKillDoorLeft" parent="Doors" unique_id=2041705967 instance=ExtResource("5_75hua")]
+position = Vector2(576, 418)
+rotation = 3.1415927
+door_id = 6
+is_locked = true
+
+[node name="EnemyKillDoorRight" parent="Doors" unique_id=1664370740 instance=ExtResource("5_75hua")]
+position = Vector2(640, 418)
+door_id = 7
+is_locked = true
 
 [node name="LevelExit" parent="." unique_id=562984780 instance=ExtResource("6_7ljjj")]
-position = Vector2(608.00006, 40)
+position = Vector2(768.00006, 33)
 scale = Vector2(1.7600391, 1)
 next_scene = "uid://ypncdfw7enfd"
 
 [node name="Player" parent="." unique_id=638306865 instance=ExtResource("7_ojp0k")]
-position = Vector2(608, 400)
+position = Vector2(300, 350)
+rotation = 1.5707964
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1725200927]
 position = Vector2(608, 369)
@@ -66,3 +125,19 @@ occluder = SubResource("OccluderPolygon2D_3ywud")
 
 [node name="BinPaper" parent="." unique_id=1242605353 instance=ExtResource("9_38u0x")]
 position = Vector2(687, 144)
+
+[node name="OpenDragObjDoorButton" parent="." unique_id=110869629 instance=ExtResource("2_75hua")]
+position = Vector2(540, 300)
+normal_texture = ExtResource("3_7ljjj")
+pressed_texture = ExtResource("4_ojp0k")
+
+[node name="OpenEnemyDoorButton" parent="." unique_id=1708152195 instance=ExtResource("2_75hua")]
+position = Vector2(628, 464)
+rotation = 1.5707964
+button_id = 1
+normal_texture = ExtResource("3_7ljjj")
+pressed_texture = ExtResource("4_ojp0k")
+
+[node name="Enemy" parent="." unique_id=1728479623 instance=ExtResource("19_uq3ay")]
+position = Vector2(624, 402)
+rotation = 3.1415927
