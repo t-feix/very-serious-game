@@ -29,7 +29,6 @@ func _physics_process(_delta: float) -> void:
 	footstep_audio()
 
 
-
 func footstep_audio():
 	if velocity.length() > 0:
 		print("1. Animation and velocity are correct!")
@@ -37,7 +36,6 @@ func footstep_audio():
 			print("2. Timer is stopped! Playing audio now.")
 			foootstep_audio.play()
 			step_timer.start(0.35)
-
 
 
 func take_damage(amount: float) -> void:
