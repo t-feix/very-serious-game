@@ -95,4 +95,4 @@ normal_texture = ExtResource("14_0eof2")
 pressed_texture = ExtResource("15_c5tt6")
 
 [node name="Enemy" parent="." unique_id=1728479623 instance=ExtResource("17_c5tt6")]
-position = Vector2(1602, 924)
+position = Vector2(1602, 936)

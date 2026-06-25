@@ -10,6 +10,8 @@ extends CharacterBody2D
 var _dead: bool = false
 var _dying: bool = false
 
+const DEATH_SCREEN_PATH := "res://ui/menus/death_screen.tscn"
+
 const ANIMATIONS_NEEDING_FLIP_V := ["player_push", "player_pull", "player_push_pull_start"]
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -42,12 +44,10 @@ func _physics_process(_delta: float) -> void:
 	footstep_audio()
 
 func _process_dying() -> void:
-	print("[player] _process_dying entered. dying=%s rewinding=%s size=%d before_death=%s" % [
-		RewindBuffer.dying, RewindBuffer.is_rewinding(), RewindBuffer.size, RewindBuffer.is_read_before_death()
-	])
+	
 	
 	if not RewindBuffer.dying:
-		print("[player] not RewindBuffer.dying, returning early")
+		
 		return
 	
 	if RewindBuffer.size <= 0:
@@ -55,12 +55,10 @@ func _process_dying() -> void:
 		return
 	
 	if RewindBuffer.is_read_before_death():
-		print("[player] REVIVE TRIGGERED")
 		_revive()
 
 
 func _revive() -> void:
-	print("REVIVE called")
 	_dying = false
 	RewindBuffer.exit_dying()
 	set_process_input(true)
@@ -75,14 +73,12 @@ func _permadeath() -> void:
 	
 	await get_tree().create_timer(0.1).timeout
 	if is_inside_tree():
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_file(DEATH_SCREEN_PATH)
 
 
 func footstep_audio():
 	if velocity.length() > 0:
-		print("1. Animation and velocity are correct!")
 		if step_timer.is_stopped():
-			print("2. Timer is stopped! Playing audio now.")
 			foootstep_audio.play()
 			step_timer.start(0.35)
 
@@ -122,9 +118,7 @@ func _update_tooltip() -> void:
 
 
 func take_damage(amount: float) -> void:
-	print("[player] take_damage: invincible=%s _dead=%s _dying=%s rewinding=%s" % [
-		invincible, _dead, _dying, EventBus.is_rewinding
-	])
+	
 	if invincible or _dead or _dying:
 		return
 	if EventBus.is_rewinding:
@@ -139,10 +133,8 @@ func die() -> void:
 	set_process_input(false)
 	velocity = Vector2.ZERO
 	
-	print("[player] playing player_shot_front")
 	sprite.play("player_shot_front")
 	await sprite.animation_finished
-	print("[player] shot_front finished")
 
 	if not is_inside_tree() or not _dying: return
 	

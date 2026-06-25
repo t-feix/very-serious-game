@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://3abk5t15tk7x"]
+
+[ext_resource type="Script" uid="uid://2cgdqswf155j" path="res://ui/menus/death_screen.gd" id="1_6mpal"]
+[ext_resource type="AudioStream" uid="uid://ctaixmjscbaob" path="res://ui/sfx/UIConfirm.wav" id="2_dqgun"]
+[ext_resource type="AudioStream" uid="uid://dkkd0ps7w36gp" path="res://ui/sfx/UIHover.wav" id="3_jsrad"]
+[ext_resource type="AudioStream" uid="uid://dtcn6xq0gmlrx" path="res://ui/sfx/UIBack.wav" id="4_76cg2"]
+
+[node name="DeathScreen" type="Control" unique_id=1050146617]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6mpal")
+
+[node name="YouDiedLabel" type="Label" parent="." unique_id=526765512]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 160
+text = "YER DEAAAD!"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1112295504]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1962374945]
+custom_minimum_size = Vector2(427, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="RespawnButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1068285194]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "RESPAWN"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=357004371]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "QUIT TO MAIN MENU"
+
+[node name="UIConfirm" type="AudioStreamPlayer" parent="." unique_id=912703356]
+stream = ExtResource("2_dqgun")
+volume_db = 6.0
+
+[node name="UIHover" type="AudioStreamPlayer" parent="." unique_id=1080147007]
+stream = ExtResource("3_jsrad")
+volume_db = 6.0
+
+[node name="UIBack" type="AudioStreamPlayer" parent="." unique_id=2128961461]
+stream = ExtResource("4_76cg2")
+volume_db = 6.0
+
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/RespawnButton" to="." method="_on_start_new_game_button_mouse_entered"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
