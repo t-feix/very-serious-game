@@ -1,0 +1,68 @@
+[gd_scene format=4 uid="uid://dcb5pyjexigu0"]
+
+[ext_resource type="TileSet" uid="uid://ba8jj83iskcpo" path="res://environment/floor/floor_tileset.tres" id="1_isepa"]
+[ext_resource type="Script" uid="uid://cu3njwa0ovitk" path="res://world/Tutorial/tutorial.gd" id="1_lxnwq"]
+[ext_resource type="TileSet" uid="uid://do5defqbo3d5a" path="res://environment/walls/wall_tileset.tres" id="2_lxnwq"]
+[ext_resource type="PackedScene" uid="uid://ce2twn3sysg2u" path="res://environment/objects/desks/desk.tscn" id="3_825jq"]
+[ext_resource type="Texture2D" uid="uid://hro7msyr86ob" path="res://environment/objects/desks/messy_broken_desk.tres" id="4_gal1e"]
+[ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/door/Door.tscn" id="5_75hua"]
+[ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="6_7ljjj"]
+[ext_resource type="PackedScene" uid="uid://bd42beihk1c6a" path="res://player/player.tscn" id="7_ojp0k"]
+[ext_resource type="Texture2D" uid="uid://cf0gnn24y5dub" path="res://shared_assets/Light/Light circle.png" id="8_l8kmg"]
+[ext_resource type="PackedScene" uid="uid://cyrmhbnbijbuu" path="res://environment/objects/bins/bin_paper.tscn" id="9_38u0x"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3ywud"]
+polygon = PackedVector2Array(577, 159, 513, 159, 513, 64, 576, 64, 576, 60, 508, 59, 507, 58, 508, 65, 508, 163, 508, 164, 572, 164, 572, 416, 577, 416, 576, 420, 645, 420, 644, 415, 644, 164, 708, 164, 708, 60, 640, 60, 640, 64, 704, 64, 703, 158, 640, 158, 640, 174, 624, 174, 624, 178, 640, 178, 640, 302, 624, 302, 624, 306, 640, 306, 640, 415, 578, 415, 577, 414, 577, 306, 592, 306, 592, 302, 577, 302, 577, 178, 592, 178, 592, 174, 577, 174)
+
+[node name="Tutorial" type="Node2D" unique_id=4249973]
+script = ExtResource("1_lxnwq")
+spawn_from_lower = Vector2(608, 300)
+
+[node name="Floor" type="TileMapLayer" parent="." unique_id=1626935638]
+tile_map_data = PackedByteArray("AAASAAYAAAABAAkAAAATAAYAAAADAAkAAAATAAcAAAABAAkAAAASAAcAAAABAAkAAAASAAgAAAABAAkAAAATAAgAAAABAAkAAAASAAkAAAADAAkAAAATAAkAAAABAAkAAAATAAoAAAABAAkAAAASAAoAAAABAAkAAAASAAsAAAABAAkAAAATAAsAAAABAAkAAAATAAwAAAABAAkAAAASAAwAAAABAAkAAAASAAUAAAABAAkAAAATAAUAAAABAAkAAAAQAAQAAAABAAkAAAARAAQAAAABAAkAAAASAAQAAAABAAkAAAATAAQAAAABAAkAAAAUAAQAAAABAAkAAAAVAAQAAAABAAkAAAAQAAMAAAABAAkAAAARAAMAAAABAAkAAAASAAMAAAABAAkAAAATAAMAAAABAAkAAAAUAAMAAAABAAkAAAAVAAMAAAABAAkAAAAQAAIAAAABAAkAAAARAAIAAAABAAkAAAASAAIAAAABAAkAAAATAAIAAAABAAkAAAAUAAIAAAABAAkAAAAVAAIAAAABAAkAAAA=")
+tile_set = ExtResource("1_isepa")
+
+[node name="Walls" type="TileMapLayer" parent="." unique_id=377097009]
+tile_map_data = PackedByteArray("AAARAAwAAgAEAAEAAAARAAsAAgAEAAEAAAARAAoAAgAEAAEAAAARAAkAAgAEAAEAAAAUAAkAAgAEAAEAABAUAAgAAgAEAAEAABAUAAcAAgAEAAEAABAUAAYAAgAEAAEAABAUAAoAAgAEAAEAABAUAAsAAgAEAAEAABAUAAwAAgAEAAEAABATAAkAAgAGAAEAAFASAAkAAgAGAAEAAGASAAUAAgAGAAEAAEATAAUAAgAGAAEAAFATAA0AAgAEAAEAAGASAA0AAgAEAAEAAGARAAgAAgAEAAEAAAARAAcAAgAEAAEAAAARAAYAAgAEAAEAAAAVAAUAAgADAAAAAAAWAAQAAgADAAAAAGAWAAMAAgADAAAAAGAWAAIAAgADAAAAAGAVAAEAAgADAAAAADAUAAEAAgADAAAAADARAAEAAgADAAAAADAQAAEAAgADAAAAADAPAAIAAgADAAAAAFAPAAMAAgADAAAAAFAPAAQAAgADAAAAAFAUAAUAAgAEAAAAAEARAAUAAgAEAAAAAFAQAAUAAgADAAAAAAA=")
+tile_set = ExtResource("2_lxnwq")
+
+[node name="Desk" parent="." unique_id=1281880372 instance=ExtResource("3_825jq")]
+position = Vector2(608, 211)
+sprite_texture = ExtResource("4_gal1e")
+
+[node name="Doors" type="Node2D" parent="." unique_id=498364387]
+
+[node name="LevelExitDoorLeft" parent="Doors" unique_id=779808323 instance=ExtResource("5_75hua")]
+position = Vector2(640, 62)
+
+[node name="LevelExitDoorRight" parent="Doors" unique_id=1383317563 instance=ExtResource("5_75hua")]
+position = Vector2(576, 62)
+rotation = 3.1415927
+
+[node name="LevelExit" parent="." unique_id=562984780 instance=ExtResource("6_7ljjj")]
+position = Vector2(608.00006, 40)
+scale = Vector2(1.7600391, 1)
+next_scene = "uid://ypncdfw7enfd"
+
+[node name="Player" parent="." unique_id=638306865 instance=ExtResource("7_ojp0k")]
+position = Vector2(608, 400)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1725200927]
+position = Vector2(608, 369)
+energy = 0.1
+shadow_enabled = true
+texture = ExtResource("8_l8kmg")
+height = 100.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=982041768]
+position = Vector2(605, 190)
+energy = 0.1
+shadow_enabled = true
+texture = ExtResource("8_l8kmg")
+height = 100.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=2015903982]
+occluder = SubResource("OccluderPolygon2D_3ywud")
+
+[node name="BinPaper" parent="." unique_id=1242605353 instance=ExtResource("9_38u0x")]
+position = Vector2(687, 144)

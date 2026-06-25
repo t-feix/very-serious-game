@@ -6,11 +6,7 @@ func _nav_move(target_pos: Vector2, move_speed: float) -> bool:
 	nav_agent.target_position = target_pos
 	
 	var path := nav_agent.get_current_navigation_path()
-	print("[%s] target=%s | path_len=%d | finished=%s | next=%s" % [
-	name, target_pos, path.size(),
-	nav_agent.is_navigation_finished(),
-	nav_agent.get_next_path_position()
-])
+	
 	
 	if nav_agent.is_navigation_finished():
 		velocity = Vector2.ZERO
@@ -19,7 +15,7 @@ func _nav_move(target_pos: Vector2, move_speed: float) -> bool:
 	
 	var next_pos := nav_agent.get_next_path_position()
 	
-	print("[%s] path_len=%d next=%s" % [name, nav_agent.get_current_navigation_path().size(), next_pos])
+	
 	
 	var dir := (next_pos - global_position).normalized()
 	velocity = dir * move_speed * _current_time_scale()
@@ -88,7 +84,7 @@ var state_names = {
 
 
 func dprint(msg: String) -> void:
-	if debug_enabled:
+	if debug_enabled and 1 == 0:
 		print(msg)
 
 
@@ -144,7 +140,6 @@ func _stable_move() -> void:
 	along = clamp(along, 0.0, max_along)
 	
 	global_position = pos_before + intended_dir * along
-	print("[%s] intended=%s actual=%s along=%f kept=%f" % [name, intended, actual, actual.dot(intended_dir), along])
 
 
 func _ready():
@@ -235,7 +230,7 @@ func _physics_process(delta):
 	
 
 	if player != null and (current_state == State.IDLE or current_state == State.INVESTIGATE):
-		if is_player_in_vision_cone(player):
+		if not player._dying and not player._dead and is_player_in_vision_cone(player):
 			dprint("[%s] Player spotted -> ALERT" % name)
 			current_state = State.ALERT
 			alert_nearby_enemies()
@@ -448,6 +443,10 @@ func do_shoot():
 		go_return()
 		return
 	
+	if player._dying or player._dead:
+		dprint("[%s] player is dying/dead -> RETURN" % name)
+		go_return()
+		return
 
 	if not is_player_in_vision_cone(player):
 		current_state = State.CHASE
@@ -526,7 +525,7 @@ func _on_body_entered(body):
 		dprint("[%s] >>> PLAYER DETECTED <<<" % name)
 		player = body
 		
-		if is_player_in_vision_cone(body):
+		if is_player_in_vision_cone(body) and not player._dying and not player._dead:
 			dprint("[%s] Player in vision cone -> ALERT" % name)
 			current_state = State.ALERT
 			alert_nearby_enemies()

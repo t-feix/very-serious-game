@@ -8,6 +8,9 @@ extends CharacterBody2D
 @export var respawn_delay: float = 1
 
 var _dead: bool = false
+var _dying: bool = false
+
+const DEATH_SCREEN_PATH := "res://ui/menus/death_screen.tscn"
 
 const ANIMATIONS_NEEDING_FLIP_V := ["player_push", "player_pull", "player_push_pull_start"]
 
@@ -17,49 +20,127 @@ const ANIMATIONS_NEEDING_FLIP_V := ["player_push", "player_pull", "player_push_p
 @onready var foootstep_audio: AudioStreamPlayer = %FootstepAudio
 @onready var step_timer: Timer = %StepTimer
 
+@onready var tooltip_label: Label = %TooltipLabel
+
 func _ready() -> void:
 	RewindBuffer.clear()
 	step_timer.start()
 
 func _physics_process(_delta: float) -> void:
-	if RewindBuffer.is_rewinding():
+	if _dying:
+		if not RewindBuffer.dying and RewindBuffer.is_rewinding():
+			print("[player] survived via early rewind")
+			_dying = false
+			set_process_input(true)
+			return
+		
+		_process_dying()
 		return
 	
+	_update_tooltip()
+	if RewindBuffer.is_rewinding():
+		return
 	handle_movement()
 	footstep_audio()
 
+func _process_dying() -> void:
+	
+	
+	if not RewindBuffer.dying:
+		
+		return
+	
+	if RewindBuffer.size <= 0:
+		_permadeath()
+		return
+	
+	if RewindBuffer.is_read_before_death():
+		_revive()
+
+
+func _revive() -> void:
+	_dying = false
+	RewindBuffer.exit_dying()
+	set_process_input(true)
+
+
+func _permadeath() -> void:
+	_dead = true
+	_dying = false
+	RewindBuffer.exit_dying()
+	if RewindBuffer.rewinding:
+		RewindBuffer.stop_rewind()
+	
+	await get_tree().create_timer(0.1).timeout
+	if is_inside_tree():
+		get_tree().change_scene_to_file(DEATH_SCREEN_PATH)
 
 func footstep_audio():
 	if velocity.length() > 0:
-		print("1. Animation and velocity are correct!")
 		if step_timer.is_stopped():
-			print("2. Timer is stopped! Playing audio now.")
 			foootstep_audio.play()
 			step_timer.start(0.35)
 
+func _get_tooltip_text() -> String:
+
+	if _carried:
+		return "[Release Right-click to drop  |  Left-click to throw]"
+	
+	if _held:
+		return "[Release Right-click to drop]"
+	
+	
+	if not _nearby_draggables.is_empty():
+		return "[Right-click to grab]"
+	
+	if not _nearby_throwables.is_empty():
+		return "[Right-click to pick up]"
+	
+	if _closest_button() != null:
+		return "[Right-click to press]"
+	
+	for door in _nearby_doors:
+		if door.can_open():
+			return "[Right-click to open door]"
+		elif door.is_locked:
+			return "[Door is locked]"
+	
+	return ""
+
+
+func _update_tooltip() -> void:
+	if RewindBuffer.is_rewinding() or _dead:
+		tooltip_label.text = ""
+		return
+	tooltip_label.text = _get_tooltip_text()
+
 
 func take_damage(amount: float) -> void:
-	if invincible or _dead:
+	
+	if invincible or _dead or _dying:
 		return
 	if EventBus.is_rewinding:
 		return
 	die()
 
 func die() -> void:
-	_dead = true
-	print("Player died")
+	if _dying or _dead:
+		return
 	
-	set_physics_process(false)
+	_dying = true
 	set_process_input(false)
-	
-	if RewindBuffer.rewinding:
-		RewindBuffer.stop_rewind()
 	velocity = Vector2.ZERO
 	
+	sprite.play("player_shot_front")
+	await sprite.animation_finished
+
+	if not is_inside_tree() or not _dying: return
 	
-	await get_tree().create_timer(respawn_delay).timeout
-	if is_inside_tree():
-		get_tree().reload_current_scene()
+	sprite.play("player_dead")
+	await sprite.animation_finished
+	if not is_inside_tree() or not _dying: return
+	
+	RewindBuffer.enter_dying()
 
 # interact section
 var _nearby_draggables: Array[Draggable] = []
@@ -130,10 +211,13 @@ func _try_interact() -> void:
 		return
 	
 	if _try_pickup():
+		sprite.play("player_pick_up")
 		return
 	
 	var closest_button := _closest_button()
 	if closest_button:
+		rotation = (closest_button.global_position - global_position).angle() + PI/2
+		sprite.play("player_button_press")
 		closest_button.press()
 		return
 	
@@ -149,6 +233,7 @@ func _try_interact() -> void:
 func _try_pickup() -> bool:
 	var closest := _closest_throwable()
 	if closest and closest.try_pickup(self):
+		rotation = (closest.global_position - global_position).angle() + PI/2
 		_carried = closest
 		return true
 	return false
@@ -162,6 +247,8 @@ func _drop_carried() -> void:
 
 func _throw_to(target: Vector2) -> void:
 	if _carried:
+		rotation = (target - global_position).angle() + PI/2
+		sprite.play("player_throw_throw")
 		_carried.throw_from_to(global_position, target)
 		_carried = null
 
@@ -188,6 +275,7 @@ func _try_grab() -> void:
 		_held = closest
 		_grab_forward = Vector2.from_angle(rotation - PI/2)
 		sprite.play("player_push_pull_start")
+		$DragSound.play()
 
 func _release() -> void:
 	if _held:
@@ -249,12 +337,15 @@ func _update_sprite(input_dir: Vector2) -> void:
 		elif not sprite.is_playing():
 			sprite.play(target_anim)
 	else:
+		if sprite.is_playing() and sprite.animation in ["player_button_press", "player_pick_up", "player_throw_throw"]:
+			return
+		
+		sprite.flip_h = false
 		if input_dir != Vector2.ZERO:
-			sprite.flip_h = false
-			if sprite.animation != "Player walk" or not sprite.is_playing():
-				sprite.play("Player walk")
+			if sprite.animation != "player_walk":
+				sprite.play("player_walk")
 		else:
-			sprite.stop()
-			sprite.frame = 2
+			if sprite.animation != "player_idle":
+				sprite.play("player_idle")
 	
 	sprite.flip_v = sprite.animation in ANIMATIONS_NEEDING_FLIP_V

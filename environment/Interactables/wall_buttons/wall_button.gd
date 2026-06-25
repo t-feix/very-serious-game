@@ -26,9 +26,11 @@ func _on_body_exited(body: Node2D) -> void:
 		body._on_button_area_exited(self)
 
 func press() -> void:
+	print("[button %d] press() called, emitting EventBus.button_pressed" % button_id)
 	pressed.emit()
 	EventBus.button_pressed.emit(button_id)
 	_flash_pressed_visual()
+	$ButtonSound.play()
 
 func _flash_pressed_visual() -> void:
 	if pressed_texture:

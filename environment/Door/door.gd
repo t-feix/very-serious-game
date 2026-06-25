@@ -27,9 +27,15 @@ func _ready() -> void:
 
 
 func _on_lock_changed(target_id: int, locked: bool) -> void:
+	print("[door %d] received lock_changed: target=%d locked=%s (my id=%d)" % [
+		door_id, target_id, locked, door_id
+	])
 	if target_id == door_id:
 		is_locked = locked
+		print("[door %d] is_locked is now %s" % [door_id, is_locked])
 		_update_sprite()
+	
+	
 
 func _update_sprite() -> void:
 	if is_locked:

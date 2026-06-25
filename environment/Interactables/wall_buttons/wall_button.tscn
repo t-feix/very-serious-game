@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cu34k3qe3qfuq"]
 
 [ext_resource type="Script" uid="uid://btvlifrq67lgt" path="res://environment/Interactables/wall_buttons/wall_button.gd" id="1_tpgrb"]
+[ext_resource type="AudioStream" uid="uid://dn2afh1gphuva" path="res://environment/sfx/ButtonPress.wav" id="2_nmmq6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5oky0"]
 
@@ -12,3 +13,8 @@ script = ExtResource("1_tpgrb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1781137357]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_5oky0")
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="." unique_id=592076334]
+stream = ExtResource("2_nmmq6")
+volume_db = -6.0
+bus = &"SFX"
