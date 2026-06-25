@@ -1,21 +1,22 @@
 [gd_scene format=4 uid="uid://ypncdfw7enfd"]
 
 [ext_resource type="TileSet" uid="uid://ba8jj83iskcpo" path="res://environment/floor/floor_tileset.tres" id="1_25v3t"]
-[ext_resource type="Script" uid="uid://be2iw58323tc1" path="res://world/spawn.gd" id="1_t3mat"]
+[ext_resource type="Script" uid="uid://be2iw58323tc1" path="res://world/Floor0.gd" id="1_t3mat"]
 [ext_resource type="PackedScene" uid="uid://bd42beihk1c6a" path="res://player/player.tscn" id="2_1hshi"]
 [ext_resource type="TileSet" uid="uid://do5defqbo3d5a" path="res://environment/walls/wall_tileset.tres" id="3_uhpy4"]
-[ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/Door/Door.tscn" id="5_t3mat"]
+[ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/door/Door.tscn" id="5_t3mat"]
 [ext_resource type="TileSet" uid="uid://cudltw1ri8087" path="res://environment/carpets/carpet_tileset.tres" id="6_1hshi"]
 [ext_resource type="AudioStream" uid="uid://d1gi4rc5y4ybq" path="res://world/sfx/BitcrushThemev2.mp3" id="8_0eof2"]
 [ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="8_se10e"]
 [ext_resource type="PackedScene" uid="uid://3s1ccw7gk5wm" path="res://environment/Interactables/throwable_objects/throwable_object.tscn" id="9_0eof2"]
-[ext_resource type="PackedScene" uid="uid://ce2twn3sysg2u" path="res://environment/Objects/desks/desk.tscn" id="9_gpmgi"]
-[ext_resource type="Texture2D" uid="uid://c6w7joqkl0ein" path="res://environment/Objects/desks/standard_dark_desk.tres" id="11_54lpg"]
-[ext_resource type="PackedScene" uid="uid://bff1u1286k6xa" path="res://environment/Objects/chairs/chair.tscn" id="11_ubnnw"]
-[ext_resource type="Texture2D" uid="uid://10lst12emici" path="res://environment/Objects/chairs/purple_chair.tres" id="11_v5wn5"]
+[ext_resource type="PackedScene" uid="uid://ce2twn3sysg2u" path="res://environment/objects/desks/desk.tscn" id="9_gpmgi"]
+[ext_resource type="Texture2D" uid="uid://c6w7joqkl0ein" path="res://environment/objects/desks/standard_dark_desk.tres" id="11_54lpg"]
+[ext_resource type="PackedScene" uid="uid://bff1u1286k6xa" path="res://environment/objects/chairs/chair.tscn" id="11_ubnnw"]
+[ext_resource type="Texture2D" uid="uid://10lst12emici" path="res://environment/objects/chairs/purple_chair.tres" id="11_v5wn5"]
 [ext_resource type="PackedScene" uid="uid://cu34k3qe3qfuq" path="res://environment/Interactables/wall_buttons/wall_button.tscn" id="13_8ev4c"]
 [ext_resource type="Texture2D" uid="uid://b15mjluex2stv" path="res://environment/Interactables/wall_buttons/green_silver_wall_button.tres" id="14_0eof2"]
 [ext_resource type="Texture2D" uid="uid://cfatiwiahf1os" path="res://environment/Interactables/wall_buttons/green_silver_wall_button_pressed.tres" id="15_c5tt6"]
+[ext_resource type="PackedScene" uid="uid://1d7jcj8nr15p" path="res://enemy/Enemy.tscn" id="17_c5tt6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_54lpg"]
 vertices = PackedVector2Array(1899.9063, 789.0703, 1899.9609, 816, 1899.9063, 816, 1424, 788.09375, 1456, 788.03125, 1456, 788.09375, 1488, 788.03125, 1488, 788.89844, 1552, 788.09375, 1584, 788.03125, 1584, 788.09375, 1616, 788.03125, 1616, 788.09375, 1648, 788.03125, 1648, 788.09375, 1680, 788.03125, 1680, 788.09375, 1712, 788.03125, 1712, 788.09375, 1744, 788.03125, 1744, 788.09375, 1776, 788.03125, 1776, 788.09375, 1808, 788.03125, 1808, 788.09375, 1840, 788.03125, 1840, 788.09375, 1872, 788.03125, 1872, 788.89844, 1264, 820.09375, 1296, 820.03125, 1296, 820.09375, 1328, 820.03125, 1328, 912, 1237.0703, 820.0781, 1264, 820.03125, 1515.9063, 848, 1515.9609, 848, 1515.9063, 880, 1515.9609, 880, 1515.9063, 912, 1648, 875.90625, 1648, 875.96094, 1616, 875.90625, 1616, 875.96094, 1584, 875.90625, 1584, 875.96094, 1552, 875.90625, 1899.9609, 848, 1899.9063, 848, 1899.9609, 880, 1899.9063, 880, 1899.9609, 912, 1899.9063, 912, 1899.9609, 944, 1899.9063, 944, 1899.9609, 976, 1899.9063, 976, 1899.9609, 1008, 1899.9063, 1008, 1899.9609, 1040, 1899.1016, 1040, 1840, 1067.9063, 1840, 1067.9609, 1808, 1067.9063, 1808, 1067.9609, 1776, 1067.9063, 1776, 1067.9609, 1744, 1067.9063, 1744, 1067.9609, 1712, 1067.9063, 1712, 1067.9609, 1680, 1067.9063, 1680, 1067.9609, 1648, 1067.9063, 1648, 1067.9609, 1616, 1067.9063, 1616, 1067.9609, 1584, 1067.9063, 1584, 1067.9609, 1552, 1067.9063, 1552, 1067.9609, 1520, 1067.9063, 1520, 1067.9609, 1488, 1067.9063, 1488, 1067.9609, 1456, 1067.9063, 1456, 1067.9609, 1424, 1067.9063, 1424, 1067.9609, 1392, 1067.9063, 1328, 944, 1328, 1035.9609, 1296, 1035.9063, 1296, 1035.9609, 1264, 1035.9063, 1236.0938, 1008, 1236.0391, 976, 1236.0938, 976, 1236.0391, 944, 1236.0938, 944, 1236.0391, 912, 1236.0938, 912, 1236.0391, 880, 1236.0938, 880, 1236.0391, 848, 1236.8984, 848, 1236.0781, 1034.9219, 1236.0391, 1008, 1364.0391, 1040, 1364.0234, 1008, 1364.0391, 1008, 1364.0391, 912, 1364.0234, 880, 1364.0391, 880, 1364.0234, 848, 1364.0391, 848, 1364.0234, 816, 1364.8984, 816, 1364.0313, 1066.9219, 1364.0234, 1040, 1712, 876.0078, 1392, 1067.1016, 1264, 1035.1016, 1365.0703, 788, 1424, 788, 1516, 789.0703, 1898.9219, 1068, 1364, 944, 1712, 912)
@@ -60,7 +61,6 @@ next_scene = "uid://bjjjquptyi1yk"
 stream = ExtResource("8_0eof2")
 volume_db = -16.0
 autoplay = true
-bus = &"Music"
 
 [node name="Doors" type="Node2D" parent="." unique_id=98812254]
 
@@ -93,3 +93,6 @@ position = Vector2(1561, 881)
 rotation = 3.1415927
 normal_texture = ExtResource("14_0eof2")
 pressed_texture = ExtResource("15_c5tt6")
+
+[node name="Enemy" parent="." unique_id=1728479623 instance=ExtResource("17_c5tt6")]
+position = Vector2(1602, 924)

@@ -599,8 +599,11 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g1dw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1dw6")
 }],
-"loop": true,
+"loop": false,
 "name": &"player_dead",
 "speed": 5.0
 }, {
@@ -946,7 +949,7 @@ shape = SubResource("CapsuleShape2D_rkbax")
 unique_name_in_owner = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_8t03j")
-animation = &"player_throw_throw"
+animation = &"player_dead"
 frame = 1
 speed_scale = 2.0
 
@@ -1002,7 +1005,6 @@ occluder = SubResource("OccluderPolygon2D_qjkh3")
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_yllr7")
 volume_db = 5.0
-bus = &"SFX"
 
 [node name="StepTimer" type="Timer" parent="Audio/footsteps" unique_id=79650677]
 unique_name_in_owner = true
@@ -1012,4 +1014,3 @@ one_shot = true
 [node name="DragSound" type="AudioStreamPlayer" parent="." unique_id=1891846906]
 stream = ExtResource("10_8t03j")
 volume_db = -13.619
-bus = &"SFX"

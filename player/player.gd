@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var respawn_delay: float = 1
 
 var _dead: bool = false
+var _dying: bool = false
 
 const ANIMATIONS_NEEDING_FLIP_V := ["player_push", "player_pull", "player_push_pull_start"]
 
@@ -24,13 +25,57 @@ func _ready() -> void:
 	step_timer.start()
 
 func _physics_process(_delta: float) -> void:
-	if RewindBuffer.is_rewinding():
+	if _dying:
+		if not RewindBuffer.dying and RewindBuffer.is_rewinding():
+			print("[player] survived via early rewind")
+			_dying = false
+			set_process_input(true)
+			return
+		
+		_process_dying()
 		return
 	
 	_update_tooltip()
+	if RewindBuffer.is_rewinding():
+		return
 	handle_movement()
 	footstep_audio()
 
+func _process_dying() -> void:
+	print("[player] _process_dying entered. dying=%s rewinding=%s size=%d before_death=%s" % [
+		RewindBuffer.dying, RewindBuffer.is_rewinding(), RewindBuffer.size, RewindBuffer.is_read_before_death()
+	])
+	
+	if not RewindBuffer.dying:
+		print("[player] not RewindBuffer.dying, returning early")
+		return
+	
+	if RewindBuffer.size <= 0:
+		_permadeath()
+		return
+	
+	if RewindBuffer.is_read_before_death():
+		print("[player] REVIVE TRIGGERED")
+		_revive()
+
+
+func _revive() -> void:
+	print("REVIVE called")
+	_dying = false
+	RewindBuffer.exit_dying()
+	set_process_input(true)
+
+
+func _permadeath() -> void:
+	_dead = true
+	_dying = false
+	RewindBuffer.exit_dying()
+	if RewindBuffer.rewinding:
+		RewindBuffer.stop_rewind()
+	
+	await get_tree().create_timer(0.1).timeout
+	if is_inside_tree():
+		get_tree().reload_current_scene()
 
 
 func footstep_audio():
@@ -77,27 +122,35 @@ func _update_tooltip() -> void:
 
 
 func take_damage(amount: float) -> void:
-	if invincible or _dead:
+	print("[player] take_damage: invincible=%s _dead=%s _dying=%s rewinding=%s" % [
+		invincible, _dead, _dying, EventBus.is_rewinding
+	])
+	if invincible or _dead or _dying:
 		return
 	if EventBus.is_rewinding:
 		return
 	die()
 
 func die() -> void:
-	_dead = true
-	print("Player died")
+	if _dying or _dead:
+		return
 	
-	set_physics_process(false)
+	_dying = true
 	set_process_input(false)
-	
-	if RewindBuffer.rewinding:
-		RewindBuffer.stop_rewind()
 	velocity = Vector2.ZERO
 	
+	print("[player] playing player_shot_front")
+	sprite.play("player_shot_front")
+	await sprite.animation_finished
+	print("[player] shot_front finished")
+
+	if not is_inside_tree() or not _dying: return
 	
-	await get_tree().create_timer(respawn_delay).timeout
-	if is_inside_tree():
-		get_tree().reload_current_scene()
+	sprite.play("player_dead")
+	await sprite.animation_finished
+	if not is_inside_tree() or not _dying: return
+	
+	RewindBuffer.enter_dying()
 
 # interact section
 var _nearby_draggables: Array[Draggable] = []

@@ -14,10 +14,35 @@ var buffer: Array[Dictionary] = []
 var write_index := 0
 var read_index := 0
 
+var dying: bool = false
+var _death_anchor: int = -1
+
 var size := 0
 var rewinding := false
 
+func enter_dying() -> void:
+	dying = true
+	_death_anchor = write_index
+
+
+func exit_dying() -> void:
+	dying = false
+	_death_anchor = -1
+
+
+func is_read_before_death() -> bool:
+	if not dying or not rewinding:
+		return false
+	var distance := (_death_anchor - read_index + MAX_STATES) % MAX_STATES
+	return distance > 0
+
 func record_state():
+	if dying:
+		write_index = (write_index + 1) % MAX_STATES
+		if size > 0:
+			size -= 1
+		return
+		
 	var state := {
 		"position": player.global_position,
 		"rotation": player.rotation,
@@ -52,6 +77,9 @@ func clear() -> void:
 	write_index = 0
 	read_index = 0
 	size = 0
+	
+	dying = false
+	_death_anchor = -1
 
 func stop_rewind() -> void:
 	if not rewinding:
@@ -68,13 +96,19 @@ func get_buffer_seconds() -> float:
 	return float(size) / Engine.physics_ticks_per_second
 
 func start_rewind() -> void:
-	if rewinding or size == 0:
+	if rewinding:
 		return
+	if size == 0:
+		return
+	
+	if dying:
+		read_index = (_death_anchor - 1 + MAX_STATES) % MAX_STATES
+	else:
+		read_index = (write_index - 1 + MAX_STATES) % MAX_STATES
+	
 	rewinding = true
-	read_index = (write_index - 1 + MAX_STATES) % MAX_STATES
 	emit_signal("rewind_started")
 	EventBus.rewind_started.emit()
-	EventBus.is_rewinding = true
 	sprite.pause()
 
 

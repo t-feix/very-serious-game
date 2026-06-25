@@ -235,7 +235,7 @@ func _physics_process(delta):
 	
 
 	if player != null and (current_state == State.IDLE or current_state == State.INVESTIGATE):
-		if is_player_in_vision_cone(player):
+		if not player._dying and not player._dead and is_player_in_vision_cone(player):
 			dprint("[%s] Player spotted -> ALERT" % name)
 			current_state = State.ALERT
 			alert_nearby_enemies()
@@ -448,6 +448,10 @@ func do_shoot():
 		go_return()
 		return
 	
+	if player._dying or player._dead:
+		dprint("[%s] player is dying/dead -> RETURN" % name)
+		go_return()
+		return
 
 	if not is_player_in_vision_cone(player):
 		current_state = State.CHASE
@@ -526,7 +530,7 @@ func _on_body_entered(body):
 		dprint("[%s] >>> PLAYER DETECTED <<<" % name)
 		player = body
 		
-		if is_player_in_vision_cone(body):
+		if is_player_in_vision_cone(body) and not player._dying and not player._dead:
 			dprint("[%s] Player in vision cone -> ALERT" % name)
 			current_state = State.ALERT
 			alert_nearby_enemies()
