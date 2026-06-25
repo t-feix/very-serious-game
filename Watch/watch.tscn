@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://pwfudx14e7im" path="res://Watch/Sprite_Pocketwatch_watch.png" id="1_435vo"]
 [ext_resource type="Script" uid="uid://cstoo5rsjqlhy" path="res://Watch/watch.gd" id="1_pkyft"]
 [ext_resource type="Texture2D" uid="uid://bgr4h0gdvyohx" path="res://Watch/Sprite_Pocketwatch_handle.png" id="2_knkmf"]
-[ext_resource type="AudioStream" uid="uid://dsib8f0rtdkdw" path="res://Watch/sfx/Rewind.wav" id="4_8rxnc"]
 
 [node name="WatchHUD" type="CanvasLayer" unique_id=1440977198]
 script = ExtResource("1_pkyft")
@@ -30,7 +29,3 @@ texture = ExtResource("1_435vo")
 position = Vector2(-24, 0)
 rotation = -6.2831855
 texture = ExtResource("2_knkmf")
-
-[node name="RewindSound" type="AudioStreamPlayer" parent="." unique_id=1887977022]
-stream = ExtResource("4_8rxnc")
-volume_db = -8.226

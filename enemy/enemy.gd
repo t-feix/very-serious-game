@@ -516,7 +516,6 @@ func shoot():
 	
 	var dir = (player.global_position - global_position).normalized()
 	bullet.setup(dir, self)
-	$FireSound.play()
 
 
 func _on_body_entered(body):

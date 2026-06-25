@@ -1,4 +1,3 @@
-
 extends Node2D
 
 const MAX_STATES := 300
@@ -62,7 +61,6 @@ func is_rewinding() -> bool:
 	return rewinding
 
 
-
 func rewind_step() -> void:
 	var state = buffer[read_index]
 	apply_state(state)
@@ -92,7 +90,6 @@ func stop_rewind() -> void:
 	EventBus.rewind_ended.emit()
 	EventBus.is_rewinding = false
 	sprite.play()
-	$RewindSound.stop()
 
 
 func get_buffer_seconds() -> float:
@@ -112,7 +109,6 @@ func start_rewind() -> void:
 	rewinding = true
 	emit_signal("rewind_started")
 	EventBus.rewind_started.emit()
-	$RewindSound.play()
 	sprite.pause()
 
 
@@ -127,7 +123,6 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		start_rewind()
-  
 	elif event.is_action_released("ui_accept"):
 		stop_rewind()
 
