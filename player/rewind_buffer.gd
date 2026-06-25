@@ -90,7 +90,7 @@ func stop_rewind() -> void:
 	EventBus.rewind_ended.emit()
 	EventBus.is_rewinding = false
 	sprite.play()
-
+	$RewindSound.stop()
 
 func get_buffer_seconds() -> float:
 	return float(size) / Engine.physics_ticks_per_second
@@ -110,7 +110,7 @@ func start_rewind() -> void:
 	emit_signal("rewind_started")
 	EventBus.rewind_started.emit()
 	sprite.pause()
-
+	$RewindSound.play()
 
 
 

@@ -516,7 +516,7 @@ func shoot():
 	
 	var dir = (player.global_position - global_position).normalized()
 	bullet.setup(dir, self)
-
+	$EnemyShoot.play()
 
 func _on_body_entered(body):
 	dprint("[%s] !!! BODY ENTERED: %s | Is Player: %s" % [name, body.name, body is Player])
