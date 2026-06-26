@@ -4,7 +4,7 @@ func _on_start_pressed() -> void:
 	$UIConfirm.play()
 	await get_tree().create_timer(0.5).timeout
 	GameState.spawn_from = "from_lower"
-	get_tree().change_scene_to_file("res://world/Floor0.tscn")
+	get_tree().change_scene_to_file("res://world/Cutscenes/StartingCutscene/starting_cutscene.tscn")
 
 
 func _on_quit_pressed() -> void:
