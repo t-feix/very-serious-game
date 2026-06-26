@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkesma3yjuprl"
-path="res://.godot/imported/Sprite_door.png-8c5b1622c3a3ae698f94fab90b7b5040.ctex"
+uid="uid://do6oj82hroucn"
+path="res://.godot/imported/S04.png-3004e999b7344d7f9ec6a2a6134d1e14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment/Door/Sprite_door.png"
-dest_files=["res://.godot/imported/Sprite_door.png-8c5b1622c3a3ae698f94fab90b7b5040.ctex"]
+source_file="res://Cutscene/S04.png"
+dest_files=["res://.godot/imported/S04.png-3004e999b7344d7f9ec6a2a6134d1e14.ctex"]
 
 [params]
 
