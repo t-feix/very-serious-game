@@ -87,17 +87,17 @@ func _get_tooltip_text() -> String:
 		return "[Release Right-click to drop  |  Left-click to throw]"
 	
 	if _held:
-		return "[Release Right-click to drop]"
+		return "[Release Right-click to let go]"
 	
 	
 	if not _nearby_draggables.is_empty():
 		return "[Right-click to grab]"
 	
 	if not _nearby_throwables.is_empty():
-		return "[Right-click to pick up]"
+		return "[Hold Right-click to pick up]"
 	
 	if _closest_button() != null:
-		return "[Right-click to press]"
+		return "[Right-click to press button]"
 	
 	for door in _nearby_doors:
 		if door.can_open():

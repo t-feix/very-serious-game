@@ -10,6 +10,7 @@ size = Vector2(64, 64)
 polygon = PackedVector2Array(-5, -5, -5, 5, 5, 5, 5, -5)
 
 [node name="ThrowableObject" type="Area2D" unique_id=143906180]
+collision_layer = 0
 script = ExtResource("1_caumy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=641872566]
@@ -21,3 +22,4 @@ shape = SubResource("RectangleShape2D_caumy")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=119273756]
 occluder = SubResource("OccluderPolygon2D_caumy")
+occluder_light_mask = 0

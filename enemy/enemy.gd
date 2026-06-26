@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
+@onready var vision_light: PointLight2D = $PointLight2D
+
 func _nav_move(target_pos: Vector2, move_speed: float) -> bool:
 	nav_agent.target_position = target_pos
 	
@@ -53,6 +55,7 @@ var previous_state = -1
 
 # --- INTERNAL ---
 var anchor: Vector2
+var anchor_rotation: float
 var player: Player = null
 var can_shoot: bool = true
 var alert_timer: float = 0.0
@@ -63,6 +66,13 @@ var _investigate_pos: Vector2
 var _investigate_scanning: bool = false
 var _investigate_scan_progress: float = 0.0
 const INVESTIGATE_SCAN_SPEED: float = PI/2
+
+var _investigate_base_rotation: float = 0.0
+var _investigate_sweep_phase: int = 0
+var _investigate_pause_timer: float = 0.0
+const INVESTIGATE_SWEEP_LEFT: float = deg_to_rad(45.0)
+const INVESTIGATE_SWEEP_RIGHT: float = deg_to_rad(90.0)
+const INVESTIGATE_PAUSE_DURATION: float = 1.0
 
 
 var _shoot_cooldown: float = 0.0
@@ -155,8 +165,10 @@ func _ready():
 	dprint("==============================================")
 	
 	anchor = global_position
+	anchor_rotation = global_rotation
 	
 	build_vision_debug()
+	vision_debug.visible = false
 	
 
 	dprint("[%s] Connecting signals..." % name)
@@ -259,26 +271,46 @@ func _physics_process(delta):
 
 func do_investigate(delta: float) -> void:
 	if not _investigate_scanning:
-		# Phase 1
 		var still_pathing := _nav_move(_investigate_pos, speed)
 		play_anim("enemy_walk")
 		
 		if not still_pathing:
 			_investigate_scanning = true
-			_investigate_scan_progress = 0.0
+			_investigate_base_rotation = rotation
+			_investigate_sweep_phase = 0
+			_investigate_pause_timer = 0.0
 	else:
-		# Phase 2
 		velocity = Vector2.ZERO
 		_stable_move()
 		play_anim("enemy_aim_hold")
 		
 		var step := INVESTIGATE_SCAN_SPEED * delta
-		rotation += step
-		_investigate_scan_progress += step
 		
-		if _investigate_scan_progress >= TAU:
-			dprint("[%s] Done investigating -> RETURN" % name)
-			current_state = State.RETURN
+		match _investigate_sweep_phase:
+			0:
+				var target := _investigate_base_rotation - INVESTIGATE_SWEEP_LEFT
+				rotation = move_toward(rotation, target, step)
+				if abs(rotation - target) < 0.01:
+					_investigate_sweep_phase = 1
+					_investigate_pause_timer = 0.0
+			
+			1:
+				_investigate_pause_timer += delta
+				if _investigate_pause_timer >= INVESTIGATE_PAUSE_DURATION:
+					_investigate_sweep_phase = 2
+			
+			2:
+				var target := _investigate_base_rotation + (INVESTIGATE_SWEEP_RIGHT - INVESTIGATE_SWEEP_LEFT)
+				rotation = move_toward(rotation, target, step)
+				if abs(rotation - target) < 0.01:
+					_investigate_sweep_phase = 3
+					_investigate_pause_timer = 0.0
+			
+			3:
+				_investigate_pause_timer += delta
+				if _investigate_pause_timer >= INVESTIGATE_PAUSE_DURATION:
+					dprint("[%s] Done investigating -> RETURN" % name)
+					current_state = State.RETURN
 
 
 func _on_state_enter(new_state, old_state) -> void:
@@ -364,17 +396,17 @@ func is_player_in_vision_cone(target: Node2D) -> bool:
 func update_debug_color():
 	match current_state:
 		State.IDLE:
-			vision_debug.color = Color(1, 1, 0, 0.2)
+			vision_light.color = Color(1, 1, 0.6)         
 		State.ALERT:
-			vision_debug.color = Color(1, 0.5, 0, 0.3)
+			vision_light.color = Color(1, 0.6, 0.2) 
 		State.CHASE:
-			vision_debug.color = Color(1, 0, 0, 0.3)
+			vision_light.color = Color(1, 0.3, 0.3) 
 		State.SHOOT:
-			vision_debug.color = Color(1, 0, 0, 0.5)
+			vision_light.color = Color(1, 0.2, 0.2) 
 		State.RETURN:
-			vision_debug.color = Color(0, 0, 1, 0.2)
+			vision_light.color = Color(0.3, 0.4, 1)   
 		State.INVESTIGATE:
-			vision_debug.color = Color(0.4, 0.7, 1, 0.25)
+			vision_light.color = Color(0.6, 0.85, 1)  
 
 
 # ========================
@@ -476,6 +508,7 @@ func do_return():
 	
 	if not still_pathing:
 		global_position = anchor
+		global_rotation = anchor_rotation
 		current_state = State.IDLE
 		dprint("[%s] Back home -> IDLE" % name)
 
