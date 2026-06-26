@@ -73,6 +73,8 @@ func _physics_process(_delta: float) -> void:
 	handle_movement()
 	footstep_audio()
 
+
+
 func _process_dying() -> void:
 	
 	
@@ -300,6 +302,10 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("throw"):
 		if _carried:
 			_throw_to(get_global_mouse_position())
+
+	if event.is_action_pressed("reset"):
+		get_tree().reload_current_scene()
+
 
 func _try_grab() -> void:
 	if _held != null:
