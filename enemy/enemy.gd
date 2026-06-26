@@ -8,22 +8,19 @@ extends CharacterBody2D
 func _nav_move(target_pos: Vector2, move_speed: float) -> bool:
 	nav_agent.target_position = target_pos
 	
-	var path := nav_agent.get_current_navigation_path()
-	
-	
 	if nav_agent.is_navigation_finished():
+		nav_agent.velocity = Vector2.ZERO
 		velocity = Vector2.ZERO
 		_stable_move()
 		return false
 	
 	var next_pos := nav_agent.get_next_path_position()
-	
-	
-	
 	var dir := (next_pos - global_position).normalized()
-	velocity = dir * move_speed * _current_time_scale()
+	var desired_velocity := dir * move_speed * _current_time_scale()
+	
+	nav_agent.velocity = desired_velocity   # avoidance computes safe velocity
 	_face_direction(dir)
-	_stable_move()
+	
 	return true
 
 # --- STATES ---
@@ -154,6 +151,7 @@ func _stable_move() -> void:
 
 
 func _ready():
+	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	sprite.rotation = PI
 	EventBus.noise_made.connect(_on_noise_made)
 	dprint("==============================================")
@@ -212,6 +210,10 @@ func _ready():
 			dprint("[%s] Player already in detection area at spawn" % name)
 			break
 
+func _on_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
+	_stable_move()
+
 func _on_noise_made(noise_pos: Vector2, radius: float) -> void:
 	if current_state != State.IDLE:
 		return
@@ -231,6 +233,7 @@ func _physics_process(delta):
 		_on_state_enter(current_state, previous_state)
 		previous_state = current_state
 	
+	print("[%s] state=%s rotation=%.1f" % [name, state_names[current_state], rad_to_deg(rotation)])
 
 	var scaled_delta: float = delta * _current_time_scale()
 	
@@ -276,6 +279,7 @@ func do_investigate(delta: float) -> void:
 		play_anim("enemy_walk")
 		
 		if not still_pathing:
+			print("[%s] arrival! capturing base_rot=%.1f" % [name, rad_to_deg(rotation)])
 			_investigate_scanning = true
 			_investigate_base_rotation = rotation
 			_investigate_sweep_phase = 0
@@ -290,10 +294,10 @@ func do_investigate(delta: float) -> void:
 		match _investigate_sweep_phase:
 			0:
 				var target := _investigate_base_rotation - INVESTIGATE_SWEEP_LEFT
-				rotation = move_toward(rotation, target, step)
-				if abs(rotation - target) < 0.01:
+				rotation = rotate_toward(rotation, target, step)
+				if abs(angle_difference(rotation, target)) < 0.01:
 					_investigate_sweep_phase = 1
-					_investigate_pause_timer = 0.0
+					_investigate_pause_timer = 0.00
 			
 			1:
 				_investigate_pause_timer += delta
@@ -302,8 +306,8 @@ func do_investigate(delta: float) -> void:
 			
 			2:
 				var target := _investigate_base_rotation + (INVESTIGATE_SWEEP_RIGHT - INVESTIGATE_SWEEP_LEFT)
-				rotation = move_toward(rotation, target, step)
-				if abs(rotation - target) < 0.01:
+				rotation = rotate_toward(rotation, target, step)
+				if abs(angle_difference(rotation, target)) < 0.01:
 					_investigate_sweep_phase = 3
 					_investigate_pause_timer = 0.0
 			

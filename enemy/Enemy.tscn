@@ -309,9 +309,12 @@ shape = SubResource("CircleShape2D_7lgfl")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=873484328]
 path_desired_distance = 4.0
-radius = 20.0
-avoidance_layers = 0
-avoidance_mask = 0
+avoidance_enabled = true
+radius = 16.0
+neighbor_distance = 200.0
+max_neighbors = 4
+time_horizon_obstacles = 1.0
+max_speed = 200.0
 
 [node name="Enemy_LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1429539975]
 occluder = SubResource("OccluderPolygon2D_5p6bu")
