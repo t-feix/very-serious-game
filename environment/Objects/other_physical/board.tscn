@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://7hcu8ea0sk3a"]
+
+[ext_resource type="Texture2D" uid="uid://ccai6j8xb83f0" path="res://environment/objects/other_physical/board.tres" id="1_xvked"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q12ov"]
+size = Vector2(4, 56)
+
+[node name="Projector" type="StaticBody2D" unique_id=1767938287]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1820279881]
+texture = ExtResource("1_xvked")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=939656506]
+shape = SubResource("RectangleShape2D_q12ov")

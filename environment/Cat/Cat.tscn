@@ -94,5 +94,5 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=737331576]
 sprite_frames = SubResource("SpriteFrames_3m6qu")
-animation = &"Cat_stretch"
-frame_progress = 0.9448367
+animation = &"Cat_empty"
+frame_progress = 0.022505967
