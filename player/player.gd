@@ -122,6 +122,7 @@ func take_damage(amount: float) -> void:
 	if EventBus.is_rewinding:
 		return
 	die()
+	$PlayerHit.play()
 
 func die() -> void:
 	if _dying or _dead:
