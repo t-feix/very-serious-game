@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://bngmenlsw74yw"]
 
-[ext_resource type="Texture2D" uid="uid://tssqkiodygi3" path="res://environment/objects/bins/bin_shredded.tres" id="1_olhot"]
+[ext_resource type="Texture2D" uid="uid://tssqkiodygi3" path="res://environment/Objects/bins/bin_shredded.tres" id="1_olhot"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o3kab"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1dpra"]
+polygon = PackedVector2Array(-2, -10, 2, -10, 2, -9, 5, -9, 5, -8, 7, -8, 7, -7, 8, -7, 8, -5, 9, -5, 9, -2, 10, -2, 10, 3, 9, 3, 9, 6, 8, 6, 8, 8, 7, 8, 7, 9, 5, 9, 5, 10, 2, 10, 2, 11, 0, 11, -2, 11, -2, 10, -5, 10, -5, 9, -7, 9, -7, 8, -8, 8, -8, 6, -9, 6, -9, 3, -10, 3, -10, -2, -9, -2, -9, -5, -8, -5, -8, -7, -7, -7, -7, -8, -5, -8, -5, -9, -2, -9)
 
 [node name="BinShredded" type="StaticBody2D" unique_id=87526272]
 collision_mask = 0
@@ -13,3 +16,6 @@ texture = ExtResource("1_olhot")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=563902426]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_o3kab")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=737601061]
+occluder = SubResource("OccluderPolygon2D_1dpra")

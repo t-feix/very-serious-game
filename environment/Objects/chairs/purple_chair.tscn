@@ -1,10 +1,16 @@
 [gd_scene format=3 uid="uid://cbgeeq4xxsai3"]
 
-[ext_resource type="Texture2D" uid="uid://10lst12emici" path="res://environment/objects/chairs/purple_chair.tres" id="1_krhxm"]
+[ext_resource type="Texture2D" uid="uid://10lst12emici" path="res://environment/Objects/chairs/purple_chair.tres" id="1_krhxm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_afrl2"]
 radius = 9.0
 height = 24.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wejxy"]
+polygon = PackedVector2Array(-10, 5, -13, 5, -13, 9, -10, 9, -10, 7, -7, 7, -7, 8, -3, 8, -3, 9, -2, 9, -2, 11, -1, 11, -1, 12, -2, 12, -2, 15, 2, 15, 2, 12, 1, 12, 1, 11, 2, 11, 2, 9, 3, 9, 3, 8, 8, 8, 8, 7, 10, 7, 10, 9, 13, 9, 13, 5, 10, 5, 10, 4, 9, 4, 9, 2, 10, 2, 10, -5, 9, -5, 9, -7, 12, -7, 12, -11, 9, -11, 9, -9, 8, -9, 8, -8, 7, -8, 7, -9, 6, -9, 6, -10, 5, -10, 5, -11, 3, -11, 3, -12, -3, -12, -3, -11, -5, -11, -5, -10, -6, -10, -6, -9, -8, -9, -8, -10, -9, -10, -9, -12, -12, -12, -12, -8, -9, -8, -9, -5, -10, -5, -10, 2, -9, 2, -9, 4, -10, 4)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y70mw"]
+polygon = PackedVector2Array(-3, 8, -3, 9, -2, 9, -2, 11, -1, 11, -1, 12, -2, 12, -2, 15, 2, 15, 2, 12, 1, 12, 1, 11, 2, 11, 2, 9, 3, 9, 3, 8, 8, 8, 8, 7, 10, 7, 10, 9, 13, 9, 13, 5, 10, 5, 10, 4, 9, 4, 9, 2, 10, 2, 10, -5, 9, -5, 9, -7, 12, -7, 12, -11, 9, -11, 9, -9, 8, -9, 8, -8, 7, -8, 7, -9, 6, -9, 6, -10, 5, -10, 5, -11, 3, -11, 3, -12, -3, -12, -3, -11, -5, -11, -5, -10, -6, -10, -6, -9, -8, -9, -8, -10, -9, -10, -9, -12, -12, -12, -12, -8, -9, -8, -9, -7, -9, -5, -10, -5, -10, 2, -9, 2, -9, 4, -10, 4, -10, 5, -13, 5, -13, 9, -10, 9, -10, 7, -7, 7, -7, 8)
 
 [node name="PurpleChair" type="StaticBody2D" unique_id=143999062]
 collision_mask = 0
@@ -14,3 +20,9 @@ shape = SubResource("CapsuleShape2D_afrl2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1262534679]
 texture = ExtResource("1_krhxm")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=2034877243]
+occluder = SubResource("OccluderPolygon2D_wejxy")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="." unique_id=1063811534]
+occluder = SubResource("OccluderPolygon2D_y70mw")

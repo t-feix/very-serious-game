@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://b2ch8soyivcsl"]
+
+[ext_resource type="Texture2D" uid="uid://pwfudx14e7im" path="res://Watch/Sprite_Pocketwatch_watch.png" id="1_435vo"]
+[ext_resource type="Script" uid="uid://cstoo5rsjqlhy" path="res://Watch/watch.gd" id="1_pkyft"]
+[ext_resource type="Texture2D" uid="uid://bgr4h0gdvyohx" path="res://Watch/Sprite_Pocketwatch_handle.png" id="2_knkmf"]
+
+[node name="WatchHUD" type="CanvasLayer" unique_id=1440977198]
+script = ExtResource("1_pkyft")
+
+[node name="Anchor" type="Control" parent="." unique_id=191576904]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Watch" type="Node2D" parent="Anchor" unique_id=1837265859]
+modulate = Color(1, 1, 1, 0.5882353)
+position = Vector2(-8, 96)
+scale = Vector2(2, 2)
+
+[node name="WatchBody" type="Sprite2D" parent="Anchor/Watch" unique_id=1388743918]
+position = Vector2(-24, 0)
+texture = ExtResource("1_435vo")
+
+[node name="WatchHandle" type="Sprite2D" parent="Anchor/Watch" unique_id=235562309]
+position = Vector2(-24, 0)
+rotation = -6.2831855
+texture = ExtResource("2_knkmf")

@@ -1,42 +1,27 @@
 [gd_scene format=3 uid="uid://cwvdqtn06cwgq"]
 
-[ext_resource type="Script" uid="uid://xv3tqrbvjf6v" path="res://environment/Door/door.gd" id="1_py504"]
-[ext_resource type="Texture2D" uid="uid://bkesma3yjuprl" path="res://environment/Door/Sprite_door.png" id="2_devri"]
+[ext_resource type="Script" uid="uid://xv3tqrbvjf6v" path="res://environment/door/door.gd" id="1_py504"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_devri"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r2ym"]
+size = Vector2(49, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ealsj"]
 size = Vector2(32, 4)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_nyt34"]
-radius = 0.0
-
-[node name="Door" type="Node2D" unique_id=371851669]
-
-[node name="Door_Rigid Body" type="RigidBody2D" parent="." unique_id=2016659511]
-collision_mask = 2
-mass = 0.3
-gravity_scale = 0.0
-linear_damp = 1.0
-angular_damp = 4.0
+[node name="Door" type="AnimatableBody2D" unique_id=779808323 groups=["doors", "navigation_polygon_source_geometry_group"]]
 script = ExtResource("1_py504")
 
-[node name="Door Sprite" type="Sprite2D" parent="Door_Rigid Body" unique_id=1447344548]
-texture_filter = 1
-texture = ExtResource("2_devri")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1004710863]
+offset = Vector2(-16, 0)
 
-[node name="Door Colission Shape" type="CollisionShape2D" parent="Door_Rigid Body" unique_id=1470077219]
-shape = SubResource("RectangleShape2D_devri")
+[node name="PlayerSensor" type="Area2D" parent="." unique_id=2069162247]
+position = Vector2(-16, 0)
+collision_layer = 0
 
-[node name="Door_Joint" type="PinJoint2D" parent="." unique_id=1059799518]
-position = Vector2(16, 0)
-node_a = NodePath("../Anker")
-node_b = NodePath("../Door_Rigid Body")
-disable_collision = false
-angular_limit_enabled = true
-angular_limit_lower = -2.3561945
-angular_limit_upper = 2.3561945
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSensor" unique_id=1436758593]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_0r2ym")
 
-[node name="Anker" type="StaticBody2D" parent="." unique_id=1764698430]
-position = Vector2(16, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Anker" unique_id=148428483]
-shape = SubResource("CircleShape2D_nyt34")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1844465819]
+position = Vector2(-16, 0)
+shape = SubResource("RectangleShape2D_ealsj")

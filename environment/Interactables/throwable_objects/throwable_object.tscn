@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://3s1ccw7gk5wm"]
+
+[ext_resource type="Script" uid="uid://b0pbonqpia63d" path="res://environment/Interactables/throwable_objects/throwable.gd" id="1_caumy"]
+[ext_resource type="Texture2D" uid="uid://5oshmwrnynmc" path="res://environment/Interactables/throwable_objects/throwable.tres" id="1_g4ra2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_caumy"]
+size = Vector2(64, 64)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_caumy"]
+polygon = PackedVector2Array(-5, -5, -5, 5, 5, 5, 5, -5)
+
+[node name="ThrowableObject" type="Area2D" unique_id=143906180]
+script = ExtResource("1_caumy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=641872566]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("1_g4ra2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1707946178]
+shape = SubResource("RectangleShape2D_caumy")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=119273756]
+occluder = SubResource("OccluderPolygon2D_caumy")
