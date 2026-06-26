@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://1d7jcj8nr15p"]
 
 [ext_resource type="Script" uid="uid://q61v3wgja7x5" path="res://enemy/enemy.gd" id="1_7lgfl"]
-[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://Bullets/Bullet.tscn" id="2_5p6bu"]
+[ext_resource type="PackedScene" uid="uid://b3827mu10ef3r" path="res://bullets/Bullet.tscn" id="2_5p6bu"]
 [ext_resource type="Texture2D" uid="uid://cna27higwefid" path="res://enemy/Sprite_Enemy.png" id="3_5p6bu"]
 [ext_resource type="Texture2D" uid="uid://xpj5vlujsvwq" path="res://shared_assets/Light/Light cone.png" id="4_80fio"]
 [ext_resource type="AudioStream" uid="uid://blsaycvmwfg0h" path="res://enemy/sfx/EnemyFire.wav" id="5_55d7h"]

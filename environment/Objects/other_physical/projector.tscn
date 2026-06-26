@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ng8yaan6d7v3"]
+
+[ext_resource type="Texture2D" uid="uid://dpsmvla05ufir" path="res://environment/objects/other_physical/projector.tres" id="1_x4prr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q12ov"]
+size = Vector2(27, 26)
+
+[node name="Projector" type="StaticBody2D" unique_id=1767938287]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1820279881]
+texture = ExtResource("1_x4prr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=939656506]
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_q12ov")

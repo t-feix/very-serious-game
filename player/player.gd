@@ -25,8 +25,19 @@ const ANIMATIONS_NEEDING_FLIP_V := ["player_push", "player_pull", "player_push_p
 func _ready() -> void:
 	RewindBuffer.clear()
 	step_timer.start()
+	EventBus.rewind_started.connect(_on_rewind_started)
+
+func _on_rewind_started() -> void:
+	if _held:
+		_held.release()
+		_held = null
+	
+	if _carried:
+		_carried.drop_at(global_position)
+		_carried = null
 
 func _physics_process(_delta: float) -> void:
+	sprite.flip_v = sprite.animation in ANIMATIONS_NEEDING_FLIP_V
 	if _dying:
 		if not RewindBuffer.dying and RewindBuffer.is_rewinding():
 			print("[player] survived via early rewind")
@@ -87,17 +98,17 @@ func _get_tooltip_text() -> String:
 		return "[Release Right-click to drop  |  Left-click to throw]"
 	
 	if _held:
-		return "[Release Right-click to drop]"
+		return "[Release Right-click to let go]"
 	
 	
 	if not _nearby_draggables.is_empty():
 		return "[Right-click to grab]"
 	
 	if not _nearby_throwables.is_empty():
-		return "[Right-click to pick up]"
+		return "[Hold Right-click to pick up]"
 	
 	if _closest_button() != null:
-		return "[Right-click to press]"
+		return "[Right-click to press button]"
 	
 	for door in _nearby_doors:
 		if door.can_open():
@@ -122,6 +133,7 @@ func take_damage(amount: float) -> void:
 	if EventBus.is_rewinding:
 		return
 	die()
+	$PlayerHit.play()
 
 func die() -> void:
 	if _dying or _dead:
@@ -253,6 +265,8 @@ func _throw_to(target: Vector2) -> void:
 		_carried = null
 
 func _input(event: InputEvent) -> void:
+	if RewindBuffer.is_rewinding():
+		return
 	if event.is_action_pressed("grab"):
 		if _carried:
 			return

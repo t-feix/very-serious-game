@@ -26,5 +26,8 @@ func _on_button_pressed(button_id: int) -> void:
 		1:
 			EventBus.door_lock_changed.emit(6, false)
 			EventBus.door_lock_changed.emit(7, false)
+		2:
+			EventBus.door_lock_changed.emit(10, false)
+			EventBus.door_lock_changed.emit(11, false)
 		_:
 			push_warning("Unhandled button press: %d" % button_id)

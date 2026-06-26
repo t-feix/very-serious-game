@@ -54,7 +54,7 @@ func throw_from_to(start: Vector2, target: Vector2) -> void:
 	put_down.emit()
 
 func _on_landed() -> void:
-	EventBus.noise_made.emit(global_position, 200.0)
+	EventBus.noise_made.emit(global_position, 400.0)
 
 func is_carried() -> bool:
 	return _carried_by != null

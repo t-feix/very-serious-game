@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://nuu0sjnl7j04"]
+
+[ext_resource type="Texture2D" uid="uid://c44nkjvumftf8" path="res://environment/objects/other_physical/big_ass_table.tres" id="1_v1e40"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8fqc"]
+size = Vector2(60, 92)
+
+[node name="BigAssTable" type="StaticBody2D" unique_id=1334454836]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=597298748]
+texture = ExtResource("1_v1e40")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1156915255]
+shape = SubResource("RectangleShape2D_t8fqc")
