@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 
+
 @onready var vision_light: PointLight2D = $PointLight2D
 
 func _nav_move(target_pos: Vector2, move_speed: float) -> bool:
@@ -550,6 +551,7 @@ func shoot():
 	var dir = (player.global_position - global_position).normalized()
 	bullet.setup(dir, self)
 	$EnemyShoot.play()
+
 
 func _on_body_entered(body):
 	dprint("[%s] !!! BODY ENTERED: %s | Is Player: %s" % [name, body.name, body is Player])

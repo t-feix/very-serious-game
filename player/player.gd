@@ -7,8 +7,27 @@ extends CharacterBody2D
 @export var invincible: bool = false   # debug
 @export var respawn_delay: float = 1
 
+@onready var camera: Camera2D = $Camera2D
+
 var _dead: bool = false
 var _dying: bool = false
+
+func _shake_camera(strength: float = 8.0, duration: float = 0.25) -> void:
+	var tween := create_tween()
+	var elapsed := 0.0
+	var fade_step := 0.02   # update every 20ms
+	
+	while elapsed < duration:
+		var fade := 1.0 - (elapsed / duration)
+		var offset := Vector2(
+			randf_range(-strength, strength),
+			randf_range(-strength, strength)
+		) * fade
+		camera.offset = offset
+		await get_tree().create_timer(fade_step).timeout
+		elapsed += fade_step
+	
+	camera.offset = Vector2.ZERO
 
 const DEATH_SCREEN_PATH := "res://ui/menus/death_screen.tscn"
 
@@ -132,6 +151,7 @@ func take_damage(amount: float) -> void:
 		return
 	if EventBus.is_rewinding:
 		return
+	_shake_camera()
 	die()
 	$PlayerHit.play()
 
