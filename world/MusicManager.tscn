@@ -23,3 +23,4 @@ stream = SubResource("AudioStreamSynchronized_n2id8")
 
 [node name="MusicIntro" type="AudioStreamPlayer" parent="." unique_id=379583987]
 stream = ExtResource("5_ye3ad")
+volume_db = -10.0

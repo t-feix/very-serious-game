@@ -102,6 +102,9 @@ func _permadeath() -> void:
 	RewindBuffer.exit_dying()
 	if RewindBuffer.rewinding:
 		RewindBuffer.stop_rewind()
+	MusicManager.stop_music()
+	MusicManager._music_started = false
+
 	
 	await get_tree().create_timer(0.1).timeout
 	if is_inside_tree():
