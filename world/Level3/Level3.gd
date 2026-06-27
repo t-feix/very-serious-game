@@ -6,6 +6,15 @@ extends Node2D
 @export var enemy_scene: PackedScene
 @onready var walls: TileMapLayer = $Walls
 
+@onready var pipe_two_bend_left: Node2D = $PipeTwoBendLeft
+
+@onready var pipe_two_bend_right: Node2D = $PipeTwoBendRight
+
+@onready var pipe_three_bend_left: Node2D = $PipeThreeBendLeft
+
+@onready var pipe_three_bend_right: Node2D = $PipeThreeBendRight
+
+
 const ROT_90_CW := TileSetAtlasSource.TRANSFORM_TRANSPOSE | TileSetAtlasSource.TRANSFORM_FLIP_H
 const ROT_180  := TileSetAtlasSource.TRANSFORM_FLIP_H | TileSetAtlasSource.TRANSFORM_FLIP_V
 const ROT_90_CCW := TileSetAtlasSource.TRANSFORM_TRANSPOSE | TileSetAtlasSource.TRANSFORM_FLIP_V

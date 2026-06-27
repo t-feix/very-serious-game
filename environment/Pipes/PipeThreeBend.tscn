@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://byr1n3lp5yi21"]
+
+[ext_resource type="Texture2D" uid="uid://besau13x0nhjv" path="res://environment/Pipes/Spritesheet_Pipes.png" id="1_losp7"]
+
+[node name="PipeTwoBend" type="Node2D" unique_id=262446263]
+
+[node name="Corner" type="Sprite2D" parent="." unique_id=415412043]
+texture = ExtResource("1_losp7")
+region_enabled = true
+region_rect = Rect2(64, 0, 32, 32)
+
+[node name="Corner2" type="Sprite2D" parent="." unique_id=545840401]
+position = Vector2(0, -96)
+rotation = -1.5707964
+texture = ExtResource("1_losp7")
+region_enabled = true
+region_rect = Rect2(64, 0, 32, 32)
+
+[node name="Attachment" type="Sprite2D" parent="." unique_id=1846227957]
+position = Vector2(-96, 0)
+texture = ExtResource("1_losp7")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Attachment2" type="Sprite2D" parent="." unique_id=655415364]
+position = Vector2(-32, -96)
+texture = ExtResource("1_losp7")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Connector" type="Sprite2D" parent="." unique_id=1105612233]
+position = Vector2(-32, 0)
+texture = ExtResource("1_losp7")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+
+[node name="Connector3" type="Sprite2D" parent="." unique_id=1618977312]
+position = Vector2(-64, 0)
+texture = ExtResource("1_losp7")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+
+[node name="Connector2" type="Sprite2D" parent="." unique_id=802512323]
+position = Vector2(0, -32)
+rotation = 1.5707964
+texture = ExtResource("1_losp7")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
+
+[node name="Connector4" type="Sprite2D" parent="." unique_id=60129955]
+position = Vector2(0, -64)
+rotation = 1.5707964
+texture = ExtResource("1_losp7")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)
