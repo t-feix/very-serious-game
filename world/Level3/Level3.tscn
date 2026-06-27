@@ -9,10 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="7_7usgp"]
 [ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/Door/Door.tscn" id="8_1p3ii"]
 [ext_resource type="PackedScene" uid="uid://dg0bhbbxni2ke" path="res://environment/Cat/Cat.tscn" id="9_h8p3p"]
-<<<<<<< Updated upstream
-[ext_resource type="AudioStream" uid="uid://b6lbdbbfbo4ok" path="res://world/sfx/Level1Maybe-BitcrushMastered.mp3" id="13_557v3"]
-=======
->>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://dydn32o74qvn" path="res://environment/Objects/chairs/chair.tscn" id="16_xexay"]
 [ext_resource type="PackedScene" uid="uid://cyrmhbnbijbuu" path="res://environment/Objects/bins/bin_paper.tscn" id="18_4owo5"]
 [ext_resource type="PackedScene" uid="uid://bngmenlsw74yw" path="res://environment/Objects/bins/bin_shredded.tscn" id="19_xexay"]
@@ -49,7 +45,6 @@ parsed_collision_mask = 1
 source_geometry_mode = 2
 agent_radius = 16.0
 
-<<<<<<< Updated upstream
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h8p3p"]
 polygon = PackedVector2Array(1444, 448, 1440, 448, 1440, 672, 1445, 672, 1445, 644, 1888, 644, 1888, 645, 1916, 645, 1916, 672, 1920, 672, 1920, 448, 1916, 448, 1916, 640, 1444, 640)
 
@@ -72,9 +67,6 @@ polygon = PackedVector2Array(1445, 320, 1445, 324, 1915, 324, 1915, 320)
 polygon = PackedVector2Array(1444, 480, 1916, 480, 1916, 476, 1444, 476)
 
 [node name="World2" type="Node2D" unique_id=1484466954]
-=======
-[node name="World3" type="Node2D" unique_id=1484466954]
->>>>>>> Stashed changes
 script = ExtResource("1_28pet")
 spawn_from_lower = Vector2(1779, 1066)
 spawn_from_higher = Vector2(80, 13)
