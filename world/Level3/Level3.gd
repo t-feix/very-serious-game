@@ -14,12 +14,49 @@ extends Node2D
 
 @onready var pipe_three_bend_right: Node2D = $PipeThreeBendRight
 
+@onready var rotations: Dictionary = {
+	pipe_two_bend_left: 0,
+	pipe_two_bend_right: 0,
+	pipe_three_bend_left: 0,
+	pipe_three_bend_right: 0,
+}
+
 
 const ROT_90_CW := TileSetAtlasSource.TRANSFORM_TRANSPOSE | TileSetAtlasSource.TRANSFORM_FLIP_H
 const ROT_180  := TileSetAtlasSource.TRANSFORM_FLIP_H | TileSetAtlasSource.TRANSFORM_FLIP_V
 const ROT_90_CCW := TileSetAtlasSource.TRANSFORM_TRANSPOSE | TileSetAtlasSource.TRANSFORM_FLIP_V
 
 var stage_one_buttons_pressed = 0
+
+var CEODoorOpened = false
+
+var _pipe_tweens: Dictionary = {}
+var _pipe_target_rotations: Dictionary = {}
+
+
+func rotate_pipe(pipe: Node2D, amount: int) -> void:
+	if _pipe_tweens.has(pipe) and _pipe_tweens[pipe].is_valid():
+		_pipe_tweens[pipe].kill()
+		pipe.rotation = _pipe_target_rotations[pipe]
+	
+	var base_rotation: float
+	if _pipe_target_rotations.has(pipe):
+		base_rotation = _pipe_target_rotations[pipe]
+	else:
+		base_rotation = pipe.rotation
+	
+	var target_rotation = base_rotation + deg_to_rad(amount * 90)
+	_pipe_target_rotations[pipe] = target_rotation
+	
+	var tween = create_tween()
+	tween.tween_property(pipe, "rotation", target_rotation, 0.5)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_BACK)
+	_pipe_tweens[pipe] = tween
+	
+	rotations[pipe] += amount
+	if rotations[pipe] == -4 or rotations[pipe] == 4:
+		rotations[pipe] = 0
 
 func _ready() -> void:
 	print("[level] _ready, connecting to EventBus.button_pressed")
@@ -36,6 +73,23 @@ func _ready() -> void:
 		player.global_position = spawn_from_lower
 	
 	GameState.spawn_from = ""
+	
+	for _i in range(3):
+		# top left
+		rotate_pipe(pipe_two_bend_left, 1)
+		rotate_pipe(pipe_three_bend_left, -1)
+		
+		# bottom right
+		rotate_pipe(pipe_three_bend_right, -1)
+		rotate_pipe(pipe_two_bend_right, 1)
+		
+		# bottom left
+		rotate_pipe(pipe_three_bend_left, 1)
+		rotate_pipe(pipe_three_bend_right, -1)
+		
+		#top right
+		rotate_pipe(pipe_two_bend_left, -1)
+		rotate_pipe(pipe_three_bend_right, 1)
 
 func reveal_spawn_room() -> void:
 	var tiles_to_erase: Array[Vector2i] = [
@@ -104,6 +158,62 @@ func _on_button_pressed(button_id: int) -> void:
 				EventBus.door_lock_changed.emit(7, false)
 		2:
 			reveal_spawn_room()
+		3:
+			if CEODoorOpened:
+				return
+			rotate_pipe(pipe_two_bend_left, 1)
+			rotate_pipe(pipe_three_bend_left, -1)
+			var all_rot_zero = true
+			for r in rotations:
+				if rotations[r] != 0:
+					all_rot_zero = false
+			
+			if all_rot_zero:
+				CEODoorOpened = true
+				EventBus.door_lock_changed.emit(18, false)
+				EventBus.door_lock_changed.emit(19, false)
+		4:
+			if CEODoorOpened:
+				return
+			rotate_pipe(pipe_two_bend_left, -1)
+			rotate_pipe(pipe_three_bend_right, 1)
+			var all_rot_zero = true
+			for r in rotations:
+				if rotations[r] != 0:
+					all_rot_zero = false
+			
+			if all_rot_zero:
+				CEODoorOpened = true
+				EventBus.door_lock_changed.emit(18, false)
+				EventBus.door_lock_changed.emit(19, false)
+		5:
+			if CEODoorOpened:
+				return
+			rotate_pipe(pipe_three_bend_left, 1)
+			rotate_pipe(pipe_three_bend_right, -1)
+			var all_rot_zero = true
+			for r in rotations:
+				if rotations[r] != 0:
+					all_rot_zero = false
+			
+			if all_rot_zero:
+				CEODoorOpened = true
+				EventBus.door_lock_changed.emit(18, false)
+				EventBus.door_lock_changed.emit(19, false)
+		6:
+			if CEODoorOpened:
+				return
+			rotate_pipe(pipe_three_bend_right, -1)
+			rotate_pipe(pipe_two_bend_right, 1)
+			var all_rot_zero = true
+			for r in rotations:
+				if rotations[r] != 0:
+					all_rot_zero = false
+			
+			if all_rot_zero:
+				CEODoorOpened = true
+				EventBus.door_lock_changed.emit(18, false)
+				EventBus.door_lock_changed.emit(19, false)
 		_:
 			push_warning("Unhandled button press: %d" % button_id)
 			print("[level] no mapping for button %d" % button_id)

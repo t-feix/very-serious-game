@@ -142,7 +142,6 @@ is_locked = true
 position = Vector2(1442, 672)
 rotation = -1.5707964
 door_id = 6
-is_locked = true
 
 [node name="LeftRoomTwoBottomDoorLeft" parent="Doors" unique_id=1222103262 instance=ExtResource("8_1p3ii")]
 position = Vector2(1442, 736)
@@ -202,11 +201,13 @@ door_id = 17
 [node name="CEOOfficeDoorRight" parent="Doors" unique_id=1083179166 instance=ExtResource("8_1p3ii")]
 position = Vector2(1760, -354)
 door_id = 18
+is_locked = true
 
 [node name="CEOOfficeDoorLeft" parent="Doors" unique_id=207167960 instance=ExtResource("8_1p3ii")]
 position = Vector2(1696, -354)
 rotation = 3.1415927
 door_id = 19
+is_locked = true
 
 [node name="BlueRoomDoorRight" parent="Doors" unique_id=169029018 instance=ExtResource("8_1p3ii")]
 position = Vector2(1920, -446)
@@ -584,16 +585,30 @@ normal_texture = ExtResource("31_22us7")
 pressed_texture = ExtResource("32_n3lsc")
 
 [node name="WallButton4" parent="." unique_id=2016494076 instance=ExtResource("30_28pet")]
-position = Vector2(1612, -314)
+position = Vector2(1612, -323)
 rotation = -1.5707964
 button_id = 3
 normal_texture = ExtResource("31_22us7")
 pressed_texture = ExtResource("32_n3lsc")
 
+[node name="WallButton6" parent="." unique_id=488410222 instance=ExtResource("30_28pet")]
+position = Vector2(1612, -204)
+rotation = -1.5707964
+button_id = 5
+normal_texture = ExtResource("31_22us7")
+pressed_texture = ExtResource("32_n3lsc")
+
 [node name="WallButton5" parent="." unique_id=2108609839 instance=ExtResource("30_28pet")]
-position = Vector2(1748, -314)
+position = Vector2(1748, -324)
 rotation = 1.5707964
 button_id = 4
+normal_texture = ExtResource("31_22us7")
+pressed_texture = ExtResource("32_n3lsc")
+
+[node name="WallButton7" parent="." unique_id=1971684011 instance=ExtResource("30_28pet")]
+position = Vector2(1748, -204)
+rotation = 1.5707964
+button_id = 6
 normal_texture = ExtResource("31_22us7")
 pressed_texture = ExtResource("32_n3lsc")
 
