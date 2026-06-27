@@ -9,7 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://cemquajqlgky0" path="res://level_exit/level_exit.tscn" id="7_h3ik0"]
 [ext_resource type="PackedScene" uid="uid://cwvdqtn06cwgq" path="res://environment/Door/Door.tscn" id="8_nsdh3"]
 [ext_resource type="PackedScene" uid="uid://boubnxfcguiv0" path="res://environment/objects/desks/messy_broken_desk/messy_broken_desk.tscn" id="9_485x2"]
+<<<<<<< Updated upstream
 [ext_resource type="AudioStream" uid="uid://b6lbdbbfbo4ok" path="res://world/sfx/Level1Maybe-BitcrushMastered.mp3" id="10_5k7ya"]
+=======
+>>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://cxwu7uhll1txh" path="res://environment/Objects/desks/desk.tscn" id="11_1j5og"]
 [ext_resource type="Texture2D" uid="uid://dfsdo8sqwg3e0" path="res://environment/Objects/desks/macbook_desk.tres" id="12_juenn"]
 [ext_resource type="Texture2D" uid="uid://2ft5001a6v8v" path="res://environment/Objects/desks/standard_desk.tres" id="13_vb48i"]
@@ -122,11 +125,6 @@ door_id = 5
 [node name="MessyBrokenDesk" parent="." unique_id=78318666 instance=ExtResource("9_485x2")]
 position = Vector2(1490, 795)
 drag_weight = 2.5
-
-[node name="BGMusic" type="AudioStreamPlayer" parent="." unique_id=1652553035]
-stream = ExtResource("10_5k7ya")
-volume_db = -26.0
-autoplay = true
 
 [node name="Desk" parent="." unique_id=1281880372 groups=["navigation_polygon_source_geometry_group"] instance=ExtResource("11_1j5og")]
 position = Vector2(1992, 664)
