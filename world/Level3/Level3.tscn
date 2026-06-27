@@ -45,6 +45,9 @@ parsed_collision_mask = 1
 source_geometry_mode = 2
 agent_radius = 16.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8p3p"]
+size = Vector2(32, 468.25)
+
 [node name="World2" type="Node2D" unique_id=1484466954]
 script = ExtResource("1_28pet")
 spawn_from_lower = Vector2(1779, 1066)
@@ -178,6 +181,7 @@ door_id = 18
 position = Vector2(1696, -354)
 rotation = 3.1415927
 door_id = 19
+is_locked = true
 
 [node name="BlueRoomDoorRight" parent="Doors" unique_id=169029018 instance=ExtResource("8_1p3ii")]
 position = Vector2(1920, -446)
@@ -425,15 +429,15 @@ position = Vector2(1261, 1057)
 sprite_texture = ExtResource("30_6kuvs")
 
 [node name="Desk3" parent="." unique_id=2035511404 groups=["navigation_polygon_source_geometry_group"] instance=ExtResource("29_34ld3")]
-position = Vector2(1130, 1060)
+position = Vector2(1137, 1059)
 sprite_texture = ExtResource("30_6kuvs")
 
 [node name="Desk4" parent="." unique_id=215212988 groups=["navigation_polygon_source_geometry_group"] instance=ExtResource("29_34ld3")]
-position = Vector2(1129, 1015)
+position = Vector2(1135, 1013)
 sprite_texture = ExtResource("30_6kuvs")
 
 [node name="Desk2" parent="." unique_id=1269290849 groups=["navigation_polygon_source_geometry_group"] instance=ExtResource("29_34ld3")]
-position = Vector2(1188, 1047)
+position = Vector2(1194, 1037)
 rotation = 1.5707964
 grab_distance_vertical = 43.0
 grab_distance_horizontal = 26.0
@@ -495,7 +499,7 @@ rotation = 3.1020646
 sprite_texture = ExtResource("29_6fswo")
 
 [node name="Chair5" parent="." unique_id=832438811 groups=["navigation_polygon_source_geometry_group"] instance=ExtResource("16_xexay")]
-position = Vector2(1131, 965)
+position = Vector2(1120, 966)
 rotation = 4.6494937
 sprite_texture = ExtResource("29_6fswo")
 
@@ -517,7 +521,6 @@ position = Vector2(1407, -641)
 sprite_texture = ExtResource("32_28pet")
 
 [node name="Enemy4" parent="." unique_id=1398150099 groups=["navigation_polygon_source_geometry_group"] instance=ExtResource("5_q7eir")]
-visible = false
 position = Vector2(1147, 879)
 
 [node name="Desk6" parent="." unique_id=363080430 groups=["navigation_polygon_source_geometry_group"] instance=ExtResource("29_34ld3")]
@@ -577,3 +580,15 @@ position = Vector2(1151, 1002)
 rotation = -1.5707963
 scale = Vector2(1, -1)
 navigation_polygon = SubResource("NavigationPolygon_28pet")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1701251815]
+position = Vector2(1066, 1058)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1723281013]
+position = Vector2(6, -29.5)
+shape = SubResource("RectangleShape2D_h8p3p")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=685210733]
+position = Vector2(255, 44)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_h8p3p")
