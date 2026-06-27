@@ -270,6 +270,7 @@ func _try_interact() -> void:
 	var closest_cat := _closest_cat()
 	if closest_cat:
 		rotation = (closest_cat.global_position - global_position).angle() + PI/2
+		sprite.play("player_pick_up_cat")
 		sprite.play("player_hold_cat")
 		closest_cat.interact_with(self)
 		return
@@ -411,7 +412,7 @@ func _update_sprite(input_dir: Vector2) -> void:
 		elif not sprite.is_playing():
 			sprite.play(target_anim)
 	else:
-		if sprite.is_playing() and sprite.animation in ["player_button_press", "player_pick_up", "player_throw_throw", "player_hold_cat"]:
+		if sprite.is_playing() and sprite.animation in ["player_button_press", "player_pick_up", "player_throw_throw", "player_hold_cat", "player_pick_up_cat"]:
 			return
 		
 		sprite.flip_h = false
