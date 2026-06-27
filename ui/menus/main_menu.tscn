@@ -50,17 +50,14 @@ text = "QUIT GAME"
 [node name="UIConfirm" type="AudioStreamPlayer" parent="." unique_id=912703356]
 stream = ExtResource("2_1njj5")
 volume_db = 6.0
-bus = &"SFX"
 
 [node name="UIHover" type="AudioStreamPlayer" parent="." unique_id=1080147007]
 stream = ExtResource("3_h223f")
 volume_db = 6.0
-bus = &"SFX"
 
 [node name="UIBack" type="AudioStreamPlayer" parent="." unique_id=2128961461]
 stream = ExtResource("4_l3r6a")
 volume_db = 6.0
-bus = &"SFX"
 
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/StartNewGameButton" to="." method="_on_start_new_game_button_mouse_entered"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartNewGameButton" to="." method="_on_start_pressed"]

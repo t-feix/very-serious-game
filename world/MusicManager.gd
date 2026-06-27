@@ -30,8 +30,12 @@ func _set_volumes_by_name(level_name: String) -> void:
 	
 	match level_name:
 		"Tutorial":
-			$MusicLoop.stream.set_sync_stream_volume(0, 0.0)
-		"World":
-			$MusicLoop.stream.set_sync_stream_volume(1, 0.0)
+			$MusicLoop.stream.set_sync_stream_volume(0, -10.0)
 		"World2":
-			$MusicLoop.stream.set_sync_stream_volume(2, 0.0)
+			$MusicLoop.stream.set_sync_stream_volume(1, -10.0)
+		"World3":
+			$MusicLoop.stream.set_sync_stream_volume(2, -10.0)
+
+
+func stop_music() -> void:
+	$MusicLoop.stop()
