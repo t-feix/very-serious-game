@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://d11e3x6n5hdyu"]
+
+[ext_resource type="Script" uid="uid://cdbpjgngp85sk" path="res://world/MusicManager.gd" id="1_tqvlx"]
+[ext_resource type="AudioStream" uid="uid://belm5vpppm8ob" path="res://world/sfx/Level1-Loop.wav" id="2_h2d32"]
+[ext_resource type="AudioStream" uid="uid://cls0glgj6bwbl" path="res://world/sfx/Level2-Loop.wav" id="3_4iao1"]
+[ext_resource type="AudioStream" uid="uid://ev730kwo51m6" path="res://world/sfx/Level3-Loop.wav" id="4_pbg64"]
+[ext_resource type="AudioStream" uid="uid://l7r73vmf1ij2" path="res://world/sfx/Music-Intro.wav" id="5_ye3ad"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_n2id8"]
+stream_count = 3
+stream_0/stream = ExtResource("2_h2d32")
+stream_0/volume = -60.0
+stream_1/stream = ExtResource("3_4iao1")
+stream_1/volume = -60.0
+stream_2/stream = ExtResource("4_pbg64")
+stream_2/volume = -60.0
+
+[node name="MusicManager" type="Node2D" unique_id=1460321673]
+script = ExtResource("1_tqvlx")
+
+[node name="MusicLoop" type="AudioStreamPlayer" parent="." unique_id=825784140]
+stream = SubResource("AudioStreamSynchronized_n2id8")
+
+[node name="MusicIntro" type="AudioStreamPlayer" parent="." unique_id=379583987]
+stream = ExtResource("5_ye3ad")

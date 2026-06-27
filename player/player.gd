@@ -389,3 +389,4 @@ func _update_sprite(input_dir: Vector2) -> void:
 				sprite.play("player_idle")
 	
 	sprite.flip_v = sprite.animation in ANIMATIONS_NEEDING_FLIP_V
+	
