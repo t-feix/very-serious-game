@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dg0bhbbxni2ke"]
 
 [ext_resource type="Texture2D" uid="uid://c6fee8k2e8mlr" path="res://environment/Cat/Sprite_Cat.png" id="1_8qm3h"]
+[ext_resource type="Script" uid="uid://lcpk570nlafw" path="res://environment/Cat/cat.gd" id="1_hqndt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqndt"]
 atlas = ExtResource("1_8qm3h")
@@ -90,9 +91,17 @@ animations = [{
 "speed": 3.0
 }]
 
-[node name="Cat" type="Node2D" unique_id=59945371]
+[sub_resource type="CircleShape2D" id="CircleShape2D_8qm3h"]
+radius = 25.019993
+
+[node name="Cat" type="Area2D" unique_id=1419398695]
+collision_layer = 0
+script = ExtResource("1_hqndt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=737331576]
 sprite_frames = SubResource("SpriteFrames_3m6qu")
-animation = &"Cat_empty"
-frame_progress = 0.022505967
+animation = &"Cat_default"
+frame_progress = 0.088693164
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2080895814]
+shape = SubResource("CircleShape2D_8qm3h")

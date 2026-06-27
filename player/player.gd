@@ -15,7 +15,7 @@ var _dying: bool = false
 func _shake_camera(strength: float = 8.0, duration: float = 0.25) -> void:
 	var tween := create_tween()
 	var elapsed := 0.0
-	var fade_step := 0.02   # update every 20ms
+	var fade_step := 0.02
 	
 	while elapsed < duration:
 		var fade := 1.0 - (elapsed / duration)
@@ -114,6 +114,8 @@ func footstep_audio():
 			step_timer.start(0.35)
 
 func _get_tooltip_text() -> String:
+	if _closest_cat() != null:
+		return "[Right click to take Bartholomeow home]"
 
 	if _carried:
 		return "[Release Right-click to drop  |  Left-click to throw]"
@@ -187,6 +189,28 @@ var _carried: Throwable = null
 
 var _nearby_doors: Array[Door] = []
 
+var _nearby_cats: Array[Cat] = []
+
+
+func register_nearby_cat(cat: Cat) -> void:
+	if not _nearby_cats.has(cat):
+		_nearby_cats.append(cat)
+
+
+func unregister_nearby_cat(cat: Cat) -> void:
+	_nearby_cats.erase(cat)
+
+
+func _closest_cat() -> Cat:
+	var best: Cat = null
+	var best_dist: float = INF
+	for c in _nearby_cats:
+		var dist := global_position.distance_squared_to(c.global_position)
+		if dist < best_dist:
+			best_dist = dist
+			best = c
+	return best
+
 
 func register_nearby_door(door: Door) -> void:
 	if not _nearby_doors.has(door):
@@ -240,6 +264,13 @@ func _closest_button() -> WallButton:
 	return best
 
 func _try_interact() -> void:
+	var closest_cat := _closest_cat()
+	if closest_cat:
+		rotation = (closest_cat.global_position - global_position).angle() + PI/2
+		sprite.play("player_hold_cat")
+		closest_cat.interact_with(self)
+		return
+	
 	if not _nearby_draggables.is_empty():
 		_try_grab()
 		return
@@ -377,7 +408,7 @@ func _update_sprite(input_dir: Vector2) -> void:
 		elif not sprite.is_playing():
 			sprite.play(target_anim)
 	else:
-		if sprite.is_playing() and sprite.animation in ["player_button_press", "player_pick_up", "player_throw_throw"]:
+		if sprite.is_playing() and sprite.animation in ["player_button_press", "player_pick_up", "player_throw_throw", "player_hold_cat"]:
 			return
 		
 		sprite.flip_h = false

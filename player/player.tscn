@@ -69,10 +69,6 @@ region = Rect2(64, 320, 32, 32)
 atlas = ExtResource("2_rkbax")
 region = Rect2(96, 320, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w10ni"]
-atlas = ExtResource("2_rkbax")
-region = Rect2(0, 672, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_gci7n"]
 atlas = ExtResource("2_rkbax")
 region = Rect2(0, 480, 32, 32)
@@ -248,6 +244,10 @@ region = Rect2(192, 544, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_g1dw6"]
 atlas = ExtResource("2_rkbax")
 region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w10ni"]
+atlas = ExtResource("2_rkbax")
+region = Rect2(0, 672, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jdjat"]
 atlas = ExtResource("2_rkbax")
@@ -612,14 +612,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w10ni")
-}],
-"loop": true,
-"name": &"Player_hold cat",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_gci7n")
 }, {
 "duration": 1.0,
@@ -771,6 +763,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"player_dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w10ni")
+}],
+"loop": true,
+"name": &"player_hold_cat",
 "speed": 5.0
 }, {
 "frames": [{
@@ -1115,8 +1115,7 @@ shape = SubResource("CapsuleShape2D_rkbax")
 unique_name_in_owner = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_8t03j")
-animation = &"Player aim_finish"
-frame = 1
+animation = &"player_hold_cat"
 speed_scale = 2.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1919794983]

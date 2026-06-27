@@ -39,7 +39,7 @@ parsed_collision_mask = 1
 source_geometry_mode = 2
 agent_radius = 16.0
 
-[node name="World" type="Node2D" unique_id=1484466954]
+[node name="World2" type="Node2D" unique_id=1484466954]
 script = ExtResource("1_e5nm6")
 spawn_from_lower = Vector2(1767, 1055)
 spawn_from_higher = Vector2(80, 13)
