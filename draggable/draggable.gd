@@ -37,18 +37,37 @@ func try_grab(grabber: Node2D) -> bool:
 	add_collision_exception_with(grabber)
 	var to_grabber: Vector2 = grabber.global_position - global_position
 
-
 	match shape_type:
 		ShapeType.RECTANGLE:
 			var snapped_dir := _snap_to_cardinal(to_grabber)
 			var dist: float = grab_distance_horizontal if snapped_dir.x != 0 else grab_distance_vertical
-			grabber.global_position = global_position + snapped_dir * dist
-			grabber.rotation = (-snapped_dir).angle() + PI/2
-			_grab_offset = snapped_dir * dist
+			var snap_pos := global_position + snapped_dir * dist
+			
+			if _position_is_clear_for(grabber, snap_pos):
+				grabber.global_position = snap_pos
+				grabber.rotation = (-snapped_dir).angle() + PI/2
+				_grab_offset = snapped_dir * dist
+			else:
+				remove_collision_exception_with(grabber)
+				_held_by = null
+				return false
+		
 		ShapeType.CIRCLE:
 			grabber.rotation = (-to_grabber.normalized()).angle() + PI/2
 			_grab_offset = to_grabber
 	return true
+
+
+func _position_is_clear_for(body: Node2D, candidate: Vector2) -> bool:
+	var params := PhysicsTestMotionParameters2D.new()
+	params.from = Transform2D(body.rotation, candidate)
+	params.motion = Vector2.ZERO
+	params.recovery_as_collision = true
+	
+	var result := PhysicsTestMotionResult2D.new()
+	var would_collide := PhysicsServer2D.body_test_motion(body.get_rid(), params, result)
+	
+	return not would_collide
 
 
 
