@@ -172,7 +172,7 @@ door_id = 13
 [node name="LevelExit" parent="." unique_id=562984780 instance=ExtResource("6_7ljjj")]
 position = Vector2(800, -120)
 scale = Vector2(1.7600391, 1)
-next_scene = "uid://ypncdfw7enfd"
+next_scene = "uid://bc5eh7rrhwj7b"
 
 [node name="Player" parent="." unique_id=638306865 instance=ExtResource("7_ojp0k")]
 position = Vector2(300, 350)
