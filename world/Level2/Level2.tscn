@@ -41,7 +41,7 @@ agent_radius = 16.0
 
 [node name="World" type="Node2D" unique_id=1484466954]
 script = ExtResource("1_e5nm6")
-spawn_from_lower = Vector2(1776, 1074)
+spawn_from_lower = Vector2(1767, 1055)
 spawn_from_higher = Vector2(80, 13)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=648317956 groups=["nav_region"]]
@@ -78,7 +78,7 @@ rotation = -1.553687
 
 [node name="LevelExit" parent="." unique_id=562984780 instance=ExtResource("7_h3ik0")]
 position = Vector2(1567, 1112)
-next_scene = "uid://bjjjquptyi1yk"
+next_scene = "uid://cdsw7g82ymk82"
 
 [node name="Doors" type="Node2D" parent="." unique_id=524982029]
 
