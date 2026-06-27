@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://d11e3x6n5hdyu"]
+[gd_scene format=3 uid="uid://wcugsxwvxqoi"]
 
 [ext_resource type="Script" uid="uid://cdbpjgngp85sk" path="res://world/MusicManager.gd" id="1_tqvlx"]
 [ext_resource type="AudioStream" uid="uid://belm5vpppm8ob" path="res://world/sfx/Level1-Loop.wav" id="2_h2d32"]
