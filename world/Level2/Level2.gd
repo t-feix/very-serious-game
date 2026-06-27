@@ -13,7 +13,7 @@ func _ready() -> void:
 	var player := get_node_or_null("Player") as Player
 	if player == null:
 		return
-	MusicManager.on_level_loaded(self)
+	#MusicManager.on_level_loaded(self)
 	
 	if GameState.spawn_from == "from_higher":
 		player.global_position = spawn_from_higher
